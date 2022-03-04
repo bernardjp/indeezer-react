@@ -1,10 +1,22 @@
-import { Container } from '@mantine/core';
-import Navbar from '../Navbar/Navbar';
+import { Container, createStyles } from '@mantine/core';
+import Navbar from './Navbar';
+
+const useStyles = createStyles(() => ({
+  header: {
+    alignItems: 'center',
+    borderBottom: '1px solid gray',
+    display: 'flex',
+    height: '4rem',
+    justifyContent: 'space-between'
+  }
+}));
 
 function StyledHeader() {
+  const { classes } = useStyles();
+
   return (
-    <Container>
-      HEADER
+    <Container className={classes.header}>
+      HEADER ICON
       <Navbar />
     </Container>
   );
