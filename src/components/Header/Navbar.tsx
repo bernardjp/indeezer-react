@@ -1,4 +1,5 @@
-import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Anchor, Container, createStyles } from '@mantine/core';
 
 const useStyles = createStyles(() => ({
@@ -7,25 +8,55 @@ const useStyles = createStyles(() => ({
   },
   anchor: {
     textDecoration: 'none',
-    margin: '0 1rem',
-
-    '&:active': {
-      color: 'yellow'
-    }
+    margin: '0 1rem'
+  },
+  active: {
+    color: 'yellow'
   }
 }));
 
-// function StyledNavLink() {
-//   return <NavLink activeClassName="active" />;
-// }
+interface LinkData {
+  route: string,
+  text: string
+}
+
+const Links:LinkData[] = [
+  {
+    route: '/',
+    text: 'HOME'
+  },
+  {
+    route: '/explore',
+    text: 'INDEEZER'
+  },
+  {
+    route: '/about',
+    text: 'ABOUT'
+  }
+];
 
 function StyledNavbar() {
-  const { classes } = useStyles();
+  // Checking for the root of the pathname allows us to know which Link is active no matter
+  // how long the pathname is. eg: /explore/artist/1 --> root = '/explore' => INDEEZER link = active
+  const { pathname } = useLocation();
+  const pathnameRoot = pathname.split('/')[1];
+  const [currentPage, setPage] = useState(`/${pathnameRoot}`);
+
+  const { classes, cx } = useStyles();
 
   return (
     <Container className={classes.navbar}>
-      <Anchor className={classes.anchor} component={NavLink} to="/">HOME</Anchor>
-      <Anchor className={classes.anchor} component={NavLink} to="about">ABOUT</Anchor>
+      {Links.map(({ route, text }) => (
+        <Anchor
+          className={cx(classes.anchor, { [classes.active]: currentPage === route })}
+          onClick={() => setPage(route)}
+          component={Link}
+          to={route}
+          key={route}
+        >
+          {text}
+        </Anchor>
+      ))}
     </Container>
   );
 }
