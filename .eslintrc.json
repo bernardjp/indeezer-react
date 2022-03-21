@@ -10,7 +10,8 @@
         "plugin:import/typescript"
     ],
     "globals": {
-      "JSX": true
+      "JSX": true,
+      "React": true
     },
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -28,7 +29,8 @@
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
       "comma-dangle": ["error", "never"],
       "import/extensions": ["error", "never"],
-      "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+      "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+      "no-console": "off" // turn warning on and check this rule before production build.
     },
     "settings": {
       "import/extensions": [
