@@ -1,10 +1,14 @@
 import { useQuery } from 'react-query';
 import { Container } from '@mantine/core';
-import fetchData from '../utils/ApiRequestHandler';
+import { fetchJSONData } from '../utils/ApiRequestHandler';
+
+// - La limitación del proxy de Rapidapi hace que no sea válido tener info en la primera
+// carga de la página debido a la dificultad en obtener multiples recursos sin recurrir
+// a multiples llamadas a la API.
+// - Diseñar página con info inicial/placeholder.
 
 function ExplorePage() {
-  const pathname: string = 'artist/27';
-  const { isLoading, error, data } = useQuery('deezer', () => fetchData(pathname));
+  const { isLoading, error, data } = useQuery('deezer', () => fetchJSONData('charts'));
 
   console.log('data:', data);
 
