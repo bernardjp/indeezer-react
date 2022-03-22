@@ -23,6 +23,7 @@ const useStyles = createStyles(() => ({
 
 function ExplorePage() {
   const { classes } = useStyles();
+
   const { isLoading, error, data } = useQuery('deezer', () => fetchJSONData('charts'));
 
   console.log('data:', data);
