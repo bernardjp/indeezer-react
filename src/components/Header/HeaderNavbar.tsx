@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Anchor, Container, createStyles } from '@mantine/core';
+import { useLocation } from 'react-router-dom';
+import { Container, createStyles } from '@mantine/core';
+import NavbarAnchor from '../Utils/NavbarAnchor';
 
 const useStyles = createStyles(() => ({
   navbar: {
@@ -15,12 +15,12 @@ const useStyles = createStyles(() => ({
   }
 }));
 
-interface LinkData {
+export interface LinkData {
   route: string,
   text: string
 }
 
-const Links:LinkData[] = [
+const navbarLinksData:LinkData[] = [
   {
     route: '/',
     text: 'HOME'
@@ -39,23 +39,19 @@ function StyledNavbar() {
   // Checking for the root of the pathname allows us to know which Link is active no matter
   // how long the pathname is. eg: /explore/artist/1 --> root = '/explore' => INDEEZER link = active
   const { pathname } = useLocation();
-  const pathnameRoot = pathname.split('/')[1];
-  const [currentPage, setPage] = useState(`/${pathnameRoot}`);
+  const pathnameRoot = `/${pathname.split('/')[1]}`;
 
   const { classes, cx } = useStyles();
 
   return (
     <Container className={classes.navbar}>
-      {Links.map(({ route, text }) => (
-        <Anchor
-          className={cx(classes.anchor, { [classes.active]: currentPage === route })}
-          onClick={() => setPage(route)}
-          component={Link}
-          to={route}
+      {navbarLinksData.map(({ route, text }) => (
+        <NavbarAnchor
+          route={route}
+          text={text}
+          styleClasses={cx(classes.anchor, { [classes.active]: pathnameRoot === route })}
           key={route}
-        >
-          {text}
-        </Anchor>
+        />
       ))}
     </Container>
   );

@@ -1,5 +1,5 @@
 import { Container, createStyles } from '@mantine/core';
-import Navbar from './Navbar';
+import Navbar from './HeaderNavbar';
 
 const useStyles = createStyles(() => ({
   header: {
