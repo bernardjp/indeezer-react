@@ -30,6 +30,7 @@
       "comma-dangle": ["error", "never"],
       "import/extensions": ["error", "never"],
       "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+      "no-use-before-define": ["error", { "functions": false, "classes": false }],
       "no-console": "off" // turn warning on and check this rule before production build.
     },
     "settings": {
