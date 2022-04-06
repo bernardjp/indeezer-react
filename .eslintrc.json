@@ -31,6 +31,7 @@
       "import/extensions": ["error", "never"],
       "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
       "no-use-before-define": ["error", { "functions": false, "classes": false }],
+      "react/jsx-one-expression-per-line": [0, { "allow": "single-child" }],
       "no-console": "off" // turn warning on and check this rule before production build.
     },
     "settings": {
