@@ -30,7 +30,8 @@ const useStyles = createStyles(() => ({
   NavbarContainer: {
     display: 'flex',
     flexDirection: 'column',
-    margin: '0'
+    margin: '0',
+    minWidth: '220px'
   },
   anchor: {
     color: 'red'
