@@ -10,7 +10,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 //   }
 // };
 
-// const fetchData = async (pathname: string) => {
+// const fetchAPIData = async (pathname: string) => {
 //   const URL = `${CORS_PROXY}${API_BASE_URL}/${pathname}`;
 //   try {
 //     const response = await axios.get(URL, configOptions);
@@ -42,12 +42,10 @@ const fetchAPIData = async (pathname: string) => {
 };
 
 // REQUEST DATA FROM JSON FILE
-type resourceDataType = 'charts' | 'albums' | 'tracks' | 'artists' | 'playlists' | 'podcasts';
-
-const fetchJSONData = async (resourceData: resourceDataType) => {
+const fetchJSONData = async (resourceData: string | undefined) => {
   try {
     const jsonData = await axios.get('../../data/json-chart.json');
-    if (resourceData === 'charts') {
+    if (resourceData === undefined) {
       return jsonData.data;
     }
 
