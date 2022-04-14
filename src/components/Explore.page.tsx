@@ -1,7 +1,8 @@
-/* eslint-disable no-unused-vars */
+// eslint-disable-next-line no-unused-vars
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Container, createStyles } from '@mantine/core';
 import { fetchJSONData } from '../utils/ApiRequestHandler';
+import GeneralLayoutContainer from './GeneralLayoutContainer';
 import SideNavbar from './SideNavbar/SideNavbar';
 import RequestHandler from './RequestHandler/RequestHandler';
 import DisplayChart from './DisplayContainer/DisplayChart';
@@ -14,12 +15,16 @@ import DisplayChart from './DisplayContainer/DisplayChart';
 const useStyles = createStyles(() => ({
   pageContainer: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    maxWidth: '100%',
+    padding: '0'
   },
   displayContainer: {
     alignItems: 'center',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    maxWidth: '100%',
+    margin: '0'
   }
 }));
 
@@ -29,29 +34,31 @@ function ExplorePage() {
   const resourceType:string | undefined = pathname.split('/')[2];
 
   return (
-    <Container className={classes.pageContainer}>
-      <SideNavbar />
-      <Container className={classes.displayContainer}>
-        <div>EXPLORE PAGE</div>
-        {resourceType === undefined
-          && (
-          <RequestHandler
-            queryOptions={resourceType}
-            queryCallback={fetchJSONData}
-            RenderComponent={DisplayChart}
-          />
-          )}
-        <Routes>
-          {/*
-          <Route path="artists" element={<RequestHandler queryOptions={resourceType} />} />
-          <Route path="albums" element={<RequestHandler queryOptions={resourceType} />} />
-          <Route path="tracks" element={<RequestHandler queryOptions={resourceType} />} />
-          <Route path="playlists" element={<RequestHandler queryOptions={resourceType} />} />
-          <Route path="podcasts" element={<RequestHandler queryOptions={resourceType} />} />
-          */}
-        </Routes>
+    <GeneralLayoutContainer>
+      <Container className={classes.pageContainer}>
+        <SideNavbar />
+        <Container className={classes.displayContainer}>
+          <div>EXPLORE PAGE</div>
+          {resourceType === undefined
+            && (
+            <RequestHandler
+              queryOptions={resourceType}
+              queryCallback={fetchJSONData}
+              RenderComponent={DisplayChart}
+            />
+            )}
+          <Routes>
+            {/*
+            <Route path="artists" element={<RequestHandler queryOptions={resourceType} />} />
+            <Route path="albums" element={<RequestHandler queryOptions={resourceType} />} />
+            <Route path="tracks" element={<RequestHandler queryOptions={resourceType} />} />
+            <Route path="playlists" element={<RequestHandler queryOptions={resourceType} />} />
+            <Route path="podcasts" element={<RequestHandler queryOptions={resourceType} />} />
+            */}
+          </Routes>
+        </Container>
       </Container>
-    </Container>
+    </GeneralLayoutContainer>
   );
 }
 

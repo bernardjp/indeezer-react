@@ -1,10 +1,10 @@
-import { Container } from '@mantine/core';
+import GeneralLayoutContainer from './GeneralLayoutContainer';
 
 function AboutPage() {
   return (
-    <Container>
+    <GeneralLayoutContainer>
       <div>ABOUT PAGE</div>
-    </Container>
+    </GeneralLayoutContainer>
   );
 }
 
