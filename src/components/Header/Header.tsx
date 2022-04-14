@@ -7,7 +7,8 @@ const useStyles = createStyles(() => ({
     borderBottom: '1px solid gray',
     display: 'flex',
     height: '4rem',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    maxWidth: '100%'
   }
 }));
 

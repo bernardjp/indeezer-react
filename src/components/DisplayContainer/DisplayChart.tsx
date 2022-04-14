@@ -1,6 +1,9 @@
-import { Container, Grid, Text } from '@mantine/core';
+import {
+  Container, Grid, createStyles
+} from '@mantine/core';
 import * as PropTypes from 'prop-types';
 import AlbumCard, { AlbumCardPropType } from './AlbumCard';
+import NavbarAnchor from '../Utils/NavbarAnchor';
 
 type ResourcePropType<T> = {
   data: Array<T>,
@@ -42,12 +45,41 @@ DisplayChart.propTypes = {
   }).isRequired
 };
 
+const useStyles = createStyles({
+  chartContainer: {
+    maxWidth: '100%'
+  },
+  navbarContainer: {
+    margin: '0',
+    padding: '1.8rem 0',
+    maxWidth: '100%'
+  },
+  title: {
+    color: 'white',
+    fontSize: '1.3rem',
+    fontWeight: 'bold',
+    transition: '0.15s',
+
+    '&:hover': {
+      textDecoration: 'none',
+      color: 'tomato'
+    }
+  }
+});
+
 function DisplayChart(props: DisplayChartPropType) {
   const { data } = props;
+  const { classes } = useStyles();
 
   return (
-    <Container>
-      <Text>Top 10 Albums</Text>
+    <Container className={classes.chartContainer}>
+      <Container className={classes.navbarContainer}>
+        <NavbarAnchor
+          route="/albums"
+          text="Top 10 Albums"
+          styleClasses={classes.title}
+        />
+      </Container>
       <Grid gutter="xl">
         {data.albums.data.map((album) => (
           <Grid.Col lg={3} key={album.id}>
