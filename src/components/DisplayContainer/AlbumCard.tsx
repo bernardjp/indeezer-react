@@ -61,13 +61,13 @@ const useStyles = createStyles({
   },
   buttonContainer: {
     gap: '14px',
-    padding: '25px',
+    padding: '16px',
     position: 'absolute',
     zIndex: '1'
   },
   title: {
     color: 'white', // <-- Change on theme
-    fontSize: '1.2rem',
+    fontSize: '1rem',
     width: 'fit-content',
 
     '&:hover': {
@@ -77,10 +77,11 @@ const useStyles = createStyles({
   },
   artist: {
     color: 'gray', // <-- Change on theme
-    fontSize: '0.95rem',
+    fontSize: '0.8rem',
     display: 'flex'
   },
   artistName: {
+    fontSize: '0.8rem',
     '&:hover': {
       textDecoration: 'underline',
       cursor: 'pointer'

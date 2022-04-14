@@ -28,16 +28,33 @@ const navbarLinksData:LinkData[] = [
 
 const useStyles = createStyles(() => ({
   NavbarContainer: {
+    backgroundColor: '#191922', // Change on custom Theme
+    border: '1px solid #32323d',
     display: 'flex',
     flexDirection: 'column',
     margin: '0',
-    minWidth: '220px'
+    minWidth: '220px',
+    padding: '1.5rem 0'
   },
   anchor: {
-    color: 'red'
+    color: 'white',
+    fontSize: '1.1rem',
+    fontWeight: 'bold',
+    padding: '0 2rem',
+    margin: '0.7rem 0',
+    borderLeft: '3px solid #191922',
+    transition: '0.1s',
+
+    '&:hover': {
+      borderLeft: '3px solid tomato',
+      textDecoration: 'none',
+      color: 'tomato'
+    }
   },
   active: {
-    color: 'yellow'
+    borderLeft: '3px solid tomato',
+    textDecoration: 'none',
+    color: 'tomato'
   }
 }));
 

@@ -13,12 +13,13 @@ const useStyles = createStyles((theme, { visible }: RoundButtonStyleType) => ({
   button: {
     backgroundColor: 'white', // <-- checkear en Theme
     borderRadius: '50%',
-    color: 'black', // <-- checkear en Theme
-    height: '50px',
-    opacity: visible ? '100%' : '0%',
-    transition: '0.2s',
-    width: '50px',
     boxShadow: '0px 1px 8px #000000d1',
+    color: 'black', // <-- checkear en Theme
+    height: '36px',
+    opacity: visible ? '100%' : '0%',
+    padding: '0',
+    transition: '0.2s',
+    width: '36px',
 
     '&:hover': {
       transform: 'scale(120%)',
