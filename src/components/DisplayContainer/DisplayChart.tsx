@@ -1,5 +1,6 @@
+// import { useRef } from 'react';
 import {
-  Container, Grid, createStyles
+  Button, Container, Grid, createStyles
 } from '@mantine/core';
 import * as PropTypes from 'prop-types';
 import AlbumCard, { AlbumCardPropType } from './AlbumCard';
@@ -46,13 +47,18 @@ DisplayChart.propTypes = {
 };
 
 const useStyles = createStyles({
+  container: {
+    maxWidth: '90%'
+  },
   chartContainer: {
-    maxWidth: '100%'
+    // flexWrap: 'nowrap'
   },
   navbarContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
     margin: '0',
-    padding: '1.8rem 0',
-    maxWidth: '100%'
+    maxWidth: '100%',
+    padding: '1.8rem 0'
   },
   title: {
     color: 'white',
@@ -71,18 +77,38 @@ function DisplayChart(props: DisplayChartPropType) {
   const { data } = props;
   const { classes } = useStyles();
 
+  // const ref = useRef();
+
+  // Extract button to another component
+  const onExpand = () => {
+    console.log('expand elements');
+  };
+
   return (
-    <Container className={classes.chartContainer}>
+    <Container className={classes.container}>
       <Container className={classes.navbarContainer}>
         <NavbarAnchor
           route="/albums"
           text="Top 10 Albums"
           styleClasses={classes.title}
         />
+        {/*
+          - button to expand the visible options with an icon (arrow up and down)
+            that toggle and switch depending of the state.
+        */}
+        <Button variant="subtle" onClick={onExpand}>
+          Show More...
+        </Button>
       </Container>
-      <Grid gutter="xl">
+      <Grid justify="start" className={classes.chartContainer}>
+        {/*
+          - default height === to the hegith of the showcased elements.
+          - every element outside of the first row is hidden by default.
+          - toggle to "show more" or "show less" --> switch the height from 1 element
+            to auto (audjust to show all elements/rows)
+        */}
         {data.albums.data.map((album) => (
-          <Grid.Col lg={3} key={album.id}>
+          <Grid.Col xs={12} sm={6} md={4} lg={2.4} key={album.id}>
             <AlbumCard data={album} />
           </Grid.Col>
         ))}
