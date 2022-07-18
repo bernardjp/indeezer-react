@@ -50,9 +50,9 @@ const useStyles = createStyles({
   },
   image: {
     borderRadius: '8px',
-    height: '264px',
+    // height: '264px',
     transition: '0.2s',
-    width: '264px',
+    maxWidth: '264px',
 
     '&:hover': {
       cursor: 'pointer',
@@ -82,6 +82,7 @@ const useStyles = createStyles({
   },
   artistName: {
     fontSize: '0.8rem',
+
     '&:hover': {
       textDecoration: 'underline',
       cursor: 'pointer'
