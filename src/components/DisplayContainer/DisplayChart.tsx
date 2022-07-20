@@ -1,6 +1,5 @@
-// import { useRef } from 'react';
 import {
-  Button, Container, Grid, createStyles
+  Container, Grid, createStyles
 } from '@mantine/core';
 import * as PropTypes from 'prop-types';
 import AlbumCard, { AlbumCardPropType } from './AlbumCard';
@@ -81,13 +80,6 @@ function DisplayChart(props: DisplayChartPropType) {
   const { ref, newHeight } = useElementHeight();
   const [isExpanded, onExpandCallback] = useExpandChart();
 
-  // const ref = useRef();
-
-  // Extract button to another component
-  const onExpand = () => {
-    console.log('expand elements');
-  };
-
   return (
     <Container className={classes.container}>
       <Container className={classes.navbarContainer}>
@@ -103,12 +95,6 @@ function DisplayChart(props: DisplayChartPropType) {
         className={classes.chartContainer}
         sx={{ height: isExpanded ? '100%' : newHeight }}
       >
-        {/*
-          - default height === to the hegith of the showcased elements.
-          - every element outside of the first row is hidden by default.
-          - toggle to "show more" or "show less" --> switch the height from 1 element
-            to auto (audjust to show all elements/rows)
-        */}
         {data.albums.data.map((album, i) => (
           <Grid.Col xs={12} sm={6} md={4} lg={2.4} key={album.id}>
             {i === 0
