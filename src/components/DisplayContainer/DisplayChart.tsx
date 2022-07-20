@@ -1,5 +1,6 @@
+// import { useRef } from 'react';
 import {
-  Container, Grid, createStyles
+  Button, Container, Grid, createStyles
 } from '@mantine/core';
 import * as PropTypes from 'prop-types';
 import AlbumCard, { AlbumCardPropType } from './AlbumCard';
@@ -79,6 +80,13 @@ function DisplayChart(props: DisplayChartPropType) {
   const { classes } = useStyles();
   const { ref, newHeight } = useElementHeight();
   const [isExpanded, onExpandCallback] = useExpandChart();
+
+  // const ref = useRef();
+
+  // Extract button to another component
+  const onExpand = () => {
+    console.log('expand elements');
+  };
 
   return (
     <Container className={classes.container}>
