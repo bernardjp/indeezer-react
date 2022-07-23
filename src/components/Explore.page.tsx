@@ -5,7 +5,7 @@ import { fetchJSONData } from '../utils/ApiRequestHandler';
 import GeneralLayoutContainer from './GeneralLayoutContainer';
 import SideNavbar from './SideNavbar/SideNavbar';
 import RequestHandler from './RequestHandler/RequestHandler';
-import DisplayChart from './DisplayContainer/DisplayChart';
+import ChartListContainer from './DisplayContainer/ChartListContainer';
 
 // - La limitación del proxy de Rapidapi hace que no sea válido tener info en la primera
 // carga de la página debido a la dificultad en obtener multiples recursos sin recurrir
@@ -44,7 +44,7 @@ function ExplorePage() {
             <RequestHandler
               queryOptions={resourceType}
               queryCallback={fetchJSONData}
-              RenderComponent={DisplayChart}
+              RenderComponent={ChartListContainer}
             />
             )}
           <Routes>

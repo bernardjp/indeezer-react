@@ -2,7 +2,7 @@ import {
   Container, Grid, createStyles
 } from '@mantine/core';
 import * as PropTypes from 'prop-types';
-import AlbumCard, { AlbumCardPropType } from './AlbumCard';
+import { AlbumCardPropType } from './AlbumCard';
 import NavbarAnchor from '../Utils/NavbarAnchor';
 import { useExpandChart, ExpandButton } from './ExpandChartButton';
 import useElementHeight from './useElementHeight';
@@ -13,37 +13,17 @@ type ResourcePropType<T> = {
 }
 
 type DisplayChartPropType = {
-  data: {
-    albums: ResourcePropType<AlbumCardPropType>,
-    // artists: ResourcePropType,
-    // playlists: ResourcePropType,
-    // podcasts: ResourcePropType,
-    // tracks: ResourcePropType,
-  }
+  CardComponent:React.ElementType,
+  resourceType: string,
+  data: ResourcePropType<AlbumCardPropType>
 }
 
 DisplayChart.propTypes = {
+  CardComponent: PropTypes.elementType.isRequired,
+  resourceType: PropTypes.string.isRequired,
   data: PropTypes.shape({
-    albums: PropTypes.shape({
-      data: PropTypes.arrayOf(PropTypes.object),
-      total: PropTypes.number
-    }),
-    artists: PropTypes.shape({
-      data: PropTypes.arrayOf(PropTypes.object),
-      total: PropTypes.number
-    }),
-    playlists: PropTypes.shape({
-      data: PropTypes.arrayOf(PropTypes.object),
-      total: PropTypes.number
-    }),
-    podcasts: PropTypes.shape({
-      data: PropTypes.arrayOf(PropTypes.object),
-      total: PropTypes.number
-    }),
-    tracks: PropTypes.shape({
-      data: PropTypes.arrayOf(PropTypes.object),
-      total: PropTypes.number
-    })
+    data: PropTypes.arrayOf(PropTypes.object),
+    total: PropTypes.number
   }).isRequired
 };
 
@@ -75,7 +55,7 @@ const useStyles = createStyles({
 });
 
 function DisplayChart(props: DisplayChartPropType) {
-  const { data } = props;
+  const { data: { data }, resourceType, CardComponent } = props;
   const { classes } = useStyles();
   const { ref, newHeight } = useElementHeight();
   const [isExpanded, onExpandCallback] = useExpandChart();
@@ -84,8 +64,8 @@ function DisplayChart(props: DisplayChartPropType) {
     <Container className={classes.container}>
       <Container className={classes.navbarContainer}>
         <NavbarAnchor
-          route="/albums"
-          text="Top 10 Albums"
+          route={`/${resourceType}`}
+          text={`Top 10 ${resourceType}`}
           styleClasses={classes.title}
         />
         <ExpandButton callback={onExpandCallback} isExpanded={isExpanded} />
@@ -95,19 +75,11 @@ function DisplayChart(props: DisplayChartPropType) {
         className={classes.chartContainer}
         sx={{ height: isExpanded ? '100%' : newHeight }}
       >
-        {data.albums.data.map((album, i) => (
+        {data.map((album, i) => (
           <Grid.Col xs={12} sm={6} md={4} lg={2.4} key={album.id}>
-            {i === 0
-              ? (
-                <div ref={ref}>
-                  <AlbumCard data={album} />
-                </div>
-              )
-              : (
-                <div>
-                  <AlbumCard data={album} />
-                </div>
-              )}
+            <div ref={i === 0 ? ref : null}>
+              <CardComponent data={album} />
+            </div>
           </Grid.Col>
         ))}
       </Grid>
