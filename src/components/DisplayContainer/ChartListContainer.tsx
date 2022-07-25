@@ -1,7 +1,7 @@
 import * as PropTypes from 'prop-types';
 import { Container } from '@mantine/core';
 import DisplayChart from './DisplayChart';
-import AlbumCard, { AlbumCardPropType } from './AlbumCard';
+import AlbumCard, { AlbumCardPropType } from '../ResourceCards/AlbumCard';
 
 type ResourcePropType<T> = {
   data: Array<T>,
@@ -61,7 +61,7 @@ export default function ChartListContainer(props: ChartListContainerPropType) {
           );
         }
 
-        return <div>{`${resource} list`}</div>;
+        return <div key={resource}>{`${resource} list`}</div>;
       })}
     </Container>
   );
