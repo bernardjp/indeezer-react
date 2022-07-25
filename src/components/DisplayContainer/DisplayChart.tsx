@@ -2,7 +2,7 @@ import {
   Container, Grid, createStyles
 } from '@mantine/core';
 import * as PropTypes from 'prop-types';
-import { AlbumCardPropType } from './AlbumCard';
+import { AlbumCardPropType } from '../ResourceCards/AlbumCard';
 import NavbarAnchor from '../Utils/NavbarAnchor';
 import { useExpandChart, ExpandButton } from './ExpandChartButton';
 import useElementHeight from './useElementHeight';
