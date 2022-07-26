@@ -3,19 +3,18 @@ import {
 } from '@mantine/core';
 import * as PropTypes from 'prop-types';
 import { AlbumCardPropType } from '../ResourceCards/AlbumCard';
+import { ArtistCardPropType } from '../ResourceCards/ArtistCard';
 import NavbarAnchor from '../Utils/NavbarAnchor';
 import { useExpandChart, ExpandButton } from './ExpandChartButton';
 import useElementHeight from './useElementHeight';
 
-type ResourcePropType<T> = {
-  data: Array<T>,
-  total: number
-}
+export type AlbumList = { data: AlbumCardPropType[] };
+export type ArtistList = { data: ArtistCardPropType[] };
 
 type DisplayChartPropType = {
-  CardComponent:React.ElementType,
+  CardComponent: React.ElementType,
   resourceType: string,
-  data: ResourcePropType<AlbumCardPropType>
+  data: AlbumList | ArtistList
 }
 
 DisplayChart.propTypes = {
@@ -75,10 +74,10 @@ function DisplayChart(props: DisplayChartPropType) {
         className={classes.chartContainer}
         sx={{ height: isExpanded ? '100%' : newHeight }}
       >
-        {data.map((album, i) => (
-          <Grid.Col xs={12} sm={6} md={4} lg={2.4} key={album.id}>
+        {data.map((element, i) => (
+          <Grid.Col xs={12} sm={6} md={4} lg={2.4} key={element.id}>
             <div ref={i === 0 ? ref : null}>
-              <CardComponent data={album} />
+              <CardComponent data={element} />
             </div>
           </Grid.Col>
         ))}
