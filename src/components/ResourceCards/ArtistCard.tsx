@@ -1,12 +1,11 @@
-/* eslint-disable no-unused-vars */
 import * as PropTypes from 'prop-types';
 import {
-  Card, Image, Badge, Text, Group, createStyles
+  Card, Avatar, Text, Group, createStyles
 } from '@mantine/core';
-// import { useHover } from '@mantine/hooks';
-// import { FaPlay } from 'react-icons/fa';
-// import { BsEye } from 'react-icons/bs';
-// import RoundButton from '../Utils/RoundButton';
+import { useHover } from '@mantine/hooks';
+import { FaPlay } from 'react-icons/fa';
+import { BsEye } from 'react-icons/bs';
+import RoundButton from '../Utils/RoundButton';
 
 export type ArtistCardPropType = {
   id: number,
@@ -38,12 +37,14 @@ const useStyles = createStyles({
     backgroundColor: 'transparent'
   },
   imageSection: {
+    alignItems: 'center',
     display: 'flex',
     flexDirection: 'column-reverse'
   },
   image: {
-    borderRadius: '8px',
-    // height: '264px',
+    borderRadius: '50%',
+    width: '100%',
+    height: '100%',
     transition: '0.2s',
     maxWidth: '264px',
 
@@ -58,7 +59,12 @@ const useStyles = createStyles({
     position: 'absolute',
     zIndex: '1'
   },
-  title: {
+  textSection: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  artist: {
     color: 'white', // <-- Change on theme
     fontSize: '1rem',
     width: 'fit-content',
@@ -68,30 +74,21 @@ const useStyles = createStyles({
       cursor: 'pointer'
     }
   },
-  artist: {
+  text: {
     color: 'gray', // <-- Change on theme
     fontSize: '0.8rem',
     display: 'flex'
-  },
-  artistName: {
-    fontSize: '0.8rem',
-
-    '&:hover': {
-      textDecoration: 'underline',
-      cursor: 'pointer'
-    }
   }
 });
 
 function ArtistCard(props: { data: ArtistCardPropType }) {
   const { data } = props;
   const { classes } = useStyles();
-  // const { ref, hovered } = useHover();
+  const { ref, hovered } = useHover();
 
-  console.log(data.name);
   return (
     <Card className={classes.cardContainer}>
-      {/* <Card.Section ref={ref} className={classes.imageSection}>
+      <Card.Section ref={ref} className={classes.imageSection}>
         <Group className={classes.buttonContainer}>
           <RoundButton
             visible
@@ -104,16 +101,16 @@ function ArtistCard(props: { data: ArtistCardPropType }) {
             onClickCallback={() => console.log('Open cover art')}
           />
         </Group>
-        <Image src={data.cover_medium} className={classes.image} alt={`${data.title} cover`} />
+        <Avatar
+          src={data.picture}
+          className={classes.image}
+          alt={`${data.name} picture`}
+        />
       </Card.Section>
-      <Card.Section>
-        <Text className={classes.title}>{data.title}</Text>
-        <Text className={classes.artist}>
-          by&nbsp;
-          <Text className={classes.artistName}>{data.artist.name}</Text>
-        </Text>
-        {data.explicit_lyrics && <Badge color="gray" radius="sm" variant="outline">EXPLICIT</Badge>}
-      </Card.Section> */}
+      <Card.Section className={classes.textSection}>
+        <Text className={classes.artist}>{data.name}</Text>
+        <Text className={classes.text}>Algo de texto...</Text>
+      </Card.Section>
     </Card>
   );
 }
