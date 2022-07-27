@@ -1,5 +1,5 @@
 import * as PropTypes from 'prop-types';
-import { Container } from '@mantine/core';
+import { Container, createStyles } from '@mantine/core';
 import DisplayChart, { AlbumList, ArtistList } from './DisplayChart';
 import AlbumCard from '../ResourceCards/AlbumCard';
 import ArtistCard from '../ResourceCards/ArtistCard';
@@ -39,12 +39,19 @@ ChartListContainer.propTypes = {
   }).isRequired
 };
 
+const useStyles = createStyles({
+  container: {
+    maxWidth: '100%'
+  }
+});
+
 export default function ChartListContainer(props: ChartListContainerPropType) {
   const { data } = props;
   const resources = Object.keys(data);
+  const { classes } = useStyles();
 
   return (
-    <Container>
+    <Container className={classes.container}>
       {resources.map((resource) => {
         if (resource === 'albums') {
           return (

@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import GeneralLayoutContainer from './components/GeneralLayoutContainer';
+import AppContainer from './components/AppContainer';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import AboutPage from './components/About.page';
@@ -8,7 +8,7 @@ import ExplorePage from './components/Explore.page';
 
 function App() {
   return (
-    <GeneralLayoutContainer>
+    <AppContainer>
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -16,7 +16,7 @@ function App() {
         <Route path="about" element={<AboutPage />} />
       </Routes>
       <Footer />
-    </GeneralLayoutContainer>
+    </AppContainer>
   );
 }
 
