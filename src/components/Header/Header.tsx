@@ -8,7 +8,7 @@ const useStyles = createStyles(() => ({
     display: 'flex',
     height: '4rem',
     justifyContent: 'space-between',
-    maxWidth: '100%'
+    minWidth: '100%'
   }
 }));
 

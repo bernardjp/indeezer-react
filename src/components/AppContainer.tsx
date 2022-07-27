@@ -6,14 +6,15 @@ type ChildrenType = JSX.Element | React.FC | null;
 const useStyles = createStyles({
   container: {
     display: 'flex',
-    flexGrow: '1',
+    flexDirection: 'column',
     margin: '0',
     maxWidth: '100%',
+    minHeight: '100vh',
     padding: '0'
   }
 });
 
-function GeneralLayoutContainer(props: { children: ChildrenType | ChildrenType[] }) {
+function AppContainer(props: { children: ChildrenType | ChildrenType[] }) {
   const { classes } = useStyles();
   const { children } = props;
 
@@ -24,4 +25,4 @@ function GeneralLayoutContainer(props: { children: ChildrenType | ChildrenType[]
   );
 }
 
-export default GeneralLayoutContainer;
+export default AppContainer;
