@@ -30,7 +30,8 @@ DisplayChart.propTypes = {
 
 const useStyles = createStyles({
   container: {
-    maxWidth: '90%'
+    maxWidth: '90%',
+    paddingBottom: '1.5rem'
   },
   chartContainer: {
     overflow: 'hidden'
@@ -40,7 +41,7 @@ const useStyles = createStyles({
     justifyContent: 'space-between',
     margin: '0',
     maxWidth: '100%',
-    padding: '1.8rem 0'
+    padding: '1.5rem 0'
   },
   title: {
     color: 'white',
