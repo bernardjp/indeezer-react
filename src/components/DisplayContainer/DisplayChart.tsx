@@ -5,6 +5,7 @@ import * as PropTypes from 'prop-types';
 import { AlbumCardPropType } from '../ResourceCards/AlbumCard';
 import { ArtistCardPropType } from '../ResourceCards/ArtistCard';
 import { TrackCardPropType } from '../ResourceCards/TrackCard';
+import { PlaylistCardPropTypes } from '../ResourceCards/PlaylistCard';
 import NavbarAnchor from '../Utils/NavbarAnchor';
 import { useExpandChart, ExpandButton } from './ExpandChartButton';
 import useElementHeight from './useElementHeight';
@@ -12,11 +13,12 @@ import useElementHeight from './useElementHeight';
 export type AlbumList = { data: AlbumCardPropType[] };
 export type ArtistList = { data: ArtistCardPropType[] };
 export type TrackList = { data: TrackCardPropType[] };
+export type PlaylistList = { data: PlaylistCardPropTypes[] };
 
 type DisplayChartPropType = {
   CardComponent: React.ElementType,
   resourceType: string,
-  data: AlbumList | ArtistList | TrackList
+  data: AlbumList | ArtistList | TrackList | PlaylistList
 }
 
 DisplayChart.propTypes = {
