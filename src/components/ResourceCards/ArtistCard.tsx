@@ -11,7 +11,7 @@ export type ArtistCardPropType = {
   id: number,
   name: string,
   link: string,
-  picture: string,
+  picture_medium: string,
   position: number,
   radio: boolean,
   tracklist: string,
@@ -23,7 +23,7 @@ ArtistCard.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
     link: PropTypes.string,
-    picture: PropTypes.string,
+    picture_medium: PropTypes.string,
     position: PropTypes.number,
     radio: PropTypes.bool,
     tracklist: PropTypes.string,
@@ -102,7 +102,7 @@ function ArtistCard(props: { data: ArtistCardPropType }) {
           />
         </Group>
         <Avatar
-          src={data.picture}
+          src={data.picture_medium}
           className={classes.image}
           alt={`${data.name} picture`}
         />
