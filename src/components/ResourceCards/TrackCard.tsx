@@ -9,7 +9,7 @@ import RoundButton from '../Utils/RoundButton';
 
 export type TrackCardPropType = {
   album: {
-    cover: string,
+    cover_medium: string,
     title: string
   },
   artist: {
@@ -26,7 +26,7 @@ export type TrackCardPropType = {
 TrackCard.propTypes = {
   data: PropTypes.shape({
     album: PropTypes.shape({
-      cover: PropTypes.string,
+      cover_medium: PropTypes.string,
       title: PropTypes.string
     }),
     artist: PropTypes.shape({
@@ -77,6 +77,7 @@ const useStyles = createStyles({
   artist: {
     color: 'white', // <-- Change on theme
     fontSize: '1rem',
+    textAlign: 'center',
     width: 'fit-content',
 
     '&:hover': {
@@ -86,15 +87,8 @@ const useStyles = createStyles({
   },
   text: {
     color: 'gray', // <-- Change on theme
-    fontSize: '0.8rem'
-  },
-  textUnderlined: {
     fontSize: '0.8rem',
-
-    '&:hover': {
-      textDecoration: 'underline',
-      cursor: 'pointer'
-    }
+    textAlign: 'center'
   },
   explicitBadge: {
     marginTop: '0.5rem'
@@ -122,7 +116,7 @@ function TrackCard(props: { data: TrackCardPropType }) {
           />
         </Group>
         <Avatar
-          src={data.album.cover}
+          src={data.album.cover_medium}
           className={classes.image}
           alt={`${data.title} picture`}
         />
