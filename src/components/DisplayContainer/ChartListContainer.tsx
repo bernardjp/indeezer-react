@@ -1,16 +1,19 @@
 import * as PropTypes from 'prop-types';
 import { Container, createStyles } from '@mantine/core';
-import DisplayChart, { AlbumList, ArtistList, TrackList } from './DisplayChart';
+import DisplayChart, {
+  AlbumList, ArtistList, TrackList, PlaylistList
+} from './DisplayChart';
 import AlbumCard from '../ResourceCards/AlbumCard';
 import ArtistCard from '../ResourceCards/ArtistCard';
 import TrackCard from '../ResourceCards/TrackCard';
+import PlaylistCard from '../ResourceCards/PlaylistCard';
 
 type ChartListContainerPropType = {
   data: {
     albums: AlbumList,
     artists: ArtistList,
     tracks: TrackList,
-    // playlists: ResourcePropType,
+    playlists: PlaylistList,
     // podcasts: ResourcePropType,
   }
 }
@@ -82,6 +85,17 @@ export default function ChartListContainer(props: ChartListContainerPropType) {
               data={data[resource]}
               resourceType={resource}
               CardComponent={TrackCard}
+              key={resource}
+            />
+          );
+        }
+
+        if (resource === 'playlists') {
+          return (
+            <DisplayChart
+              data={data[resource]}
+              resourceType={resource}
+              CardComponent={PlaylistCard}
               key={resource}
             />
           );
