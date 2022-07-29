@@ -50,7 +50,6 @@ const useStyles = createStyles({
   },
   image: {
     borderRadius: '8px',
-    // height: '264px',
     transition: '0.2s',
     maxWidth: '264px',
 
@@ -87,6 +86,9 @@ const useStyles = createStyles({
       textDecoration: 'underline',
       cursor: 'pointer'
     }
+  },
+  explicitBadge: {
+    marginTop: '0.3rem'
   }
 });
 
@@ -119,7 +121,7 @@ function AlbumCard(props: { data: AlbumCardPropType }) {
           by&nbsp;
           <Text className={classes.artistName}>{data.artist.name}</Text>
         </Text>
-        {data.explicit_lyrics && <Badge color="gray" radius="sm" variant="outline">EXPLICIT</Badge>}
+        {data.explicit_lyrics && <Badge className={classes.explicitBadge} color="gray" radius="sm" variant="outline">EXPLICIT</Badge>}
       </Card.Section>
     </Card>
   );
