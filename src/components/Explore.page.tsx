@@ -16,6 +16,7 @@ const useStyles = createStyles(() => ({
   pageContainer: {
     display: 'flex',
     flexDirection: 'row',
+    margin: '0',
     maxWidth: '100%',
     padding: '0'
   },
