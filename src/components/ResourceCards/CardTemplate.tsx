@@ -7,15 +7,17 @@ import { FaPlay } from 'react-icons/fa';
 import { BsEye } from 'react-icons/bs';
 import RoundButton from '../Utils/RoundButton';
 
+export type CardInfoType = {
+  image: string,
+  info: string,
+  link: string,
+  title: string
+}
+
 type TemplateCardPropType = {
   playButtonCallback: () => void,
   viewButtonCallback: () => void,
-  card: {
-    image: string,
-    info: string,
-    link: string,
-    title: string
-  },
+  card: CardInfoType,
   isExplicit: boolean,
   isRound: boolean
 }
@@ -61,36 +63,14 @@ const useStyles = createStyles((theme, align: 'center' | '') => ({
     position: 'absolute',
     zIndex: '1'
   },
-  title: {
-    color: 'white', // <-- Change on theme
-    fontSize: '1rem',
-    width: 'fit-content',
-
-    '&:hover': {
-      textDecoration: 'underline',
-      cursor: 'pointer'
-    }
-  },
   textContainer: {
     alignItems: align,
     display: 'flex',
     flexDirection: 'column'
   },
-  text: {
-    color: 'gray', // <-- Change on theme
-    fontSize: '0.8rem',
-    display: 'flex'
-  },
-  textUnderlined: {
-    fontSize: '0.8rem',
-
-    '&:hover': {
-      textDecoration: 'underline',
-      cursor: 'pointer'
-    }
-  },
   explicitBadge: {
-    marginTop: '0.3rem'
+    marginTop: '0.3rem',
+    maxWidth: 'fit-content'
   }
 }));
 
@@ -123,8 +103,8 @@ function TemplateCard(props: TemplateCardPropType) {
         }
       </Card.Section>
       <Card.Section className={classes.textContainer}>
-        <Text size="md" lineClamp={1} color="white">{card.title}</Text>
-        <Text size="xs" lineClamp={2} color="gray">{card.info}</Text>
+        <Text size="md" lineClamp={1} color="white" align={isRound ? 'center' : 'left'}>{card.title}</Text>
+        <Text size="xs" lineClamp={2} color="gray" align={isRound ? 'center' : 'left'}>{card.info}</Text>
         {
           isExplicit
             && <Badge className={classes.explicitBadge} color="gray" radius="sm" variant="outline">EXPLICIT</Badge>

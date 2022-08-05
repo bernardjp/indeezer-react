@@ -1,5 +1,5 @@
 import * as PropTypes from 'prop-types';
-import TemplateCard from './CardTemplate';
+import TemplateCard, { CardInfoType } from './CardTemplate';
 
 export type PodcastCardPropTypes = {
   description: string,
@@ -21,7 +21,7 @@ PodcastCard.propTypes = {
 
 function PodcastCard(props: { data: PodcastCardPropTypes }) {
   const { data } = props;
-  const curatedCardData = {
+  const curatedCardData: CardInfoType = {
     title: data.title,
     info: data.description,
     image: data.picture_medium,
