@@ -1,7 +1,7 @@
-import { ReactQueryDevtools } from 'react-query/devtools';
-import { QueryClient, QueryClientProvider, QueryClientConfig } from 'react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClient, QueryClientProvider, QueryClientConfig } from '@tanstack/react-query';
 
-type ChildrenType = JSX.Element | React.FC | null;
+type ChildrenType = React.ReactNode | null;
 
 const queryClientOptions: QueryClientConfig = {
   defaultOptions: {
@@ -18,7 +18,7 @@ function QueryProvider(props: { children: ChildrenType | ChildrenType[] }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      { children }
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

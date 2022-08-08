@@ -61,7 +61,7 @@ const useStyles = createStyles((theme, align: 'center' | '') => ({
     gap: '14px',
     padding: '16px',
     position: 'absolute',
-    zIndex: '1'
+    zIndex: 1
   },
   textContainer: {
     alignItems: align,
