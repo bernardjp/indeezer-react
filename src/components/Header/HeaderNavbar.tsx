@@ -2,16 +2,23 @@ import { useLocation } from 'react-router-dom';
 import { Container, createStyles } from '@mantine/core';
 import NavbarAnchor from '../Utils/NavbarAnchor';
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme) => ({
   navbar: {
     margin: 'auto 0'
   },
   anchor: {
+    color: theme.colorScheme === 'dark' ? 'white' : 'black', // check theming with dark/light mode
+    fontWeight: 'bold',
+    margin: '0 1rem',
     textDecoration: 'none',
-    margin: '0 1rem'
+
+    '&:hover': {
+      color: theme.colors.red[5],
+      textDecoration: 'none'
+    }
   },
   active: {
-    color: 'yellow'
+    color: theme.colors.red[5]
   }
 }));
 

@@ -26,10 +26,10 @@ const navbarLinksData:LinkData[] = [
   }
 ];
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme) => ({
   NavbarContainer: {
-    backgroundColor: '#191922', // Change on custom Theme
-    border: '1px solid #32323d',
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
+    border: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[5]}`,
     display: 'flex',
     flexDirection: 'column',
     margin: '0',
@@ -37,24 +37,24 @@ const useStyles = createStyles(() => ({
     padding: '1.5rem 0'
   },
   anchor: {
-    color: 'white',
+    color: theme.colorScheme === 'dark' ? 'white' : 'black',
     fontSize: '1.1rem',
     fontWeight: 'bold',
     padding: '0 2rem',
     margin: '0.7rem 0',
-    borderLeft: '3px solid #191922',
+    borderLeft: `3px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.dark[0]}`,
     transition: '0.1s',
 
     '&:hover': {
-      borderLeft: '3px solid tomato',
+      borderLeft: `3px solid ${theme.colors.red[5]}`,
       textDecoration: 'none',
-      color: 'tomato'
+      color: theme.colors.red[5]
     }
   },
   active: {
-    borderLeft: '3px solid tomato',
+    borderLeft: `3px solid ${theme.colors.red[5]}`,
     textDecoration: 'none',
-    color: 'tomato'
+    color: theme.colors.red[5]
   }
 }));
 

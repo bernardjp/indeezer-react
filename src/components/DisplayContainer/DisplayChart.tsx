@@ -32,7 +32,7 @@ DisplayChart.propTypes = {
   }).isRequired
 };
 
-const useStyles = createStyles({
+const useStyles = createStyles((theme) => ({
   container: {
     maxWidth: '90%',
     paddingBottom: '1.5rem'
@@ -48,17 +48,17 @@ const useStyles = createStyles({
     padding: '1.5rem 0'
   },
   title: {
-    color: 'white',
+    color: theme.colorScheme === 'dark' ? 'white' : 'black',
     fontSize: '1.3rem',
     fontWeight: 'bold',
     transition: '0.15s',
 
     '&:hover': {
       textDecoration: 'none',
-      color: 'tomato'
+      color: theme.colors.red[5]
     }
   }
-});
+}));
 
 function DisplayChart(props: DisplayChartPropType) {
   const { data: { data }, resourceType, CardComponent } = props;
