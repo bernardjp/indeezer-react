@@ -7,7 +7,7 @@ const useStyles = createStyles(() => ({
     borderBottom: '1px solid gray',
     display: 'flex',
     height: '4rem',
-    justifyContent: 'space-between',
+    justifyContent: 'end',
     minWidth: '100%'
   }
 }));
@@ -17,7 +17,6 @@ function StyledHeader() {
 
   return (
     <Container className={classes.header}>
-      HEADER ICON
       <Navbar />
     </Container>
   );
