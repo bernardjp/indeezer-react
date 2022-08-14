@@ -2,10 +2,10 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Container, createStyles } from '@mantine/core';
 import { fetchJSONData } from '../utils/ApiRequestHandler';
-import GeneralLayoutContainer from './GeneralLayoutContainer';
 import SideNavbar from './SideNavbar/SideNavbar';
 import RequestHandler from './RequestHandler/RequestHandler';
 import ChartListContainer from './DisplayContainer/ChartListContainer';
+import Header from './Header/Header';
 
 // - La limitación del proxy de Rapidapi hace que no sea válido tener info en la primera
 // carga de la página debido a la dificultad en obtener multiples recursos sin recurrir
@@ -18,14 +18,17 @@ const useStyles = createStyles(() => ({
     flexDirection: 'row',
     margin: '0',
     maxWidth: '100%',
+    minHeight: '100vh',
     padding: '0'
   },
   displayContainer: {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
+    flexGrow: 1,
     maxWidth: '100%',
-    margin: '0'
+    margin: '0',
+    padding: '0'
   }
 }));
 
@@ -35,12 +38,12 @@ function ExplorePage() {
   const resourceType:string | undefined = pathname.split('/')[2];
 
   return (
-    <GeneralLayoutContainer>
-      <Container className={classes.pageContainer}>
-        <SideNavbar />
-        <Container className={classes.displayContainer}>
-          <div>EXPLORE PAGE</div>
-          {resourceType === undefined
+    <Container className={classes.pageContainer}>
+      <SideNavbar />
+      <Container className={classes.displayContainer}>
+        <Header />
+        <div>EXPLORE PAGE</div>
+        {resourceType === undefined
             && (
             <RequestHandler
               queryOptions={resourceType}
@@ -48,18 +51,17 @@ function ExplorePage() {
               RenderComponent={ChartListContainer}
             />
             )}
-          <Routes>
-            {/*
+        <Routes>
+          {/*
             <Route path="artists" element={<RequestHandler queryOptions={resourceType} />} />
             <Route path="albums" element={<RequestHandler queryOptions={resourceType} />} />
             <Route path="tracks" element={<RequestHandler queryOptions={resourceType} />} />
             <Route path="playlists" element={<RequestHandler queryOptions={resourceType} />} />
             <Route path="podcasts" element={<RequestHandler queryOptions={resourceType} />} />
             */}
-          </Routes>
-        </Container>
+        </Routes>
       </Container>
-    </GeneralLayoutContainer>
+    </Container>
   );
 }
 

@@ -1,5 +1,6 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import * as PropTypes from 'prop-types';
+import StyledLoader from '../Utils/StyledLoader';
 
 type RequestHandlerPropType = {
   queryOptions: string,
@@ -19,7 +20,7 @@ function RequestHandler(props: RequestHandlerPropType) {
 
   return (
     <>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <StyledLoader isLoading={isLoading} />}
       {error && <div>Error!</div>}
       {data && <RenderComponent data={data} />}
     </>

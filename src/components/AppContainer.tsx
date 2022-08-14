@@ -1,7 +1,7 @@
 import { Container, createStyles } from '@mantine/core';
 
 // this type is shared with the StyleProvider Component
-type ChildrenType = JSX.Element | React.FC | null;
+type ChildrenType = React.ReactNode | null;
 
 const useStyles = createStyles({
   container: {

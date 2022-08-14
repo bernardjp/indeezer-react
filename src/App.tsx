@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
 import AppContainer from './components/AppContainer';
-import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import AboutPage from './components/About.page';
 import HomePage from './components/Home.page';
@@ -9,7 +8,6 @@ import ExplorePage from './components/Explore.page';
 function App() {
   return (
     <AppContainer>
-      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="explore/*" element={<ExplorePage />} />
