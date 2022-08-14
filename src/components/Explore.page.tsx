@@ -18,14 +18,17 @@ const useStyles = createStyles(() => ({
     flexDirection: 'row',
     margin: '0',
     maxWidth: '100%',
+    minHeight: '100vh',
     padding: '0'
   },
   displayContainer: {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
+    flexGrow: 1,
     maxWidth: '100%',
-    margin: '0'
+    margin: '0',
+    padding: '0'
   }
 }));
 

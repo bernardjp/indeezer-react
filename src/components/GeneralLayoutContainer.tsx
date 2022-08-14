@@ -11,6 +11,7 @@ const useStyles = createStyles({
     flexGrow: 1,
     margin: '0',
     maxWidth: '100%',
+    minHeight: '100vh',
     padding: '0'
   }
 });
