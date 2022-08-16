@@ -1,12 +1,12 @@
 import { Container, createStyles } from '@mantine/core';
 import Navbar from './HeaderNavbar';
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme) => ({
   header: {
     alignItems: 'center',
-    borderBottom: '1px solid gray',
+    borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[5]}`,
     display: 'flex',
-    height: '4rem',
+    height: '54px',
     justifyContent: 'end',
     minWidth: '100%'
   }
