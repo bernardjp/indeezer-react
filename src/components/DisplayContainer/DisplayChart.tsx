@@ -1,26 +1,17 @@
 import {
+  // eslint-disable-next-line no-unused-vars
   Container, Grid, createStyles
 } from '@mantine/core';
 import * as PropTypes from 'prop-types';
-import { AlbumCardPropType } from '../ResourceCards/AlbumCard';
-import { ArtistCardPropType } from '../ResourceCards/ArtistCard';
-import { TrackCardPropType } from '../ResourceCards/TrackCard';
-import { PlaylistCardPropTypes } from '../ResourceCards/PlaylistCard';
-import { PodcastCardPropTypes } from '../ResourceCards/PodcastCard';
+import { ResourceDataList } from '../../types/CardDisplay.types';
 import NavbarAnchor from '../Utils/NavbarAnchor';
 import { useExpandChart, ExpandButton } from './ExpandChartButton';
 import useElementHeight from './useElementHeight';
 
-export type AlbumList = { data: AlbumCardPropType[] };
-export type ArtistList = { data: ArtistCardPropType[] };
-export type TrackList = { data: TrackCardPropType[] };
-export type PlaylistList = { data: PlaylistCardPropTypes[] };
-export type PodcastList = { data: PodcastCardPropTypes[] };
-
 type DisplayChartPropType = {
   CardComponent: React.ElementType,
   resourceType: string,
-  data: AlbumList | ArtistList | TrackList | PlaylistList | PodcastList
+  data: ResourceDataList
 }
 
 DisplayChart.propTypes = {
@@ -69,13 +60,25 @@ function DisplayChart(props: DisplayChartPropType) {
   return (
     <Container className={classes.container}>
       <Container className={classes.navbarContainer}>
+        {/*
+          CHANGE THE ANCHOR BELOW FOR A H2 OR A SPAN.
+          NO NEED OF AN ANCHOR HERE WITH THE SIDEBAR ALLWAYS PRESENT
+        */}
         <NavbarAnchor
           route={`/${resourceType}`}
           text={`Top 10 ${resourceType}`}
           styleClasses={classes.title}
         />
+        {/*
+          CREATE BUTTONS THAT INTERACT WITH THE NAVIGATION BUTTONS OF THE CAROUSEL:
+          [NEW BTN (CLICK) ===> CAROUSEL BTN (CLICK)]
+          HIDE THE BUTTONS OF THE CAROUSEL
+        */}
         <ExpandButton callback={onExpandCallback} isExpanded={isExpanded} />
       </Container>
+      {/*
+        ADD STYLED CAROUSEL COMPONENT.
+      */}
       <Grid
         justify="start"
         className={classes.chartContainer}

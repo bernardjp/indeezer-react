@@ -1,8 +1,9 @@
 import * as PropTypes from 'prop-types';
 import { Container, createStyles } from '@mantine/core';
-import DisplayChart, {
+import {
   AlbumList, ArtistList, TrackList, PlaylistList, PodcastList
-} from './DisplayChart';
+} from '../../types/CardDisplay.types';
+import DisplayChart from './DisplayChart';
 import AlbumCard from '../ResourceCards/AlbumCard';
 import ArtistCard from '../ResourceCards/ArtistCard';
 import TrackCard from '../ResourceCards/TrackCard';
