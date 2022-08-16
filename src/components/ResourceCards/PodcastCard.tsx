@@ -1,13 +1,6 @@
 import * as PropTypes from 'prop-types';
+import { PodcastCardPropTypes } from '../../types/CardDisplay.types';
 import TemplateCard, { CardInfoType } from './CardTemplate';
-
-export type PodcastCardPropTypes = {
-  description: string,
-  id: number,
-  link: string,
-  picture_medium: string,
-  title: string
-}
 
 PodcastCard.propTypes = {
   data: PropTypes.shape({
