@@ -1,12 +1,8 @@
-import {
-  // eslint-disable-next-line no-unused-vars
-  Container, Grid, createStyles
-} from '@mantine/core';
+import { Container, createStyles } from '@mantine/core';
 import * as PropTypes from 'prop-types';
 import { ResourceDataList } from '../../types/CardDisplay.types';
 import NavbarAnchor from '../Utils/NavbarAnchor';
-import { useExpandChart, ExpandButton } from './ExpandChartButton';
-import useElementHeight from './useElementHeight';
+import StyledCarousel from '../Carousel/StyledCarousel';
 
 type DisplayChartPropType = {
   CardComponent: React.ElementType,
@@ -25,8 +21,8 @@ DisplayChart.propTypes = {
 
 const useStyles = createStyles((theme) => ({
   container: {
-    maxWidth: '90%',
-    paddingBottom: '1.5rem'
+    maxWidth: '93%',
+    paddingBottom: '4rem'
   },
   chartContainer: {
     overflow: 'hidden'
@@ -36,7 +32,9 @@ const useStyles = createStyles((theme) => ({
     justifyContent: 'space-between',
     margin: '0',
     maxWidth: '100%',
-    padding: '1.5rem 0'
+    paddingLeft: '0.5rem',
+    paddingTop: '0.4rem',
+    position: 'absolute'
   },
   title: {
     color: theme.colorScheme === 'dark' ? 'white' : 'black',
@@ -52,10 +50,8 @@ const useStyles = createStyles((theme) => ({
 }));
 
 function DisplayChart(props: DisplayChartPropType) {
-  const { data: { data }, resourceType, CardComponent } = props;
+  const { data, resourceType, CardComponent } = props;
   const { classes } = useStyles();
-  const { ref, newHeight } = useElementHeight();
-  const [isExpanded, onExpandCallback] = useExpandChart();
 
   return (
     <Container className={classes.container}>
@@ -74,12 +70,17 @@ function DisplayChart(props: DisplayChartPropType) {
           [NEW BTN (CLICK) ===> CAROUSEL BTN (CLICK)]
           HIDE THE BUTTONS OF THE CAROUSEL
         */}
-        <ExpandButton callback={onExpandCallback} isExpanded={isExpanded} />
+        {/* <ExpandButton callback={onExpandCallback} isExpanded={isExpanded} /> */}
       </Container>
       {/*
         ADD STYLED CAROUSEL COMPONENT.
       */}
-      <Grid
+      <StyledCarousel
+        data={data}
+        CardComponent={CardComponent}
+      />
+
+      {/* <Grid
         justify="start"
         className={classes.chartContainer}
         sx={{ height: isExpanded ? '100%' : newHeight }}
@@ -91,7 +92,7 @@ function DisplayChart(props: DisplayChartPropType) {
             </div>
           </Grid.Col>
         ))}
-      </Grid>
+      </Grid> */}
     </Container>
   );
 }

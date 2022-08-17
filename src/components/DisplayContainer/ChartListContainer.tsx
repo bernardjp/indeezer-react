@@ -47,7 +47,8 @@ ChartListContainer.propTypes = {
 
 const useStyles = createStyles({
   container: {
-    maxWidth: '100%'
+    maxWidth: '100%',
+    paddingBottom: '4rem'
   }
 });
 
