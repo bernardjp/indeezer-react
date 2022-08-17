@@ -1,9 +1,17 @@
 import { useLocation } from 'react-router-dom';
-import { Container, createStyles } from '@mantine/core';
+import {
+  Container, Image, Anchor, createStyles, useMantineTheme
+} from '@mantine/core';
 import { LinkData } from '../Header/HeaderNavbar';
 import NavbarAnchor from '../Utils/NavbarAnchor';
+import AppLogoDM from '../../assets/Colored_Full_White.png';
+import AppLogoLM from '../../assets/Colored_Full_Black.png';
 
 const navbarLinksData:LinkData[] = [
+  {
+    route: '',
+    text: 'Top 10'
+  },
   {
     route: 'artists',
     text: 'Artists'
@@ -34,7 +42,8 @@ const useStyles = createStyles((theme) => ({
     flexDirection: 'column',
     margin: '0',
     minWidth: '220px',
-    padding: '0'
+    padding: '0',
+    zIndex: 3
   },
   fixedContentContainer: {
     display: 'flex',
@@ -45,6 +54,7 @@ const useStyles = createStyles((theme) => ({
   navbarContainer: {
     display: 'flex',
     flexDirection: 'column',
+    margin: 0,
     padding: '2.5rem 0'
   },
   anchor: {
@@ -53,7 +63,7 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 'bold',
     padding: '0 2rem',
     margin: '0.7rem 0',
-    borderLeft: `3px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.dark[0]}`,
+    borderLeft: `3px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.dark[0]}`,
     transition: '0.075s',
 
     '&:hover': {
@@ -69,20 +79,29 @@ const useStyles = createStyles((theme) => ({
   },
   iconContainer: {
     display: 'flex',
+    height: '100%',
     justifyContent: 'center',
-    padding: '1rem 0'
+    margin: '12px 0 0 24px',
+    maxWidth: '123px'
   }
 }));
 
 function SideNavbar() {
   const { pathname } = useLocation();
-  const resourceType = pathname.split('/')[2];
+  const resourceType = pathname.split('/')[2] || '';
   const { classes, cx } = useStyles();
+  const theme = useMantineTheme();
 
   return (
     <Container className={classes.mainContainer}>
       <Container className={classes.fixedContentContainer}>
-        <div className={classes.iconContainer}>Sidebar ICON</div>
+        <Anchor href="https://www.deezer.com" target="_blank">
+          <Image
+            className={classes.iconContainer}
+            src={theme.colorScheme === 'dark' ? AppLogoDM : AppLogoLM}
+            alt="Deezer icon"
+          />
+        </Anchor>
         <Container className={classes.navbarContainer}>
           {navbarLinksData.map(({ route, text }) => (
             <NavbarAnchor

@@ -33,7 +33,7 @@ const useStyles = createStyles((theme) => ({
     margin: '0',
     maxWidth: '100%',
     paddingLeft: '0.5rem',
-    paddingTop: '0.4rem',
+    paddingTop: '1rem',
     position: 'absolute'
   },
   title: {

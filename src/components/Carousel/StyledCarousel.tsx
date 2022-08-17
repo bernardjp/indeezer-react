@@ -28,11 +28,12 @@ const useStyles = createStyles(() => ({
     justifyContent: 'end',
     marginBottom: '1rem',
     paddingTop: '1rem',
-    gap: '0.2rem'
+    gap: '0.3rem'
   },
   controlContainer: {
     backgroundColor: 'transparent',
     border: 'white',
+    marginLeft: '0.5rem',
     minWidth: '35px',
     minHeight: '35px',
     borderRadius: '35px',
@@ -61,7 +62,6 @@ function StyledCarousel(props: PropsType) {
   return (
     <Carousel
       align="start"
-      // loop
       slideSize="20%"
       slidesToScroll={2}
       speed={7}
