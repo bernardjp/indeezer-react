@@ -79,7 +79,6 @@ function DisplayChart(props: DisplayChartPropType) {
         data={data}
         CardComponent={CardComponent}
       />
-
       {/* <Grid
         justify="start"
         className={classes.chartContainer}
