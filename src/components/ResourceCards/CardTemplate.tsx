@@ -37,18 +37,18 @@ TemplateCard.propTypes = {
 
 const useStyles = createStyles((theme, align: 'center' | '') => ({
   cardContainer: {
-    maxWidth: '264px',
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    margin: '0.5rem'
   },
   imageSection: {
     alignItems: align,
     display: 'flex',
-    flexDirection: 'column-reverse'
+    flexDirection: 'column-reverse',
+    marginBottom: '0.3rem'
   },
   image: {
     borderRadius: '50%',
     height: '100%',
-    maxWidth: '264px',
     transition: '0.2s',
     width: '100%',
 
@@ -69,7 +69,7 @@ const useStyles = createStyles((theme, align: 'center' | '') => ({
     flexDirection: 'column'
   },
   explicitBadge: {
-    marginTop: '0.3rem',
+    marginTop: '0.5rem',
     maxWidth: 'fit-content'
   }
 }));
@@ -104,7 +104,7 @@ function TemplateCard(props: TemplateCardPropType) {
       </Card.Section>
       <Card.Section className={classes.textContainer}>
         <Text size="md" lineClamp={1} color="white" align={isRound ? 'center' : 'left'}>{card.title}</Text>
-        <Text size="xs" lineClamp={2} color="gray" align={isRound ? 'center' : 'left'}>{card.info}</Text>
+        <Text size="xs" lineClamp={2} color="dimmed" align={isRound ? 'center' : 'left'}>{card.info}</Text>
         {
           isExplicit
             && <Badge className={classes.explicitBadge} color="gray" radius="sm" variant="outline">EXPLICIT</Badge>
