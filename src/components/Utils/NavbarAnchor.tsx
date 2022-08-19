@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 
 type navbarPropType = {
   route: string,
-  text: string,
+  children: string | React.ReactNode,
   styleClasses: string
 };
 
 function NavbarAnchor(props: navbarPropType) {
   const {
-    route, text, styleClasses
+    route, children, styleClasses
   } = props;
 
   return (
@@ -18,7 +18,7 @@ function NavbarAnchor(props: navbarPropType) {
       component={Link}
       to={route}
     >
-      {text}
+      {children}
     </Anchor>
   );
 }

@@ -55,10 +55,11 @@ function StyledNavbar() {
       {navbarLinksData.map(({ route, text }) => (
         <NavbarAnchor
           route={route}
-          text={text}
           styleClasses={cx(classes.anchor, { [classes.active]: pathnameRoot === route })}
           key={route}
-        />
+        >
+          {text}
+        </NavbarAnchor>
       ))}
     </Container>
   );
