@@ -62,36 +62,15 @@ function DisplayChart(props: DisplayChartPropType) {
         */}
         <NavbarAnchor
           route={`/${resourceType}`}
-          text={`Top 10 ${resourceType}`}
           styleClasses={classes.title}
-        />
-        {/*
-          CREATE BUTTONS THAT INTERACT WITH THE NAVIGATION BUTTONS OF THE CAROUSEL:
-          [NEW BTN (CLICK) ===> CAROUSEL BTN (CLICK)]
-          HIDE THE BUTTONS OF THE CAROUSEL
-        */}
-        {/* <ExpandButton callback={onExpandCallback} isExpanded={isExpanded} /> */}
+        >
+          {`Top 10 ${resourceType}`}
+        </NavbarAnchor>
       </Container>
-      {/*
-        ADD STYLED CAROUSEL COMPONENT.
-      */}
       <StyledCarousel
         data={data}
         CardComponent={CardComponent}
       />
-      {/* <Grid
-        justify="start"
-        className={classes.chartContainer}
-        sx={{ height: isExpanded ? '100%' : newHeight }}
-      >
-        {data.map((element, i) => (
-          <Grid.Col xs={12} sm={6} md={4} lg={2.4} key={element.id}>
-            <div ref={i === 0 ? ref : null}>
-              <CardComponent data={element} />
-            </div>
-          </Grid.Col>
-        ))}
-      </Grid> */}
     </Container>
   );
 }
