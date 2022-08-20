@@ -47,8 +47,13 @@ ChartListContainer.propTypes = {
 
 const useStyles = createStyles({
   container: {
+    marginTop: '54px',
     maxWidth: '100%',
-    padding: '4rem 0'
+    overflow: 'hidden',
+    padding: '0',
+    paddingBottom: '100px',
+    position: 'absolute',
+    width: ['-moz-available', '-webkit-fill-available']
   }
 });
 

@@ -44,7 +44,7 @@ function ConversionBanner() {
   return (
     <Container className={classes.bannerContainer}>
       <Text className={classes.bannerText}>
-        Estás disfrutando de Deezer Free. Suscríbete y sáltate gratis los anuncios durante 1 mes.
+        You&apos;re on IN/Deezer Free. Upgrade & skip ads free for 1 month (placeholder)
       </Text>
       <Anchor className={classes.bannerAnchor}>EXPLORE</Anchor>
     </Container>

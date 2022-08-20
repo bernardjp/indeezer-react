@@ -24,6 +24,10 @@ const useStyles = createStyles((theme, { visible }: RoundButtonStyleType) => ({
     '&:hover': {
       transform: 'scale(120%)',
       backgroundColor: 'white' // <-- checkear en Theme
+    },
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      opacity: '100%'
     }
   }
 }));
