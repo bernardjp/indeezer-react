@@ -38,7 +38,7 @@ const navbarLinksData:LinkData[] = [
 const useStyles = createStyles((theme) => ({
   mainContainer: {
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-    borderRight: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[5]}`,
+    borderRight: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]}`,
     display: 'flex',
     flexDirection: 'column',
     height: '100vh',

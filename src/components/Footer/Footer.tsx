@@ -3,8 +3,8 @@ import { Container, Text, createStyles } from '@mantine/core';
 const useStyles = createStyles((theme) => ({
   footerContainer: {
     alignItems: 'center',
-    backgroundColor: theme.colors.dark[5],
-    borderTop: `1px solid ${theme.colors.dark[4]}`,
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.dark[0],
+    borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
     bottom: 0,
     display: 'flex',
     height: '80px',
