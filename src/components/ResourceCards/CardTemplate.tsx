@@ -54,7 +54,7 @@ const useStyles = createStyles((theme, align: 'center' | '') => ({
 
     '&:hover': {
       cursor: 'pointer',
-      filter: 'brightness(75%)'
+      filter: theme.colorScheme === 'dark' ? 'brightness(75%)' : 'contrast(60%) brightness(120%)'
     }
   },
   buttonContainer: {
@@ -103,7 +103,7 @@ function TemplateCard(props: TemplateCardPropType) {
         }
       </Card.Section>
       <Card.Section className={classes.textContainer}>
-        <Text size="md" lineClamp={1} color="white" align={isRound ? 'center' : 'left'}>{card.title}</Text>
+        <Text size="md" lineClamp={1} align={isRound ? 'center' : 'left'}>{card.title}</Text>
         <Text size="xs" lineClamp={2} color="dimmed" align={isRound ? 'center' : 'left'}>{card.info}</Text>
         {
           isExplicit

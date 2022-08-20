@@ -39,7 +39,7 @@ const useStyles = createStyles((theme) => ({
 
     img: {
       maxWidth: '25px',
-      filter: 'invert(100%)'
+      filter: theme.colorScheme === 'dark' ? 'invert(100%)' : ''
     },
 
     '&:hover': {

@@ -28,6 +28,7 @@ const useStyles = createStyles((theme) => ({
   controlContainer: {
     backgroundColor: 'transparent',
     border: 'white',
+    boxShadow: '0px 4px 15px -5px rgba(0,0,0,0.3)',
     marginLeft: '0.5rem',
     minWidth: '35px',
     minHeight: '35px',
@@ -45,7 +46,7 @@ const useStyles = createStyles((theme) => ({
     },
 
     svg: {
-      color: 'white'
+      color: theme.colorScheme === 'dark' ? 'white' : 'black'
     }
   }
 }));

@@ -15,6 +15,7 @@ const useStyles = createStyles(() => ({
     padding: '20px 16px'
   },
   bannerText: {
+    color: 'white',
     fontSize: '13px',
     lineHeight: '18px',
     marginBottom: '1rem'
