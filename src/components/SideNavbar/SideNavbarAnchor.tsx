@@ -29,11 +29,11 @@ const useStyles = createStyles((theme) => ({
     gap: '0.9rem',
     borderLeft: `3px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.dark[0]}`,
     color: theme.colorScheme === 'dark' ? 'white' : 'black',
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     fontWeight: 'bold',
     lineHeight: '1.7rem',
     margin: '0.6rem 0',
-    padding: '0 1.8rem',
+    padding: '0 1.6rem',
     transition: '0.075s',
     justifyContent: 'left',
 
@@ -43,7 +43,6 @@ const useStyles = createStyles((theme) => ({
     },
 
     '&:hover': {
-      borderLeft: `3px solid ${theme.colors.red[5]}`,
       color: theme.colors.red[5],
       textDecoration: 'none',
 
@@ -65,6 +64,7 @@ const useStyles = createStyles((theme) => ({
 
 function SideNavbarAnchor(props: SideNavbarAnchorPropType) {
   const {
+    // TO-DO: use the 'theme' argument to set Dark Mode / Light Mode
     // eslint-disable-next-line no-unused-vars
     route, text, theme, currentActiveType
   } = props;

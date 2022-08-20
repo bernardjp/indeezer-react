@@ -1,34 +1,29 @@
 import { createStyles } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 import { ResourceDataList } from '../../types/CardDisplay.types';
+import useCarouselQuery from '../DisplayContainer/useCarouselQuery';
 
 type PropsType = {
   data: ResourceDataList,
   CardComponent: React.ElementType
 }
 
-// set breakpoints in the theme.
-// eslint-disable-next-line no-unused-vars
-const breakpoints = {
-  xs: '240px',
-  sm: '480px',
-  md: '720px',
-  lg: '960px',
-  xl: '1080px'
-};
-
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme) => ({
   carouselContainer: {
     display: 'flex',
     flexDirection: 'column-reverse'
   },
   controlsContainer: {
-    // experimetn
+    // experiment
     position: 'relative',
     justifyContent: 'end',
     marginBottom: '1rem',
     paddingTop: '1rem',
-    gap: '0.3rem'
+    gap: '0.3rem',
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      marginBottom: '0.3rem'
+    }
   },
   controlContainer: {
     backgroundColor: 'transparent',
@@ -58,32 +53,35 @@ const useStyles = createStyles(() => ({
 function StyledCarousel(props: PropsType) {
   const { data: { data }, CardComponent } = props;
   const { classes } = useStyles();
+  const { ref, slidesToScroll, slidesSpeed } = useCarouselQuery();
 
   return (
-    <Carousel
-      align="start"
-      slideSize="20%"
-      slidesToScroll={2}
-      speed={7}
-      classNames={{
-        controls: classes.controlsContainer,
-        control: classes.controlContainer,
-        root: classes.carouselContainer
-      }}
-      // --> CHECK BREAKPOINTS !!
-      breakpoints={[
-        { maxWidth: 'xs', slideSize: '100%' },
-        { maxWidth: 'sm', slideSize: '50%' },
-        { maxWidth: 'md', slideSize: '33.33333%' },
-        { maxWidth: 'xl', slideSize: '25%' }
-      ]}
-    >
-      {data.map((element) => (
-        <Carousel.Slide key={element.id}>
-          <CardComponent data={element} />
-        </Carousel.Slide>
-      ))}
-    </Carousel>
+    <div ref={ref}>
+      <Carousel
+        align="start"
+        slideSize="20%"
+        slidesToScroll={slidesToScroll}
+        speed={slidesSpeed}
+        classNames={{
+          controls: classes.controlsContainer,
+          control: classes.controlContainer,
+          root: classes.carouselContainer
+        }}
+        // ---> TO-DO: CHECK THEME BREAKPOINST FOR CONSISTENCY!!
+        breakpoints={[
+          { maxWidth: 'xs', slideSize: '100%' },
+          { maxWidth: 'md', slideSize: '50%' },
+          { maxWidth: 'lg', slideSize: '33.33333%' },
+          { maxWidth: 'xl', slideSize: '25%' }
+        ]}
+      >
+        {data.map((element) => (
+          <Carousel.Slide key={element.id}>
+            <CardComponent data={element} />
+          </Carousel.Slide>
+        ))}
+      </Carousel>
+    </div>
   );
 }
 

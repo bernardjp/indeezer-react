@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import {
-  Container, Image, Anchor, createStyles, useMantineTheme
+  Container, Image, Anchor, ScrollArea, createStyles, useMantineTheme
 } from '@mantine/core';
 import { LinkData } from '../Header/HeaderNavbar';
 import SideNavbarAnchor from './SideNavbarAnchor';
@@ -41,35 +41,36 @@ const useStyles = createStyles((theme) => ({
     borderRight: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[5]}`,
     display: 'flex',
     flexDirection: 'column',
+    height: '100vh',
     margin: '0',
     minWidth: '220px',
-    padding: '0',
-    zIndex: 3
-  },
-  fixedContentContainer: {
-    display: 'flex',
-    flexDirection: 'column',
     maxWidth: 'min-content',
-    minWidth: 'inherit',
-    padding: '0',
-    position: 'fixed'
+    padding: '0 0 100px 0',
+    position: 'fixed',
+    zIndex: 3,
+
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      display: 'none'
+    }
   },
   navbarContainer: {
     display: 'flex',
     flexDirection: 'column',
     margin: 0,
+    overflow: 'auto',
     padding: '0'
   },
   anchorContainer: {
     height: '55px',
     margin: '0',
-    padding: '12px 0 0 24px'
+    padding: '12px 0 0 24px',
+    width: 'fit-content'
   },
   iconContainer: {
     display: 'flex',
     height: '100%',
     justifyContent: 'center',
-    maxWidth: '150px'
+    maxWidth: '135px'
   }
 }));
 
@@ -81,17 +82,17 @@ function SideNavbar() {
 
   return (
     <Container className={classes.mainContainer}>
-      <Container className={classes.fixedContentContainer}>
-        <Container className={classes.anchorContainer}>
-          <Anchor href="https://www.deezer.com" target="_blank">
-            <Image
-              className={classes.iconContainer}
-              src={theme.colorScheme === 'dark' ? AppLogoDM : AppLogoLM}
-              alt="Deezer icon"
-            />
-          </Anchor>
-        </Container>
-        <ConversionBanner />
+      <Container className={classes.anchorContainer}>
+        <Anchor href="https://www.deezer.com" target="_blank">
+          <Image
+            className={classes.iconContainer}
+            src={theme.colorScheme === 'dark' ? AppLogoDM : AppLogoLM}
+            alt="Deezer icon"
+          />
+        </Anchor>
+      </Container>
+      <ConversionBanner />
+      <ScrollArea offsetScrollbars>
         <Container className={classes.navbarContainer}>
           {navbarLinksData.map(({ route, text }) => (
             <SideNavbarAnchor
@@ -103,7 +104,7 @@ function SideNavbar() {
             />
           ))}
         </Container>
-      </Container>
+      </ScrollArea>
     </Container>
   );
 }

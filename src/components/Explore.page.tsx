@@ -12,7 +12,7 @@ import Header from './Header/Header';
 // a multiples llamadas a la API.
 // - Diseñar página con info inicial/placeholder.
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme) => ({
   pageContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -28,7 +28,12 @@ const useStyles = createStyles(() => ({
     flexGrow: 1,
     maxWidth: '100%',
     margin: '0',
-    padding: '0'
+    marginLeft: '220px',
+    padding: '0',
+
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      marginLeft: '0px'
+    }
   }
 }));
 
@@ -42,7 +47,6 @@ function ExplorePage() {
       <SideNavbar />
       <Container className={classes.displayContainer}>
         <Header />
-        <div>EXPLORE PAGE</div>
         {resourceType === undefined
             && (
             <RequestHandler
