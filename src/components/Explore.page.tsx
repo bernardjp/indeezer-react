@@ -46,7 +46,7 @@ function ExplorePage() {
     <Container className={classes.pageContainer}>
       <SideNavbar />
       <Container className={classes.displayContainer}>
-        <Header />
+        <Header withSearchBar />
         {resourceType === undefined
             && (
             <RequestHandler
