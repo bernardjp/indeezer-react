@@ -22,7 +22,7 @@ function GeneralLayoutContainer(props: { children: ChildrenType | ChildrenType[]
 
   return (
     <Container className={classes.container}>
-      <Header />
+      <Header withSearchBar={false} />
       { children }
     </Container>
   );
