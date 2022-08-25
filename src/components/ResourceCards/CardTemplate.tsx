@@ -96,6 +96,11 @@ function TemplateCard(props: TemplateCardPropType) {
             onClickCallback={viewButtonCallback}
           />
         </Group>
+        {/*
+          The images are hosted so we need to implement a RequestHandler in case the link
+          to them is broken or the host isn't working.
+          SEE: onLoad & onError events
+        */}
         {
           isRound
             ? <Avatar src={card.image} className={classes.image} alt={`${card.title} image`} />

@@ -52,7 +52,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 function StyledCarousel(props: PropsType) {
-  const { data: { data }, CardComponent } = props;
+  const { data, CardComponent } = props;
   const { classes } = useStyles();
   const { ref, slidesToScroll, slidesSpeed } = useCarouselQuery();
 
