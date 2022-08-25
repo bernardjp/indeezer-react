@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { ResourceType, ResourceDataList, APIJsonResponseType } from '../types/CardDisplay.types';
 
 // REQUEST HANDLER THROUGH A HEROKU PUBLIC CORS PROXY
 // const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -42,18 +43,40 @@ const fetchAPIData = async (pathname: string) => {
 };
 
 // REQUEST DATA FROM JSON FILE
-const fetchJSONData = async (resourceData: string | undefined) => {
+const fetchJSONData = async (
+  resourceType: ResourceType | undefined
+): Promise<APIJsonResponseType | any> => {
   try {
     const jsonData = await axios.get('../../data/json-chart.json');
-    if (resourceData === undefined) {
-      return jsonData.data;
+
+    if (resourceType === undefined) {
+      const mappedData = dataMapper(jsonData.data);
+      const data: APIJsonResponseType = {
+        resourceList: mappedData,
+        // NO-NO: hardcoded implementation
+        resourceType: ['albums', 'artists', 'tracks', 'playlists', 'podcasts']
+      };
+
+      return data;
     }
 
-    return jsonData.data[resourceData].data;
+    const data: APIJsonResponseType = {
+      resourceList: { [resourceType]: jsonData.data[resourceType].data },
+      resourceType: [resourceType]
+    };
+
+    return data;
   } catch (error) {
     console.log(error);
     return error;
   }
 };
+
+function dataMapper(data: any): { [key: string]: ResourceDataList } {
+  const keys = Object.keys(data);
+  const mappedData = keys.reduce((acc, key) => ({ ...acc, [key]: data[key].data }), {});
+
+  return mappedData;
+}
 
 export { fetchAPIData, fetchJSONData };

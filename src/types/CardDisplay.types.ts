@@ -1,3 +1,6 @@
+// Base resource types
+export type ResourceType = 'artists' | 'albums' | 'tracks' | 'playlists' | 'podcasts'
+
 // Types for each card component
 export type AlbumCardPropType = {
   artist: {
@@ -59,11 +62,17 @@ export type TrackCardPropType = {
 }
 
 // Types for each individual resource list (Albums, Artists, Podcast, etc)
-export type AlbumList = { data: AlbumCardPropType[] };
-export type ArtistList = { data: ArtistCardPropType[] };
-export type TrackList = { data: TrackCardPropType[] };
-export type PlaylistList = { data: PlaylistCardPropTypes[] };
-export type PodcastList = { data: PodcastCardPropTypes[] };
+export type AlbumList = AlbumCardPropType[];
+export type ArtistList = ArtistCardPropType[];
+export type TrackList = TrackCardPropType[];
+export type PlaylistList = PlaylistCardPropTypes[];
+export type PodcastList = PodcastCardPropTypes[];
 
 // Type for the list of all resources
 export type ResourceDataList = AlbumList | ArtistList | TrackList | PlaylistList | PodcastList;
+
+// API JSON response type
+export type APIJsonResponseType = {
+  resourceList: { [key: string]: ResourceDataList },
+  resourceType: ResourceType[]
+}

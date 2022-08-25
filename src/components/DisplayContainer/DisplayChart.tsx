@@ -14,10 +14,7 @@ type DisplayChartPropType = {
 DisplayChart.propTypes = {
   CardComponent: PropTypes.elementType.isRequired,
   resourceType: PropTypes.string.isRequired,
-  data: PropTypes.shape({
-    data: PropTypes.arrayOf(PropTypes.object),
-    total: PropTypes.number
-  }).isRequired
+  data: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 const iconSlide = keyframes({

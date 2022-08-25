@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Container, createStyles } from '@mantine/core';
 import { fetchJSONData } from '../utils/ApiRequestHandler';
@@ -6,6 +5,7 @@ import SideNavbar from './SideNavbar/SideNavbar';
 import RequestHandler from './RequestHandler/RequestHandler';
 import ChartListContainer from './DisplayContainer/ChartListContainer';
 import Header from './Header/Header';
+import ResourceListContainer from './ResourceListContainer/ResourceListContainer';
 
 // - La limitación del proxy de Rapidapi hace que no sea válido tener info en la primera
 // carga de la página debido a la dificultad en obtener multiples recursos sin recurrir
@@ -56,13 +56,56 @@ function ExplorePage() {
             />
             )}
         <Routes>
-          {/*
-            <Route path="artists" element={<RequestHandler queryOptions={resourceType} />} />
-            <Route path="albums" element={<RequestHandler queryOptions={resourceType} />} />
-            <Route path="tracks" element={<RequestHandler queryOptions={resourceType} />} />
-            <Route path="playlists" element={<RequestHandler queryOptions={resourceType} />} />
-            <Route path="podcasts" element={<RequestHandler queryOptions={resourceType} />} />
-            */}
+          <Route
+            path="artists"
+            element={(
+              <RequestHandler
+                queryOptions={resourceType}
+                queryCallback={fetchJSONData}
+                RenderComponent={ResourceListContainer}
+              />
+            )}
+          />
+          <Route
+            path="albums"
+            element={(
+              <RequestHandler
+                queryOptions={resourceType}
+                queryCallback={fetchJSONData}
+                RenderComponent={ResourceListContainer}
+              />
+            )}
+          />
+          <Route
+            path="tracks"
+            element={(
+              <RequestHandler
+                queryOptions={resourceType}
+                queryCallback={fetchJSONData}
+                RenderComponent={ResourceListContainer}
+              />
+            )}
+          />
+          <Route
+            path="playlists"
+            element={(
+              <RequestHandler
+                queryOptions={resourceType}
+                queryCallback={fetchJSONData}
+                RenderComponent={ResourceListContainer}
+              />
+            )}
+          />
+          <Route
+            path="podcasts"
+            element={(
+              <RequestHandler
+                queryOptions={resourceType}
+                queryCallback={fetchJSONData}
+                RenderComponent={ResourceListContainer}
+              />
+            )}
+          />
         </Routes>
       </Container>
     </Container>

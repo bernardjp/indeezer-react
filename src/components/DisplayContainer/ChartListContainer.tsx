@@ -1,24 +1,8 @@
 import * as PropTypes from 'prop-types';
 import { Container, createStyles } from '@mantine/core';
-import {
-  AlbumList, ArtistList, TrackList, PlaylistList, PodcastList
-} from '../../types/CardDisplay.types';
+import { APIJsonResponseType } from '../../types/CardDisplay.types';
 import DisplayChart from './DisplayChart';
-import AlbumCard from '../ResourceCards/AlbumCard';
-import ArtistCard from '../ResourceCards/ArtistCard';
-import TrackCard from '../ResourceCards/TrackCard';
-import PlaylistCard from '../ResourceCards/PlaylistCard';
-import PodcastCard from '../ResourceCards/PodcastCard';
-
-type ChartListContainerPropType = {
-  data: {
-    albums: AlbumList,
-    artists: ArtistList,
-    tracks: TrackList,
-    playlists: PlaylistList,
-    podcasts: PodcastList,
-  }
-}
+import getCardComponent from '../ResourceCards/getCardComponent';
 
 ChartListContainer.propTypes = {
   data: PropTypes.shape({
@@ -57,71 +41,20 @@ const useStyles = createStyles({
   }
 });
 
-export default function ChartListContainer(props: ChartListContainerPropType) {
-  const { data } = props;
-  const resources = Object.keys(data);
+export default function ChartListContainer(props: { data: APIJsonResponseType }) {
+  const { data: { resourceList, resourceType } } = props;
   const { classes } = useStyles();
 
   return (
     <Container className={classes.container}>
-      {resources.map((resource) => {
-        if (resource === 'albums') {
-          return (
-            <DisplayChart
-              data={data[resource]}
-              resourceType={resource}
-              CardComponent={AlbumCard}
-              key={resource}
-            />
-          );
-        }
-
-        if (resource === 'artists') {
-          return (
-            <DisplayChart
-              data={data[resource]}
-              resourceType={resource}
-              CardComponent={ArtistCard}
-              key={resource}
-            />
-          );
-        }
-
-        if (resource === 'tracks') {
-          return (
-            <DisplayChart
-              data={data[resource]}
-              resourceType={resource}
-              CardComponent={TrackCard}
-              key={resource}
-            />
-          );
-        }
-
-        if (resource === 'playlists') {
-          return (
-            <DisplayChart
-              data={data[resource]}
-              resourceType={resource}
-              CardComponent={PlaylistCard}
-              key={resource}
-            />
-          );
-        }
-
-        if (resource === 'podcasts') {
-          return (
-            <DisplayChart
-              data={data[resource]}
-              resourceType={resource}
-              CardComponent={PodcastCard}
-              key={resource}
-            />
-          );
-        }
-
-        return <div key={resource}>{`${resource} list`}</div>;
-      })}
+      {resourceType.map((resource): React.ReactNode => (
+        <DisplayChart
+          data={resourceList[resource]}
+          resourceType={resource}
+          CardComponent={getCardComponent(resource)}
+          key={resource}
+        />
+      ))}
     </Container>
   );
 }
