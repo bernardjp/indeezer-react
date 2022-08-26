@@ -1,4 +1,4 @@
-import { Container } from '@mantine/core';
+import { Grid, createStyles } from '@mantine/core';
 import { ResourceDataList } from '../../types/CardDisplay.types';
 
 type DisplayListPropType = {
@@ -6,13 +6,37 @@ type DisplayListPropType = {
   CardComponent: React.ElementType
 }
 
+const useStyles = createStyles(() => ({
+  container: {
+    paddingBottom: '80px',
+    width: '93%'
+  },
+  cardContainer: {
+    padding: '0',
+    marginBottom: '1rem'
+  }
+}));
+
 function DisplayList(props: DisplayListPropType) {
   const { dataList, CardComponent } = props;
+  const { classes } = useStyles();
 
   return (
-    <Container>
-      {dataList.map((item) => <CardComponent data={item} key={item.id} />)}
-    </Container>
+    <Grid className={classes.container} gutter="xs">
+      {dataList.map((item) => (
+        <Grid.Col
+          className={classes.cardContainer}
+          xs={6}
+          sm={6}
+          md={4}
+          lg={3}
+          xl={2.4}
+          key={item.id}
+        >
+          <CardComponent data={item} />
+        </Grid.Col>
+      ))}
+    </Grid>
   );
 }
 
