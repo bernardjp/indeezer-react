@@ -94,7 +94,7 @@ function DisplayChart(props: DisplayChartPropType) {
     <Container className={classes.container}>
       <Container className={classes.navbarContainer}>
         <NavbarAnchor
-          route={`/${resourceType}`}
+          route={`${resourceType}`}
           styleClasses={classes.title}
         >
           {`Top 10 ${resourceType}`}

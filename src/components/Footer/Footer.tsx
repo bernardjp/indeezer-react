@@ -6,7 +6,7 @@ const useStyles = createStyles((theme) => ({
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.dark[0],
     borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
     bottom: 0,
-    boxShadow: '0px -1px 20px -8px rgba(0,0,0,0.5)',
+    boxShadow: theme.colorScheme === 'dark' ? '0px -1px 20px -8px rgba(0,0,0,0.5)' : '0px 0px 30px -8px rgba(0,0,0,0.1)',
     display: 'flex',
     height: '80px',
     justifyContent: 'center',

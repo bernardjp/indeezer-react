@@ -13,10 +13,12 @@ ResourceListContainer.propTypes = {
 
 const useStyles = createStyles(() => ({
   mainContainer: {
-    marginTop: '54px',
+    alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    marginTop: '54px',
+    maxWidth: '100%',
+    width: ['-moz-available', '-webkit-fill-available']
   }
 }));
 
