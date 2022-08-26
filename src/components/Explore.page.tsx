@@ -40,7 +40,8 @@ const useStyles = createStyles((theme) => ({
 function ExplorePage() {
   const { classes } = useStyles();
   const { pathname } = useLocation();
-  const resourceType:string | undefined = pathname.split('/')[2];
+  const resourceType: string | undefined = pathname.split('/')[2];
+  const RESOURCE_LIST = ['albums', 'artists', 'tracks', 'playlists', 'podcasts'];
 
   return (
     <Container className={classes.pageContainer}>
@@ -56,56 +57,19 @@ function ExplorePage() {
             />
             )}
         <Routes>
-          <Route
-            path="artists"
-            element={(
-              <RequestHandler
-                queryOptions={resourceType}
-                queryCallback={fetchJSONData}
-                RenderComponent={ResourceListContainer}
-              />
-            )}
-          />
-          <Route
-            path="albums"
-            element={(
-              <RequestHandler
-                queryOptions={resourceType}
-                queryCallback={fetchJSONData}
-                RenderComponent={ResourceListContainer}
-              />
-            )}
-          />
-          <Route
-            path="tracks"
-            element={(
-              <RequestHandler
-                queryOptions={resourceType}
-                queryCallback={fetchJSONData}
-                RenderComponent={ResourceListContainer}
-              />
-            )}
-          />
-          <Route
-            path="playlists"
-            element={(
-              <RequestHandler
-                queryOptions={resourceType}
-                queryCallback={fetchJSONData}
-                RenderComponent={ResourceListContainer}
-              />
-            )}
-          />
-          <Route
-            path="podcasts"
-            element={(
-              <RequestHandler
-                queryOptions={resourceType}
-                queryCallback={fetchJSONData}
-                RenderComponent={ResourceListContainer}
-              />
-            )}
-          />
+          {RESOURCE_LIST.map((resource) => (
+            <Route
+              key={resource}
+              path={resource}
+              element={(
+                <RequestHandler
+                  queryOptions={resourceType}
+                  queryCallback={fetchJSONData}
+                  RenderComponent={ResourceListContainer}
+                />
+                )}
+            />
+          ))}
         </Routes>
       </Container>
     </Container>
