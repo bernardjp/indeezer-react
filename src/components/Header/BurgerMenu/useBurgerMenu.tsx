@@ -1,22 +1,20 @@
-import { useState } from 'react';
-import { useHover } from '@mantine/hooks';
+import { useState, useCallback } from 'react';
 
 type useBurgerButtonType = {
   isOpened: boolean,
-  isHovered: boolean,
-  setOpened: React.Dispatch<React.SetStateAction<boolean>>,
-  hoverRef: React.MutableRefObject<HTMLDivElement>
+  onSetOpen: () => void
 }
 
 function useBurgerButton(): useBurgerButtonType {
   const [isOpened, setOpened] = useState(false);
-  const { hovered, ref } = useHover();
+  const onSetOpen = useCallback((): void => setOpened((opened) => !opened), [setOpened]);
 
-  const burgerButton: useBurgerButtonType = {
-    isOpened, isHovered: hovered, setOpened, hoverRef: ref
+  const useBurgerMenu = {
+    isOpened,
+    onSetOpen
   };
 
-  return burgerButton;
+  return useBurgerMenu;
 }
 
 export default useBurgerButton;
