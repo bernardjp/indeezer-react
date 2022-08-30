@@ -4,7 +4,11 @@ import NavbarAnchor from '../Utils/NavbarAnchor';
 
 const useStyles = createStyles((theme) => ({
   navbar: {
-    margin: 'auto 0'
+    margin: 'auto 0',
+
+    [`@media (max-width: ${theme.breakpoints.md}px)`]: {
+      display: 'none'
+    }
   },
   anchor: {
     color: theme.colorScheme === 'dark' ? 'white' : 'black', // check theming with dark/light mode
@@ -27,7 +31,7 @@ export interface LinkData {
   text: string
 }
 
-const navbarLinksData:LinkData[] = [
+export const navbarLinksData:LinkData[] = [
   {
     route: '/',
     text: 'HOME'
