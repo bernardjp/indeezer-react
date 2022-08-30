@@ -1,6 +1,7 @@
 import { Container, createStyles } from '@mantine/core';
 import Navbar from './HeaderNavbar';
 import SearchBar from './SearchBar';
+import BurgerMenu from './BurgerMenu/BurgerMenu';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -27,6 +28,7 @@ function StyledHeader(props: { withSearchBar: boolean }) {
     <Container className={classes.header}>
       {withSearchBar && <SearchBar />}
       <Navbar />
+      <BurgerMenu />
     </Container>
   );
 }
