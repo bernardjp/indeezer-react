@@ -1,51 +1,176 @@
-import { Container, createStyles } from '@mantine/core';
+import { Container, createStyles, keyframes } from '@mantine/core';
+import { IoIosArrowForward } from 'react-icons/io';
 import NavbarAnchor from '../../Utils/NavbarAnchor';
-import { navbarLinksData } from '../HeaderNavbar';
+import { LinkData } from '../HeaderNavbar';
+import usePathnameRoot from '../usePathnameRoot';
 
 type BurgerNavbarPropType = {
   isOpened: boolean
 }
 
+const iconSlide = keyframes({
+  'from, to': { transform: 'translate3d(0, 0, 0)' },
+  '50%': { transform: 'translate3d(6px, 0, 0)' }
+});
+
 const useStyles = createStyles((theme, isOpened: boolean) => ({
   navbarContainer: {
-    border: '2px solid red',
+    backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.light[4]}`,
+    borderEndStartRadius: '10px',
+    borderTopLeftRadius: '10px',
     display: 'flex',
     flexDirection: 'column',
     height: 'auto',
-    padding: '54px 0', // 54px is the header height
+    minWidth: '357px',
+    padding: '0',
     position: 'absolute',
-    right: '-240px',
-    top: '0',
-    transform: isOpened ? 'translateX(-240px)' : '',
+    right: '-357px',
+    top: '54px',
+    transform: isOpened ? 'translateX(-357px)' : '',
     transition: '0.35s ease-in-out',
     visibility: isOpened ? 'visible' : 'hidden',
-    width: '240px',
 
     [`@media (min-width: ${theme.breakpoints.md}px)`]: {
       display: 'none',
       visibility: 'hidden'
+    },
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      minWidth: '0px',
+      width: 'auto'
     }
   },
+  middleSection: {
+    borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.light[3]}`,
+    borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.light[3]}`,
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '0',
+    padding: '0.5rem',
+    paddingRight: '0'
+  },
   navbarButton: {
-    border: '1px solid green'
+    alignItems: 'center',
+    borderEndStartRadius: '4px',
+    borderStartStartRadius: '4px',
+    color: `${theme.colorScheme === 'dark' ? 'white' : 'black'}`,
+    display: 'flex',
+    fontSize: '0.95rem',
+    justifyContent: 'space-between',
+    padding: '0.65rem',
+    paddingRight: '0.25rem',
+    transition: '0.15s',
+
+    '&:hover': {
+      backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.light[3]}`,
+      textDecoration: 'none',
+
+      svg: {
+        animation: `${iconSlide} 0.27s`
+      }
+    },
+
+    '&:active': {
+      backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.light[4]}`,
+      textDecoration: 'none'
+    }
+  },
+  icon: {
+    height: '18px',
+    transition: '0.05s ease-in-out',
+    width: 'auto'
+  },
+  secondaryButton: {
+    color: 'gray',
+    fontSize: '0.95rem',
+    padding: '0.4rem',
+    paddingLeft: '1.4rem',
+    paddingRight: '0.25rem',
+
+    svg: {
+      transform: 'scale(90%)'
+    },
+
+    '&:hover': {
+      backgroundColor: 'inherit',
+      color: theme.colors.red[5],
+
+      svg: {
+        color: theme.colors.red[5]
+      }
+    }
+  },
+  active: {
+    backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.light[3]}`
   }
 }));
 
+const navbarLinksData:LinkData[] = [
+  {
+    route: '/',
+    text: 'Go Home'
+  },
+  {
+    route: '/explore',
+    text: 'Explore IN/Deezer'
+  },
+  {
+    route: '/explore/artists',
+    text: 'Artists'
+  },
+  {
+    route: '/explore/albums',
+    text: 'Albums'
+  },
+  {
+    route: '/explore/tracks',
+    text: 'Tracks'
+  },
+  {
+    route: '/explore/playlists',
+    text: 'Playlists'
+  },
+  {
+    route: '/explore/podcasts',
+    text: 'Podcasts'
+  },
+  {
+    route: '/about',
+    text: 'About us'
+  }
+];
+
 function BurgerMenuNavbar(props: BurgerNavbarPropType) {
   const { isOpened } = props;
-  const { classes } = useStyles(isOpened);
+  const pathnameRoot = usePathnameRoot();
+  const { classes, cx } = useStyles(isOpened);
 
   return (
     <Container className={classes.navbarContainer}>
-      {navbarLinksData.map(({ text, route }) => (
-        <NavbarAnchor
-          styleClasses={classes.navbarButton}
-          route={route}
-          key={text}
-        >
-          {text}
-        </NavbarAnchor>
-      ))}
+      <Container>
+        Menu header with Links to the Official Page
+      </Container>
+      <Container className={classes.middleSection}>
+        {navbarLinksData.map(({ text, route }) => (
+          <NavbarAnchor
+            styleClasses={
+              cx(
+                classes.navbarButton,
+                { [classes.active]: pathnameRoot === route },
+                { [classes.secondaryButton]: route.split('/').length > 2 }
+              )
+            }
+            route={route}
+            key={text}
+          >
+            {text}
+            <IoIosArrowForward className={classes.icon} />
+          </NavbarAnchor>
+        ))}
+      </Container>
+      <Container>
+        Menu footer with Theme selection
+      </Container>
     </Container>
   );
 }
