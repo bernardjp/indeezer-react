@@ -1,6 +1,6 @@
-import { useLocation } from 'react-router-dom';
 import { Container, createStyles } from '@mantine/core';
 import NavbarAnchor from '../Utils/NavbarAnchor';
+import usePathnameRoot from './usePathnameRoot';
 
 const useStyles = createStyles((theme) => ({
   navbar: {
@@ -49,8 +49,7 @@ export const navbarLinksData:LinkData[] = [
 function StyledNavbar() {
   // Checking for the root of the pathname allows us to know which Link is active no matter
   // how long the pathname is. eg: /explore/artist/1 --> root = '/explore' => INDEEZER link = active
-  const { pathname } = useLocation();
-  const pathnameRoot = `/${pathname.split('/')[1]}`;
+  const pathnameRoot = usePathnameRoot();
 
   const { classes, cx } = useStyles();
 
