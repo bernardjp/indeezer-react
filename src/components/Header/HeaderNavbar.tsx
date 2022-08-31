@@ -1,9 +1,11 @@
 import { Container, createStyles } from '@mantine/core';
 import NavbarAnchor from '../Utils/NavbarAnchor';
+import DarkThemeButton from './HeaderDarkThemeButton';
 import usePathnameRoot from './usePathnameRoot';
 
 const useStyles = createStyles((theme) => ({
   navbar: {
+    display: 'flex',
     margin: 'auto 0',
 
     [`@media (max-width: ${theme.breakpoints.md}px)`]: {
@@ -12,8 +14,10 @@ const useStyles = createStyles((theme) => ({
   },
   anchor: {
     color: theme.colorScheme === 'dark' ? 'white' : 'black', // check theming with dark/light mode
+    fontSize: '0.95rem',
     fontWeight: 'bold',
     margin: '0 1rem',
+    paddingTop: '4px',
     textDecoration: 'none',
 
     '&:hover': {
@@ -47,10 +51,7 @@ export const navbarLinksData:LinkData[] = [
 ];
 
 function StyledNavbar() {
-  // Checking for the root of the pathname allows us to know which Link is active no matter
-  // how long the pathname is. eg: /explore/artist/1 --> root = '/explore' => INDEEZER link = active
   const pathnameRoot = usePathnameRoot();
-
   const { classes, cx } = useStyles();
 
   return (
@@ -64,6 +65,7 @@ function StyledNavbar() {
           {text}
         </NavbarAnchor>
       ))}
+      <DarkThemeButton />
     </Container>
   );
 }
