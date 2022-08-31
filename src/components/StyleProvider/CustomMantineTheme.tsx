@@ -14,8 +14,7 @@ const CustomTheme: MantineThemeOverride = {
       '#0c0c0f', // 8
       '#000' // 9 -> complete black
     ]
-  },
-  colorScheme: 'dark'
+  }
 };
 
 export default CustomTheme;
