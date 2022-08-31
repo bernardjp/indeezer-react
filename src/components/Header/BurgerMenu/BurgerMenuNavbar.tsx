@@ -2,6 +2,7 @@ import { Container, createStyles, keyframes } from '@mantine/core';
 import { IoIosArrowForward } from 'react-icons/io';
 import NavbarAnchor from '../../Utils/NavbarAnchor';
 import { LinkData } from '../HeaderNavbar';
+import BurgerThemeButton from './BurgerThemeButton';
 import usePathnameRoot from '../usePathnameRoot';
 
 type BurgerNavbarPropType = {
@@ -15,7 +16,7 @@ const iconSlide = keyframes({
 
 const useStyles = createStyles((theme, isOpened: boolean) => ({
   navbarContainer: {
-    backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.light[4]}`,
+    backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1]}`,
     borderEndStartRadius: '10px',
     borderTopLeftRadius: '10px',
     display: 'flex',
@@ -36,18 +37,25 @@ const useStyles = createStyles((theme, isOpened: boolean) => ({
     },
 
     [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
-      minWidth: '0px',
       width: 'auto'
+    },
+
+    '@media (max-width: 360px)': {
+      minWidth: '0',
+      width: '100%'
     }
   },
   middleSection: {
-    borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.light[3]}`,
-    borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.light[3]}`,
+    borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[3]}`,
+    borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[3]}`,
     display: 'flex',
     flexDirection: 'column',
     margin: '0',
     padding: '0.5rem',
     paddingRight: '0'
+  },
+  menuFooter: {
+    margin: '0'
   },
   navbarButton: {
     alignItems: 'center',
@@ -62,7 +70,7 @@ const useStyles = createStyles((theme, isOpened: boolean) => ({
     transition: '0.15s',
 
     '&:hover': {
-      backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.light[3]}`,
+      backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[3]}`,
       textDecoration: 'none',
 
       svg: {
@@ -71,7 +79,7 @@ const useStyles = createStyles((theme, isOpened: boolean) => ({
     },
 
     '&:active': {
-      backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.light[4]}`,
+      backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[4]}`,
       textDecoration: 'none'
     }
   },
@@ -101,7 +109,7 @@ const useStyles = createStyles((theme, isOpened: boolean) => ({
     }
   },
   active: {
-    backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.light[3]}`
+    backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[3]}`
   }
 }));
 
@@ -148,7 +156,7 @@ function BurgerMenuNavbar(props: BurgerNavbarPropType) {
   return (
     <Container className={classes.navbarContainer}>
       <Container>
-        Menu header with Links to the Official Page
+        Menu header with Links
       </Container>
       <Container className={classes.middleSection}>
         {navbarLinksData.map(({ text, route }) => (
@@ -168,8 +176,8 @@ function BurgerMenuNavbar(props: BurgerNavbarPropType) {
           </NavbarAnchor>
         ))}
       </Container>
-      <Container>
-        Menu footer with Theme selection
+      <Container className={classes.menuFooter}>
+        <BurgerThemeButton />
       </Container>
     </Container>
   );
