@@ -1,6 +1,7 @@
 import * as PropTypes from 'prop-types';
 import { PodcastCardPropTypes } from '../../types/CardDisplay.types';
 import TemplateCard, { CardInfoType } from './CardTemplate';
+import { ModalImagePropType } from '../Modal/ModalImage';
 
 PodcastCard.propTypes = {
   data: PropTypes.shape({
@@ -8,6 +9,7 @@ PodcastCard.propTypes = {
     id: PropTypes.number,
     link: PropTypes.string,
     picture_medium: PropTypes.string,
+    picture_xl: PropTypes.string,
     title: PropTypes.string
   }).isRequired
 };
@@ -21,10 +23,15 @@ function PodcastCard(props: { data: PodcastCardPropTypes }) {
     link: data.link
   };
 
+  const modalImageSettings: ModalImagePropType = {
+    imageURL: data.picture_xl,
+    alt: `${curatedCardData.title} Podcast Picture`
+  };
+
   return (
     <TemplateCard
       playButtonCallback={() => console.log('Play music')}
-      viewButtonCallback={() => console.log('Open cover art')}
+      viewButtonSettings={modalImageSettings}
       isExplicit={false}
       isRound={false}
       card={curatedCardData}

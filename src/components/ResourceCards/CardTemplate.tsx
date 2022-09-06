@@ -6,6 +6,7 @@ import { useHover } from '@mantine/hooks';
 import { FaPlay } from 'react-icons/fa';
 import { BsEye } from 'react-icons/bs';
 import RoundButton from '../Utils/RoundButton';
+import { useModalImage, ModalImagePropType } from '../Modal/ModalImage';
 
 export type CardInfoType = {
   image: string,
@@ -16,7 +17,7 @@ export type CardInfoType = {
 
 type TemplateCardPropType = {
   playButtonCallback: () => void,
-  viewButtonCallback: () => void,
+  viewButtonSettings: ModalImagePropType,
   card: CardInfoType,
   isExplicit: boolean,
   isRound: boolean
@@ -24,7 +25,10 @@ type TemplateCardPropType = {
 
 TemplateCard.propTypes = {
   playButtonCallback: PropTypes.func,
-  viewButtonCallback: PropTypes.func,
+  viewButtonSettings: PropTypes.shape({
+    imageURL: PropTypes.string,
+    alt: PropTypes.string
+  }),
   card: PropTypes.shape({
     image: PropTypes.string,
     info: PropTypes.string,
@@ -76,10 +80,11 @@ const useStyles = createStyles((theme, align: 'center' | '') => ({
 
 function TemplateCard(props: TemplateCardPropType) {
   const {
-    playButtonCallback, viewButtonCallback, card, isExplicit, isRound
+    playButtonCallback, viewButtonSettings, card, isExplicit, isRound
   } = props;
   const { classes } = useStyles(isRound ? 'center' : '');
   const { ref, hovered } = useHover();
+  const modalHandler = useModalImage(viewButtonSettings);
 
   return (
     <Card className={classes.cardContainer}>
@@ -93,7 +98,7 @@ function TemplateCard(props: TemplateCardPropType) {
           <RoundButton
             visible={hovered}
             Icon={BsEye}
-            onClickCallback={viewButtonCallback}
+            onClickCallback={modalHandler}
           />
         </Group>
         {/*

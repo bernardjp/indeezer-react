@@ -1,6 +1,7 @@
 import * as PropTypes from 'prop-types';
 import { PlaylistCardPropTypes } from '../../types/CardDisplay.types';
 import TemplateCard, { CardInfoType } from './CardTemplate';
+import { ModalImagePropType } from '../Modal/ModalImage';
 
 PlaylistCard.propTypes = {
   data: PropTypes.shape({
@@ -8,6 +9,7 @@ PlaylistCard.propTypes = {
     link: PropTypes.string,
     nb_tracks: PropTypes.number,
     picture_medium: PropTypes.string,
+    picture_xl: PropTypes.string,
     title: PropTypes.string,
     tracklist: PropTypes.string
   }).isRequired
@@ -22,10 +24,15 @@ function PlaylistCard(props: { data: PlaylistCardPropTypes }) {
     title: data.title
   };
 
+  const modalImageSettings: ModalImagePropType = {
+    imageURL: data.picture_xl,
+    alt: `${curatedCardData.title} Playlist Picture`
+  };
+
   return (
     <TemplateCard
       playButtonCallback={() => console.log('play music')}
-      viewButtonCallback={() => console.log('view art')}
+      viewButtonSettings={modalImageSettings}
       isRound={false}
       isExplicit={false}
       card={curatedCardData}
