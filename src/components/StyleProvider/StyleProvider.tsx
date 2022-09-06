@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
+import CustomModalProvider from '../Modal/CustomModalsProvider';
 import CustomTheme from './CustomMantineTheme';
 
 type ChildrenType = React.ReactNode | null;
@@ -12,7 +13,9 @@ function StyleProvider(props: { children: ChildrenType | ChildrenType[] }) {
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
       <MantineProvider theme={{ colorScheme, ...CustomTheme }} withNormalizeCSS withGlobalStyles>
-        { children }
+        <CustomModalProvider>
+          { children }
+        </CustomModalProvider>
       </MantineProvider>
     </ColorSchemeProvider>
   );
