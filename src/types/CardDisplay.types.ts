@@ -9,6 +9,7 @@ export type AlbumCardPropType = {
   },
   cover: string,
   cover_medium: string,
+  cover_xl: string,
   explicit_lyrics: boolean,
   id: number,
   link: string,
@@ -22,6 +23,7 @@ export type ArtistCardPropType = {
   name: string,
   link: string,
   picture_medium: string,
+  picture_xl: string,
   position: number,
   radio: boolean,
   tracklist: string,
@@ -33,6 +35,7 @@ export type PlaylistCardPropTypes = {
   link: string,
   nb_tracks: number,
   picture_medium: string,
+  picture_xl: string,
   title: string,
   tracklist: string
 }
@@ -42,12 +45,14 @@ export type PodcastCardPropTypes = {
   id: number,
   link: string,
   picture_medium: string,
+  picture_xl: string,
   title: string
 }
 
 export type TrackCardPropType = {
   album: {
     cover_medium: string,
+    cover_xl: string,
     title: string
   },
   artist: {
