@@ -1,11 +1,13 @@
 import * as PropTypes from 'prop-types';
 import { TrackCardPropType } from '../../types/CardDisplay.types';
 import TemplateCard, { CardInfoType } from './CardTemplate';
+import { ModalImagePropType } from '../Modal/ModalImage';
 
 TrackCard.propTypes = {
   data: PropTypes.shape({
     album: PropTypes.shape({
       cover_medium: PropTypes.string,
+      cover_xl: PropTypes.string,
       title: PropTypes.string
     }),
     artist: PropTypes.shape({
@@ -29,10 +31,15 @@ function TrackCard(props: { data: TrackCardPropType }) {
     title: data.title
   };
 
+  const modalImageSettings: ModalImagePropType = {
+    imageURL: data.album.cover_xl,
+    alt: `${curatedCardData.title} Playlist Picture`
+  };
+
   return (
     <TemplateCard
       playButtonCallback={() => console.log('play music')}
-      viewButtonCallback={() => console.log('view art')}
+      viewButtonSettings={modalImageSettings}
       isExplicit={data.explicit_lyrics}
       isRound
       card={curatedCardData}

@@ -1,12 +1,12 @@
 import { Image } from '@mantine/core';
 import { openModal } from '@mantine/modals';
 
-type ModalImagePropType = {
+export type ModalImagePropType = {
   imageURL: string,
   alt: string
 }
 
-function useModalImage(props: ModalImagePropType) {
+export function useModalImage(props: ModalImagePropType) {
   const { imageURL, alt } = props;
   const modalSettings = {
     title: '',
@@ -23,5 +23,3 @@ function useModalImage(props: ModalImagePropType) {
 
   return modalHandler;
 }
-
-export default useModalImage;
