@@ -1,4 +1,5 @@
-import { Container, Text, createStyles } from '@mantine/core';
+import { Container, createStyles } from '@mantine/core';
+import AudioPlayer from './AudioPlayer';
 
 const useStyles = createStyles((theme) => ({
   footerContainer: {
@@ -25,7 +26,7 @@ function Footer() {
 
   return (
     <Container className={classes.footerContainer}>
-      <Text className={classes.text}>FOOTER</Text>
+      <AudioPlayer />
     </Container>
   );
 }
