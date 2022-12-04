@@ -4,11 +4,16 @@ import usePlaylistContext from './usePlaylistContext';
 type ChildrenType = React.ReactNode | null;
 
 const PlaylistContext = createContext<{
-    playlist: Set<string>,
-    setPlaylist: React.Dispatch<React.SetStateAction<Set<string>>>,
-    addTrack: Function,
-    removeTrack: Function
-  } | null >(null);
+  playlist: Set<string>,
+  setPlaylist: React.Dispatch<React.SetStateAction<Set<string>>>,
+  addTrack: Function,
+  removeTrack: Function
+    }>({
+      playlist: new Set(),
+      setPlaylist: () => {},
+      addTrack: () => {},
+      removeTrack: () => {}
+    });
 
 function PlaylistContextProvider(props: { children: ChildrenType | ChildrenType[] }) {
   const { children } = props;
