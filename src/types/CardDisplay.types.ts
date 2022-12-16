@@ -51,11 +51,13 @@ export type PodcastCardPropTypes = {
 
 export type TrackCardPropType = {
   album: {
+    id: number,
     cover_medium: string,
     cover_xl: string,
     title: string
   },
   artist: {
+    id: number,
     name: string,
     picture: string
   },
@@ -63,6 +65,7 @@ export type TrackCardPropType = {
   explicit_lyrics: boolean,
   id: number,
   link: string,
+  preview: string,
   title: string
 }
 
