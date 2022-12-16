@@ -1,30 +1,31 @@
 import { createContext, useMemo } from 'react';
-import usePlaylistContext from './usePlaylistContext';
+import { TrackType } from '../../types/AudioPlayer.types';
+import { usePlaylistContext } from './usePlaylistContext';
 
 type ChildrenType = React.ReactNode | null;
 
 const PlaylistContext = createContext<{
-  playlist: Set<string>,
-  setPlaylist: React.Dispatch<React.SetStateAction<Set<string>>>,
+  playlist: Array<TrackType>,
   addTrack: Function,
-  removeTrack: Function
+  removeTrack: Function,
+  clearList: Function
     }>({
-      playlist: new Set(),
-      setPlaylist: () => {},
+      playlist: [],
       addTrack: () => {},
-      removeTrack: () => {}
+      removeTrack: () => {},
+      clearList: () => {}
     });
 
 function PlaylistContextProvider(props: { children: ChildrenType | ChildrenType[] }) {
   const { children } = props;
   const {
-    playlist, setPlaylist, addTrack, removeTrack
+    playlist, addTrack, removeTrack, clearList
   } = usePlaylistContext();
 
   // useMemo explanation:
   // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-no-constructed-context-values.md
   const contextHandler = useMemo(() => ({
-    playlist, setPlaylist, addTrack, removeTrack
+    playlist, addTrack, removeTrack, clearList
   }), [playlist]);
 
   return (
