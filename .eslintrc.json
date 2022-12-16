@@ -33,7 +33,8 @@
       "no-use-before-define": ["error", { "functions": false, "classes": false }],
       "react/jsx-one-expression-per-line": [0, { "allow": "single-child" }],
       "linebreak-style": "off",
-      "no-console": "off" // turn warning on and check this rule before production build.
+      "no-console": "off", // turn warning on and check this rule before production build.
+      "no-unused-expressions": ["error", { "allowTernary": true }] 
     },
     "settings": {
       "import/extensions": [
