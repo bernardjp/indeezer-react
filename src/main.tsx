@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import StyleProvider from './components/StyleProvider/StyleProvider';
 import QueryProvider from './components/QueryProvider/QueryProvider';
+import { PlaylistContextProvider } from './components/Context/PlaylistContext';
 import './styles/index.css';
 import App from './App';
 
@@ -14,7 +15,9 @@ root.render(
     <Router>
       <StyleProvider>
         <QueryProvider>
-          <App />
+          <PlaylistContextProvider>
+            <App />
+          </PlaylistContextProvider>
         </QueryProvider>
       </StyleProvider>
     </Router>
