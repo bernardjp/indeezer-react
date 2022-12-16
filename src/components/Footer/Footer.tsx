@@ -1,5 +1,5 @@
 import { Container, createStyles } from '@mantine/core';
-import AudioPlayer from './AudioPlayer';
+import AudioPlayer from '../AudioPlayer/AudioPlayer';
 
 const useStyles = createStyles((theme) => ({
   footerContainer: {
