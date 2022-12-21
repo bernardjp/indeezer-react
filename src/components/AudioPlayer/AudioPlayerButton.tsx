@@ -3,13 +3,11 @@ import { Button, Tooltip } from '@mantine/core';
 
 type Props = {
   tooltip: string,
-  type: [
-    'play', 'pause', 'next', 'prev', 'share', 'loop_list', 'loop_track', 'shuffle', 'volume', 'eq', 'lyrics', 'like'
-  ],
+  type: 'play' | 'pause' | 'next' | 'prev' | 'share' | 'loop_list' | 'loop_track' | 'shuffle' | 'volume' | 'eq' | 'lyrics' | 'like',
   isDisable: boolean,
   isActive: boolean,
-  size: ['sm', 'm', 'lg'],
-  onClickHandler: () => {}
+  size: 'sm' | 'm' | 'lg',
+  onClickHandler: () => void
 }
 
 /*
@@ -42,9 +40,14 @@ function AudioPlayerButton(props: Props): JSX.Element {
     onClickHandler
   } = props;
 
+  console.log(props);
+
   return (
-    <Tooltip label={tooltip}>
-      <Button onClick={onClickHandler}>
+    <Tooltip label={tooltip} disabled={tooltip === ''}>
+      <Button
+        onClick={onClickHandler}
+        disabled={isDisable}
+      >
         {type}
       </Button>
     </Tooltip>
