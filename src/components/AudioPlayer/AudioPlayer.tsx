@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useRef } from 'react';
 import useAudioPlayer from './useAudioPlayer';
+import AudioPlayerButton from './AudioPlayerButton';
 
 /*
   UI
@@ -47,49 +48,7 @@ function AudioPlayer() {
 
   return (
     <div>
-      <div>
-
-        <div>
-          <button
-            type="button"
-            onClick={() => prevTrack()}
-            disabled={tracks.prevDisable}
-          >
-            PREV
-          </button>
-          <button
-            type="button"
-            onClick={() => togglePlaying()}
-            disabled={!tracks.current}
-          >
-            { isPlaying ? 'PAUSE' : 'PLAY' }
-          </button>
-          <button
-            type="button"
-            onClick={() => nextTrack()}
-            disabled={tracks.nextDisable}
-          >
-            NEXT
-          </button>
-          <button
-            type="button"
-            onClick={() => toggleLooping()}
-            disabled={!tracks.current}
-          >
-            LOOP {isLooping || 'disable'}
-          </button>
-          <button
-            type="button"
-            onClick={() => toggleShuffle()}
-            disabled={!tracks.current}
-          >
-            SHUFFLE
-          </button>
-        </div>
-
-        <p>{ tracks.current ? `${tracks.current.artistName} - ${tracks.current.trackTitle}` : ''}</p>
-      </div>
-
+      {/* Core Audioplayer */}
       <audio ref={audioPlayer} controls autoPlay={isPlaying} loop={isLooping === 'track' || false}>
         <source
           src="#"
@@ -97,6 +56,61 @@ function AudioPlayer() {
         />
         <track kind="captions" />
       </audio>
+
+      <div>
+        <div>
+
+          {/* Audioplayer track control (prev, Play/Pause, next) */}
+          <div>
+            <AudioPlayerButton
+              tooltip=""
+              size="m"
+              type="prev"
+              onClickHandler={() => prevTrack()}
+              isDisable={tracks.prevDisable}
+              isActive={false}
+            />
+            <AudioPlayerButton
+              tooltip=""
+              size="lg"
+              type={isPlaying ? 'pause' : 'play'}
+              onClickHandler={() => togglePlaying()}
+              isDisable={!tracks.current}
+              isActive={false}
+            />
+            <AudioPlayerButton
+              tooltip=""
+              size="m"
+              type="next"
+              onClickHandler={() => nextTrack()}
+              isDisable={tracks.nextDisable}
+              isActive={false}
+            />
+          </div>
+
+          {/* Playlist a misc. controls (volume, looping, shuffling, sharing, eq, etc.) */}
+          <div>
+            <button
+              type="button"
+              onClick={() => toggleLooping()}
+              disabled={!tracks.current}
+            >
+              LOOP {isLooping || 'disable'}
+            </button>
+            <button
+              type="button"
+              onClick={() => toggleShuffle()}
+              disabled={!tracks.current}
+            >
+              SHUFFLE
+            </button>
+          </div>
+
+        </div>
+
+        <p>{ tracks.current ? `${tracks.current.artistName} - ${tracks.current.trackTitle}` : ''}</p>
+      </div>
+
     </div>
   );
 }
