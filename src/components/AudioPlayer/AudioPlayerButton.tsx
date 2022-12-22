@@ -1,14 +1,32 @@
 /* eslint-disable no-unused-vars */
 import { Button, Tooltip } from '@mantine/core';
+import { BsFillPlayFill, BsPause } from 'react-icons/bs';
+import { IoPlaySkipBackSharp, IoPlaySkipForwardSharp } from 'react-icons/io5';
 
 type Props = {
   tooltip: string,
-  type: 'play' | 'pause' | 'next' | 'prev' | 'share' | 'loop_list' | 'loop_track' | 'shuffle' | 'volume' | 'eq' | 'lyrics' | 'like',
+  type: 'play' | 'pause' | 'next' | 'prev',
+  // | 'share' | 'loop_list' | 'loop_track' | 'shuffle' | 'volume' | 'eq' | 'lyrics' | 'like',
   isDisable: boolean,
   isActive: boolean,
   size: 'sm' | 'm' | 'lg',
   onClickHandler: () => void
 }
+
+const icons = {
+  play: <BsFillPlayFill />,
+  pause: <BsPause />,
+  next: <IoPlaySkipForwardSharp />,
+  prev: <IoPlaySkipBackSharp />
+  // share: '',
+  // loop_list: '',
+  // loop_track: '',
+  // shuffle: '',
+  // volume: '',
+  // eq: '',
+  // lyrics: '',
+  // like: ''
+};
 
 /*
   BUTTON Props:
@@ -40,15 +58,13 @@ function AudioPlayerButton(props: Props): JSX.Element {
     onClickHandler
   } = props;
 
-  console.log(props);
-
   return (
     <Tooltip label={tooltip} disabled={tooltip === ''}>
       <Button
         onClick={onClickHandler}
         disabled={isDisable}
       >
-        {type}
+        {icons[type]}
       </Button>
     </Tooltip>
   );
