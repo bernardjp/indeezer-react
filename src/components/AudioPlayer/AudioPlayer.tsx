@@ -43,74 +43,89 @@ function AudioPlayer() {
     prevTrack
   } = useAudioPlayer({ audioPlayer: audioPlayer.current });
 
-  // console.log(tracks);
-  // console.log(isLooping);
-
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       {/* Core Audioplayer */}
-      <audio ref={audioPlayer} controls autoPlay={isPlaying} loop={isLooping === 'track' || false}>
-        <source
-          src="#"
-          type="audio/mpeg"
-        />
-        <track kind="captions" />
-      </audio>
-
-      <div>
-        <div>
-
-          {/* Audioplayer track control (prev, Play/Pause, next) */}
-          <div>
-            <AudioPlayerButton
-              tooltip=""
-              size="m"
-              type="prev"
-              onClickHandler={() => prevTrack()}
-              isDisable={tracks.prevDisable}
-              isActive={false}
-            />
-            <AudioPlayerButton
-              tooltip=""
-              size="lg"
-              type={isPlaying ? 'pause' : 'play'}
-              onClickHandler={() => togglePlaying()}
-              isDisable={!tracks.current}
-              isActive={false}
-            />
-            <AudioPlayerButton
-              tooltip=""
-              size="m"
-              type="next"
-              onClickHandler={() => nextTrack()}
-              isDisable={tracks.nextDisable}
-              isActive={false}
-            />
-          </div>
-
-          {/* Playlist a misc. controls (volume, looping, shuffling, sharing, eq, etc.) */}
-          <div>
-            <button
-              type="button"
-              onClick={() => toggleLooping()}
-              disabled={!tracks.current}
-            >
-              LOOP {isLooping || 'disable'}
-            </button>
-            <button
-              type="button"
-              onClick={() => toggleShuffle()}
-              disabled={!tracks.current}
-            >
-              SHUFFLE
-            </button>
-          </div>
-
-        </div>
-
-        <p>{ tracks.current ? `${tracks.current.artistName} - ${tracks.current.trackTitle}` : ''}</p>
+      <div style={{ position: 'absolute', bottom: '100px' }}>
+        <audio ref={audioPlayer} controls autoPlay={isPlaying} loop={isLooping === 'track' || false}>
+          <source
+            src="#"
+            type="audio/mpeg"
+          />
+          <track kind="captions" />
+        </audio>
       </div>
 
+      <div style={{
+        display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center'
+      }}
+      >
+
+        {/* Audioplayer track control (prev, Play/Pause, next) */}
+        <div style={{
+          display: 'flex', gap: '8px', alignItems: 'center'
+        }}
+        >
+          <AudioPlayerButton
+            tooltip=""
+            size="m"
+            type="prev"
+            onClickHandler={() => prevTrack()}
+            isDisable={tracks.prevDisable}
+            isActive={false}
+          />
+          <AudioPlayerButton
+            tooltip=""
+            size="lg"
+            type={isPlaying ? 'pause' : 'play'}
+            onClickHandler={() => togglePlaying()}
+            isDisable={!tracks.current}
+            isActive={false}
+          />
+          <AudioPlayerButton
+            tooltip=""
+            size="m"
+            type="next"
+            onClickHandler={() => nextTrack()}
+            isDisable={tracks.nextDisable}
+            isActive={false}
+          />
+        </div>
+
+        {/* Track slide, name, and timers */}
+        <div>
+          <p>{ tracks.current ? `${tracks.current.artistName} - ${tracks.current.trackTitle}` : ''}</p>
+        </div>
+
+        {/* Playlist a misc. controls (volume, looping, shuffling, sharing, eq, etc.) */}
+        <div>
+          <button
+            type="button"
+            onClick={() => toggleLooping()}
+            disabled={!tracks.current}
+          >
+            LOOP {isLooping || 'disable'}
+          </button>
+          <button
+            type="button"
+            onClick={() => toggleShuffle()}
+            disabled={!tracks.current}
+          >
+            SHUFFLE
+          </button>
+        </div>
+
+        <div>
+          <button
+            type="button"
+            onClick={() => console.log('Queue window')}
+            disabled={!tracks.current}
+          >
+            QUEUE
+          </button>
+        </div>
+
+      </div>
     </div>
   );
 }
