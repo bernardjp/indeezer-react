@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useRef } from 'react';
+import { Image } from '@mantine/core';
 import useAudioPlayer from './useAudioPlayer';
 import AudioPlayerButton from './AudioPlayerButton';
 
@@ -36,6 +37,7 @@ function AudioPlayer() {
     tracks,
     isPlaying,
     isLooping,
+    isShuffled,
     togglePlaying,
     toggleLooping,
     toggleShuffle,
@@ -98,31 +100,89 @@ function AudioPlayer() {
         </div>
 
         {/* Playlist a misc. controls (volume, looping, shuffling, sharing, eq, etc.) */}
-        <div>
-          <button
-            type="button"
-            onClick={() => toggleLooping()}
-            disabled={!tracks.current}
+        <div style={{
+          display: 'flex', alignItems: 'center'
+        }}
+        >
+          <div style={{
+            display: 'flex', gap: '8px', alignItems: 'center'
+          }}
           >
-            LOOP {isLooping || 'disable'}
-          </button>
-          <button
-            type="button"
-            onClick={() => toggleShuffle()}
-            disabled={!tracks.current}
-          >
-            SHUFFLE
-          </button>
-        </div>
-
-        <div>
-          <button
-            type="button"
-            onClick={() => console.log('Queue window')}
-            disabled={!tracks.current}
-          >
-            QUEUE
-          </button>
+            <AudioPlayerButton
+              tooltip="Chromecast"
+              size="m"
+              type="share"
+              onClickHandler={() => console.log('Sharing track')}
+              isDisable={false}
+              isActive={false}
+            />
+            <AudioPlayerButton
+              /*
+                isLooping === false => {
+                  tooltip: "Repeat all tracks in list",
+                  type: "loop_list",
+                  isActive: false
+                }
+                isLooping === "list" => {
+                  tooltip: "Repeat the current track",
+                  type: "loop_list",
+                  isActive: true
+                }
+                isLooping === "track" => {
+                  tooltip: "Turn off repeat",
+                  type: "loop_list" + "point",
+                  isActive: true
+                }
+              */
+              tooltip="Repeat all tracks in list"
+              size="m"
+              type="loop_list"
+              onClickHandler={() => toggleLooping()}
+              isDisable={false}
+              isActive={false}
+            />
+            <AudioPlayerButton
+              tooltip={`Turn ${isShuffled ? 'off' : 'on'} Shuffle`}
+              size="m"
+              type="shuffle"
+              onClickHandler={() => toggleShuffle()}
+              isDisable={false}
+              isActive={isShuffled}
+            />
+            <AudioPlayerButton
+              tooltip=""
+              size="m"
+              type="volume_on"
+              onClickHandler={() => console.log('Toggle volume')}
+              isDisable={false}
+              isActive={false}
+            />
+            <AudioPlayerButton
+              tooltip=""
+              size="m"
+              type="eq"
+              onClickHandler={() => console.log('Toggle Equalizer')}
+              isDisable={false}
+              isActive={false}
+            />
+          </div>
+          <div style={{ marginLeft: '12px', paddingLeft: '20px', borderLeft: '1px solid #3e3e47' }}>
+            <button
+              style={{
+                backgroundColor: 'transparent', border: 'none', display: 'flex', alignItems: 'center', cursor: 'pointer', color: 'white', fontSize: '0.75rem', gap: '8px'
+              }}
+              type="button"
+              onClick={(e) => console.log(e)}
+            >
+              <Image
+                width={28}
+                height={28}
+                src={undefined}
+                withPlaceholder
+              />
+              Queue
+            </button>
+          </div>
         </div>
 
       </div>
