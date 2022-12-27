@@ -4,11 +4,16 @@ import { Button, Tooltip, createStyles } from '@mantine/core';
 import {
   IoPlaySkipBackSharp, IoPlaySkipForwardSharp, IoPlaySharp, IoPauseSharp
 } from 'react-icons/io5';
+import { TiArrowLoop, TiArrowShuffle } from 'react-icons/ti';
+import { FaChromecast } from 'react-icons/fa';
+import { RiVolumeUpLine, RiVolumeMuteLine } from 'react-icons/ri';
+import { FiVolume2, FiVolumeX } from 'react-icons/fi';
+import { ImEqualizer } from 'react-icons/im';
 
 type Props = {
   tooltip: string,
-  type: 'play' | 'pause' | 'next' | 'prev',
-  // | 'share' | 'loop_list' | 'loop_track' | 'shuffle' | 'volume' | 'eq' | 'lyrics' | 'like',
+  type: 'play' | 'pause' | 'next' | 'prev'| 'loop_list' | 'shuffle' | 'share' | 'volume_on' | 'eq'
+  // | 'loop_track' | 'volume_off' | 'lyrics' | 'like',
   isDisable: boolean,
   isActive: boolean,
   size: 'sm' | 'm' | 'lg',
@@ -19,13 +24,14 @@ const icons = {
   play: <IoPlaySharp style={{ paddingLeft: '3px' }} />,
   pause: <IoPauseSharp />,
   next: <IoPlaySkipForwardSharp />,
-  prev: <IoPlaySkipBackSharp />
-  // share: '',
-  // loop_list: '',
+  prev: <IoPlaySkipBackSharp />,
+  loop_list: <TiArrowLoop style={{ fontSize: '1.4rem' }} />,
   // loop_track: '',
-  // shuffle: '',
-  // volume: '',
-  // eq: '',
+  share: <FaChromecast style={{ fontSize: '1.2rem' }} />,
+  shuffle: <TiArrowShuffle style={{ fontSize: '1.3rem' }} />,
+  volume_on: <FiVolume2 style={{ fontSize: '1.1rem' }} />,
+  // volume_off: '',
+  eq: <ImEqualizer style={{ fontSize: '1rem' }} />
   // lyrics: '',
   // like: ''
 };
@@ -53,15 +59,15 @@ const useStyles = createStyles((theme, params: Props) => ({
     alignItems: 'center',
     backgroundColor: 'transparent',
     borderRadius: '50%',
-    color: 'white',
+    color: params.isActive ? theme.colors.red[5] : 'white',
     display: 'flex',
     fontSize: params.size === 'lg' ? '1.8rem' : params.size === 'm' ? '1.2rem' : '1rem',
-    height: params.size === 'lg' ? '48px' : params.size === 'm' ? '36px' : '24px',
+    height: params.size === 'lg' ? '48px' : params.size === 'm' ? '32px' : '24px',
     justifyContent: 'center',
     padding: '0',
     textAlign: 'center',
     width: params.size === 'lg' ? '48px' : params.size === 'm' ? '32px' : '24px',
-    transition: '0.25s',
+    transition: '0.2s',
 
     '&:hover': {
       backgroundColor: '#42424c'
@@ -69,8 +75,14 @@ const useStyles = createStyles((theme, params: Props) => ({
 
     '&:disabled': {
       backgroundColor: 'transparent',
-      color: '#3e3e47'
+      color: '#3e3e47',
+      cursor: 'default'
     }
+  },
+  tooltip: {
+    backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[1]}`,
+    boxShadow: theme.colorScheme === 'dark' ? '0px -1px 10px -8px rgba(0,0,0,0.5)' : '0px 0px 10px -8px rgba(0,0,0,0.1)',
+    fontSize: '0.65rem'
   }
 }));
 
@@ -107,7 +119,14 @@ function AudioPlayerButton(props: Props): JSX.Element {
   const { classes } = useStyles(props);
 
   return (
-    <Tooltip label={tooltip} disabled={tooltip === ''}>
+    <Tooltip
+      classNames={{ tooltip: classes.tooltip }}
+      label={tooltip}
+      disabled={tooltip === ''}
+      offset={10}
+      transition="skew-down"
+      transitionDuration={70}
+    >
       <Button
         className={classes.button}
         onClick={onClickHandler}
