@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useRef } from 'react';
 import { Image } from '@mantine/core';
+import { IoMusicalNotes } from 'react-icons/io5';
 import useAudioPlayer from './useAudioPlayer';
 import AudioPlayerButton from './AudioPlayerButton';
 
@@ -44,6 +45,8 @@ function AudioPlayer() {
     nextTrack,
     prevTrack
   } = useAudioPlayer({ audioPlayer: audioPlayer.current });
+
+  console.log(tracks);
 
   return (
     <div style={{ width: '100%' }}>
@@ -174,12 +177,28 @@ function AudioPlayer() {
               type="button"
               onClick={(e) => console.log(e)}
             >
-              <Image
-                width={28}
-                height={28}
-                src={undefined}
-                withPlaceholder
-              />
+              {
+                tracks.current
+                  ? (
+                    <Image
+                      width={28}
+                      height={28}
+                      radius={4}
+                      src={tracks.current.albumThumbnail}
+                    />
+                  )
+                  : (
+                    <IoMusicalNotes style={{
+                      width: '28px',
+                      height: '28px',
+                      padding: '6px',
+                      backgroundColor: 'rgb(223, 222, 228)',
+                      borderRadius: '4px',
+                      color: 'rgb(200, 200, 200)'
+                    }}
+                    />
+                  )
+              }
               Queue
             </button>
           </div>

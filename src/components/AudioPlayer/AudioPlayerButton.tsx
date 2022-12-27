@@ -59,7 +59,7 @@ const useStyles = createStyles((theme, params: Props) => ({
     alignItems: 'center',
     backgroundColor: 'transparent',
     borderRadius: '50%',
-    color: params.isActive ? theme.colors.red[5] : 'white',
+    color: `${theme.colorScheme === 'dark' ? theme.colors.gray[1] : theme.colors.dark[4]}`,
     display: 'flex',
     fontSize: params.size === 'lg' ? '1.8rem' : params.size === 'm' ? '1.2rem' : '1rem',
     height: params.size === 'lg' ? '48px' : params.size === 'm' ? '32px' : '24px',
@@ -70,7 +70,7 @@ const useStyles = createStyles((theme, params: Props) => ({
     transition: '0.2s',
 
     '&:hover': {
-      backgroundColor: '#42424c'
+      backgroundColor: `${theme.colorScheme === 'dark' ? '#42424c' : '#eaeaea'}`
     },
 
     '&:disabled': {
@@ -80,9 +80,9 @@ const useStyles = createStyles((theme, params: Props) => ({
     }
   },
   tooltip: {
-    backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[1]}`,
+    backgroundColor: theme.colors.dark[4],
     boxShadow: theme.colorScheme === 'dark' ? '0px -1px 10px -8px rgba(0,0,0,0.5)' : '0px 0px 10px -8px rgba(0,0,0,0.1)',
-    fontSize: '0.65rem'
+    fontSize: '0.7rem'
   }
 }));
 
@@ -123,9 +123,11 @@ function AudioPlayerButton(props: Props): JSX.Element {
       classNames={{ tooltip: classes.tooltip }}
       label={tooltip}
       disabled={tooltip === ''}
-      offset={10}
+      offset={8}
       transition="skew-down"
       transitionDuration={70}
+      withArrow
+      arrowSize={6}
     >
       <Button
         className={classes.button}
