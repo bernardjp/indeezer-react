@@ -10,6 +10,7 @@ TrackCard.propTypes = {
   data: PropTypes.shape({
     album: PropTypes.shape({
       id: PropTypes.number,
+      cover_small: PropTypes.string,
       cover_medium: PropTypes.string,
       cover_xl: PropTypes.string,
       title: PropTypes.string
@@ -47,6 +48,7 @@ function TrackCard(props: { data: TrackCardPropType }) {
     const trackData: TrackType = {
       albumID: data.album.id,
       albumCover: data.album.cover_medium,
+      albumThumbnail: data.album.cover_small,
       albumTitle: data.album.title,
       artistID: data.artist.id,
       artistName: data.artist.name,
