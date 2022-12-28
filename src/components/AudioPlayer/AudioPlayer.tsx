@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { useRef } from 'react';
-import { Image } from '@mantine/core';
+import { useRef, forwardRef } from 'react';
+import {
+  Button, Image, Slider, HoverCard
+} from '@mantine/core';
 import { IoMusicalNotes } from 'react-icons/io5';
 import useAudioPlayer from './useAudioPlayer';
-import AudioPlayerButton from './AudioPlayerButton';
+import { AudioPlayerButton, AudioPlayerVolumeButton } from './AudioPlayerButton';
 
 /*
   UI
@@ -152,11 +154,11 @@ function AudioPlayer() {
               isDisable={false}
               isActive={isShuffled}
             />
-            <AudioPlayerButton
-              tooltip=""
+
+            <AudioPlayerVolumeButton
               size="m"
               type="volume_on"
-              onClickHandler={() => console.log('Toggle volume')}
+              onClickHandler={() => console.log('Toggle volume!')}
               isDisable={false}
               isActive={false}
             />

@@ -1,23 +1,27 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-unused-vars */
-import { Button, Tooltip, createStyles } from '@mantine/core';
+import { Button, createStyles } from '@mantine/core';
 import {
   IoPlaySkipBackSharp, IoPlaySkipForwardSharp, IoPlaySharp, IoPauseSharp
 } from 'react-icons/io5';
 import { TiArrowLoop, TiArrowShuffle } from 'react-icons/ti';
 import { FaChromecast } from 'react-icons/fa';
-import { RiVolumeUpLine, RiVolumeMuteLine } from 'react-icons/ri';
 import { FiVolume2, FiVolumeX } from 'react-icons/fi';
 import { ImEqualizer } from 'react-icons/im';
+import AudioPlayerTooltip from './AudioPlayerTootip';
+import AudioPlayerVolume from './AudioPlayerVolume';
 
-type Props = {
-  tooltip: string,
+type ButtonProps = {
   type: 'play' | 'pause' | 'next' | 'prev'| 'loop_list' | 'shuffle' | 'share' | 'volume_on' | 'eq'
   // | 'loop_track' | 'volume_off' | 'lyrics' | 'like',
   isDisable: boolean,
   isActive: boolean,
   size: 'sm' | 'm' | 'lg',
   onClickHandler: () => void
+}
+
+type FullButtonProps = ButtonProps & {
+  tooltip: string
 }
 
 const icons = {
@@ -30,31 +34,13 @@ const icons = {
   share: <FaChromecast style={{ fontSize: '1.2rem' }} />,
   shuffle: <TiArrowShuffle style={{ fontSize: '1.3rem' }} />,
   volume_on: <FiVolume2 style={{ fontSize: '1.1rem' }} />,
-  // volume_off: '',
+  volume_off: <FiVolumeX style={{ fontSize: '1.1rem' }} />,
   eq: <ImEqualizer style={{ fontSize: '1rem' }} />
   // lyrics: '',
   // like: ''
 };
 
-// const sizeParams = {
-//   lg: {
-//     fontSize: '1.8rem',
-//     height: '48px',
-//     width: '48px'
-//   },
-//   m: {
-//     fontSize: '1.4rem',
-//     height: '32px',
-//     width: '32px'
-//   },
-//   sm: {
-//     fontSize: '1rem',
-//     height: '24px',
-//     width: '24px'
-//   }
-// };
-
-const useStyles = createStyles((theme, params: Props) => ({
+const useStyles = createStyles((theme, params: ButtonProps) => ({
   button: {
     alignItems: 'center',
     backgroundColor: 'transparent',
@@ -78,35 +64,11 @@ const useStyles = createStyles((theme, params: Props) => ({
       color: '#3e3e47',
       cursor: 'default'
     }
-  },
-  tooltip: {
-    backgroundColor: theme.colors.dark[4],
-    boxShadow: theme.colorScheme === 'dark' ? '0px -1px 10px -8px rgba(0,0,0,0.5)' : '0px 0px 10px -8px rgba(0,0,0,0.1)',
-    fontSize: '0.7rem'
   }
 }));
 
-/*
-  BUTTON Props:
-    - Object-like props: {
-      tootip: string || ""
-      type: [
-        "play", "pause", "next", "prev", "share", "loop_list",
-        "loop_track", "shuffle", "volume", "eq", "lyrics", "like"
-      ], --------> set the button icon
-      isDisable: boolean,
-      isActive: boolean, ---> icon stays colored when active (optional arguement)
-      size: ["sm", "m", "lg"],
-      onClickHandler: () => {}
-    }
-
-  icon: {
-    play: faplayicon ---> icon from react-icons library
-  }
-  --> icon[type]
-*/
-
-function AudioPlayerButton(props: Props): JSX.Element {
+// Basic AP Button Component with tooltip support
+function AudioPlayerButton(props: FullButtonProps): JSX.Element {
   const {
     tooltip,
     type,
@@ -119,16 +81,7 @@ function AudioPlayerButton(props: Props): JSX.Element {
   const { classes } = useStyles(props);
 
   return (
-    <Tooltip
-      classNames={{ tooltip: classes.tooltip }}
-      label={tooltip}
-      disabled={tooltip === ''}
-      offset={8}
-      transition="skew-down"
-      transitionDuration={70}
-      withArrow
-      arrowSize={6}
-    >
+    <AudioPlayerTooltip tooltip={tooltip}>
       <Button
         className={classes.button}
         onClick={onClickHandler}
@@ -136,8 +89,57 @@ function AudioPlayerButton(props: Props): JSX.Element {
       >
         {icons[type]}
       </Button>
-    </Tooltip>
+    </AudioPlayerTooltip>
   );
 }
 
-export default AudioPlayerButton;
+// Unique Button Component design to handle the volume input.
+// TO BE IMPLEMENTED
+function AudioPlayerVolumeButton(props: ButtonProps): JSX.Element {
+  const {
+    type,
+    isDisable,
+    isActive,
+    size,
+    onClickHandler
+  } = props;
+
+  const { classes } = useStyles(props);
+
+  return (
+    <AudioPlayerVolume>
+      <Button
+        className={classes.button}
+        onClick={onClickHandler}
+        disabled={isDisable}
+      >
+        {icons[type]}
+      </Button>
+    </AudioPlayerVolume>
+  );
+}
+
+// Button Component design to handle dropdown menus.
+function AudioPlayerMenuButton(props: ButtonProps): JSX.Element {
+  const {
+    type,
+    isDisable,
+    isActive,
+    size,
+    onClickHandler
+  } = props;
+
+  const { classes } = useStyles(props);
+
+  return (
+    <Button
+      className={classes.button}
+      onClick={onClickHandler}
+      disabled={isDisable}
+    >
+      {icons[type]}
+    </Button>
+  );
+}
+
+export { AudioPlayerButton, AudioPlayerVolumeButton, AudioPlayerMenuButton };
