@@ -1,15 +1,9 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-unused-vars */
 import { Button, createStyles } from '@mantine/core';
-import {
-  IoPlaySkipBackSharp, IoPlaySkipForwardSharp, IoPlaySharp, IoPauseSharp
-} from 'react-icons/io5';
-import { TiArrowLoop, TiArrowShuffle } from 'react-icons/ti';
-import { FaChromecast } from 'react-icons/fa';
-import { FiVolume2, FiVolumeX } from 'react-icons/fi';
-import { ImEqualizer } from 'react-icons/im';
 import AudioPlayerTooltip from './AudioPlayerTootip';
 import AudioPlayerVolume from './AudioPlayerVolume';
+import AudioPlayerIcons from './AudioPlayerIcons';
 import useVolume from './useVolume';
 
 type ButtonProps = {
@@ -30,22 +24,6 @@ type VolumeButtonProps = {
   isDisable: boolean,
   size: 'sm' | 'm' | 'lg'
 }
-
-const icons = {
-  play: <IoPlaySharp style={{ paddingLeft: '3px' }} />,
-  pause: <IoPauseSharp />,
-  next: <IoPlaySkipForwardSharp />,
-  prev: <IoPlaySkipBackSharp />,
-  loop_list: <TiArrowLoop style={{ fontSize: '1.4rem' }} />,
-  // loop_track: '',
-  share: <FaChromecast style={{ fontSize: '1.2rem' }} />,
-  shuffle: <TiArrowShuffle style={{ fontSize: '1.3rem' }} />,
-  volume_on: <FiVolume2 style={{ fontSize: '1.1rem' }} />,
-  volume_off: <FiVolumeX style={{ fontSize: '1.1rem' }} />,
-  eq: <ImEqualizer style={{ fontSize: '1rem' }} />
-  // lyrics: '',
-  // like: ''
-};
 
 const useStyles = createStyles((theme, params: { size: 'sm' | 'm' | 'lg' }) => ({
   button: {
@@ -94,7 +72,7 @@ function AudioPlayerButton(props: FullButtonProps): JSX.Element {
         onClick={onClickHandler}
         disabled={isDisable}
       >
-        {icons[type]}
+        {AudioPlayerIcons[type]}
       </Button>
     </AudioPlayerTooltip>
   );
@@ -123,7 +101,7 @@ function AudioPlayerVolumeButton(props: VolumeButtonProps): JSX.Element {
         onClick={toggleMute}
         disabled={isDisable}
       >
-        {icons[volume === 0 ? 'volume_off' : 'volume_on']}
+        {AudioPlayerIcons[volume === 0 ? 'volume_off' : 'volume_on']}
       </Button>
     </AudioPlayerVolume>
   );
@@ -147,7 +125,7 @@ function AudioPlayerMenuButton(props: ButtonProps): JSX.Element {
       onClick={onClickHandler}
       disabled={isDisable}
     >
-      {icons[type]}
+      {AudioPlayerIcons[type]}
     </Button>
   );
 }
