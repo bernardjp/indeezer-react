@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { useRef, forwardRef } from 'react';
-import {
-  Button, Image, Slider, HoverCard
-} from '@mantine/core';
+import { useRef } from 'react';
+import { Image } from '@mantine/core';
 import { IoMusicalNotes } from 'react-icons/io5';
 import useAudioPlayer from './useAudioPlayer';
 import { AudioPlayerButton, AudioPlayerVolumeButton } from './AudioPlayerButton';
@@ -47,8 +45,6 @@ function AudioPlayer() {
     nextTrack,
     prevTrack
   } = useAudioPlayer({ audioPlayer: audioPlayer.current });
-
-  console.log(tracks);
 
   return (
     <div style={{ width: '100%' }}>
@@ -156,12 +152,11 @@ function AudioPlayer() {
             />
 
             <AudioPlayerVolumeButton
+              audioPlayer={audioPlayer?.current}
               size="m"
-              type="volume_on"
-              onClickHandler={() => console.log('Toggle volume!')}
               isDisable={false}
-              isActive={false}
             />
+
             <AudioPlayerButton
               tooltip=""
               size="m"
@@ -171,6 +166,7 @@ function AudioPlayer() {
               isActive={false}
             />
           </div>
+
           <div style={{ marginLeft: '12px', paddingLeft: '20px', borderLeft: '1px solid #3e3e47' }}>
             <button
               style={{

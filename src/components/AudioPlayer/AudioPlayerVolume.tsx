@@ -16,8 +16,8 @@ const useStyles = createStyles(() => ({
   thumb: { // .mantine-Slider-thumb
     border: '1px solid #32323d',
     backgroundColor: '#fff',
-    height: '18px',
-    width: '18px',
+    height: '20px',
+    width: '20px',
     boxShadow: '0px 0px 19px -6px black'
   },
   bar: { // .mantine-Slider-bar  --->  Filled part of the track
@@ -32,8 +32,14 @@ const useStyles = createStyles(() => ({
   }
 }));
 
-function AudioPlayerVolume(props: { children: React.ReactNode | null }) {
-  const { children } = props;
+type Props = {
+  children: React.ReactNode | null,
+  onChangeHandler: React.Dispatch<React.SetStateAction<number>>,
+  volume: number
+}
+
+function AudioPlayerVolume(props: Props) {
+  const { children, onChangeHandler, volume } = props;
   const { classes } = useStyles();
 
   return (
@@ -52,6 +58,8 @@ function AudioPlayerVolume(props: { children: React.ReactNode | null }) {
           size="sm"
           radius="md"
           label={null}
+          onChange={(e) => onChangeHandler(e)}
+          value={volume}
         />
       </HoverCard.Dropdown>
     </HoverCard>

@@ -20,7 +20,6 @@ function AudioPlayerTooltip(props: Props): JSX.Element {
   } = props;
 
   const { classes } = useStyles();
-  console.log(tooltip);
 
   return (
     <Tooltip
