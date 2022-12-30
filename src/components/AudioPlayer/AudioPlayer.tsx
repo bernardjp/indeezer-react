@@ -4,6 +4,7 @@ import { Image } from '@mantine/core';
 import { IoMusicalNotes } from 'react-icons/io5';
 import useAudioPlayer from './useAudioPlayer';
 import { AudioPlayerButton, AudioPlayerVolumeButton } from './AudioPlayerButton';
+import AudioPlayerTrack from './AudioPlayerTrack';
 
 /*
   UI
@@ -33,6 +34,8 @@ import { AudioPlayerButton, AudioPlayerVolumeButton } from './AudioPlayerButton'
 */
 
 function AudioPlayer() {
+  // CONSIDERATION: Move the useAudioPlayer inside each button to avoid re-rendering
+  // the whole component. e.g: togglePlaying --> play_button, toggleShuffle --> shuffle_list
   const audioPlayer = useRef<HTMLAudioElement>(null);
   const {
     tracks,
@@ -48,7 +51,7 @@ function AudioPlayer() {
 
   return (
     <div style={{ width: '100%' }}>
-      {/* Core Audioplayer */}
+      {/* Core Audioplayer. Hide after development */}
       <div style={{ position: 'absolute', bottom: '100px' }}>
         <audio ref={audioPlayer} controls autoPlay={isPlaying} loop={isLooping === 'track' || false}>
           <source
@@ -96,9 +99,7 @@ function AudioPlayer() {
         </div>
 
         {/* Track slide, name, and timers */}
-        <div>
-          <p>{ tracks.current ? `${tracks.current.artistName} - ${tracks.current.trackTitle}` : ''}</p>
-        </div>
+        <AudioPlayerTrack audioPlayer={audioPlayer.current} track={tracks.current} />
 
         {/* Playlist a misc. controls (volume, looping, shuffling, sharing, eq, etc.) */}
         <div style={{
