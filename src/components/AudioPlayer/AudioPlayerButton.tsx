@@ -7,8 +7,7 @@ import AudioPlayerIcons from './AudioPlayerIcons';
 import useVolume from './useVolume';
 
 type ButtonProps = {
-  type: 'play' | 'pause' | 'next' | 'prev'| 'loop_list' | 'shuffle' | 'share' | 'eq'
-  // | 'loop_track' | 'lyrics' | 'like',
+  type: 'play' | 'pause' | 'next' | 'prev'| 'loop_list' | 'shuffle' | 'share' | 'eq' | 'lyrics' | 'like' | 'add',
   isDisable: boolean,
   isActive: boolean,
   size: 'sm' | 'm' | 'lg',
