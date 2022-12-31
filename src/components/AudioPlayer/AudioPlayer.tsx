@@ -52,7 +52,7 @@ function AudioPlayer() {
   return (
     <div style={{ width: '100%' }}>
       {/* Core Audioplayer. Hide after development */}
-      <div style={{ position: 'absolute', bottom: '100px' }}>
+      <div style={{ position: 'absolute', bottom: '100px', display: 'none' }}>
         <audio ref={audioPlayer} controls autoPlay={isPlaying} loop={isLooping === 'track' || false}>
           <source
             src="#"
@@ -99,7 +99,11 @@ function AudioPlayer() {
         </div>
 
         {/* Track slide, name, and timers */}
-        <AudioPlayerTrack audioPlayer={audioPlayer.current} track={tracks.current} />
+        <AudioPlayerTrack
+          audioPlayer={audioPlayer.current}
+          track={tracks.current}
+          isPlaying={isPlaying}
+        />
 
         {/* Playlist a misc. controls (volume, looping, shuffling, sharing, eq, etc.) */}
         <div style={{
