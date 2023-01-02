@@ -4,34 +4,7 @@ import { Image } from '@mantine/core';
 import { IoMusicalNotes } from 'react-icons/io5';
 import useAudioPlayer from './useAudioPlayer';
 import { AudioPlayerButton, AudioPlayerVolumeButton } from './AudioPlayerButton';
-import AudioPlayerTrack from './AudioPlayerTrack';
-
-/*
-  UI
-    - Previous track
-    - Play / Stop
-    - Next track
-
-    (TOP)
-    - Explicit icon
-    - Track Name
-    - Artist
-    - Show lyrics (?)
-    - Add to favourites
-    ------
-    (BOTTOM)
-    - Current Time
-    - Progression bar
-    - Total Time
-
-    - Loop complete track list -> Loop current track -> Don't repeat tracks
-    - Shuffle tracks
-    - Volume -> toggle mute
-      - Volume slide
-    -----
-    - Track list
-      -
-*/
+import AudioPlayerTrack from './Track/AudioPlayerTrack';
 
 function AudioPlayer() {
   // CONSIDERATION: Move the useAudioPlayer inside each button to avoid re-rendering
@@ -52,8 +25,8 @@ function AudioPlayer() {
   return (
     <div style={{ width: '100%' }}>
       {/* Core Audioplayer. Hide after development */}
-      <div style={{ position: 'absolute', bottom: '100px', display: 'none' }}>
-        <audio ref={audioPlayer} controls autoPlay={isPlaying} loop={isLooping === 'track' || false}>
+      <div>
+        <audio ref={audioPlayer} autoPlay={isPlaying} loop={isLooping === 'track' || false}>
           <source
             src="#"
             type="audio/mpeg"
