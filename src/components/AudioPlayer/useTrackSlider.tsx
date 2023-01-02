@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
 import { useState, useEffect, useRef } from 'react';
 
-// type Props = HTMLAudioElement | null
 type Props = {
   audioPlayer: HTMLAudioElement | null,
   isPlaying: boolean
