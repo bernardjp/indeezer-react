@@ -12,12 +12,10 @@ const useStyles = createStyles((theme) => ({
     height: '80px',
     justifyContent: 'center',
     maxWidth: '100%',
+    padding: '0 24px',
     position: 'fixed',
     width: '100%',
     zIndex: 4
-  },
-  text: {
-
   }
 }));
 

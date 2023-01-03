@@ -1,6 +1,7 @@
 export type TrackType = {
   albumID: number,
   albumCover: string,
+  albumThumbnail: string,
   albumTitle: string,
   artistID: number,
   artistName: string,

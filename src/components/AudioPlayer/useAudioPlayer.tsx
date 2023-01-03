@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import {
   useState, useRef, useEffect, useContext
 } from 'react';
@@ -176,14 +175,8 @@ const useAudioPlayer = (props: Props) => {
       index.current += 1;
     }
 
-    console.log('index:', index.current);
-    console.log('current_order:', order.current);
-    console.log('current_index:', order.current[index.current]);
-
     updateTracks();
     setTrackSource();
-
-    console.log('-------------------');
   }
 
   function prevTrack(): void {
@@ -195,14 +188,8 @@ const useAudioPlayer = (props: Props) => {
       index.current -= 1;
     }
 
-    console.log('index:', index.current);
-    console.log('current_order:', order.current);
-    console.log('current_index:', order.current[index.current]);
-
     updateTracks();
     setTrackSource();
-
-    console.log('-------------------');
   }
 
   function stopPlaying(): void {
