@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { Image } from '@mantine/core';
 import { IoMusicalNotes } from 'react-icons/io5';
 import useAudioPlayer from './useAudioPlayer';
-import { AudioPlayerButton, AudioPlayerVolumeButton } from './AudioPlayerButton';
+import { AudioPlayerButton, AudioPlayerVolumeButton, AudioPlayerMenuButton } from './AudioPlayerButton';
 import AudioPlayerTrack from './Track/AudioPlayerTrack';
 
 function AudioPlayer() {
@@ -123,14 +123,15 @@ function AudioPlayer() {
               size="m"
               isDisable={false}
             />
-            <AudioPlayerButton
-              tooltip=""
+            <AudioPlayerMenuButton
               size="m"
               type="eq"
               onClickHandler={() => console.log('Toggle Equalizer')}
               isDisable={false}
               isActive={false}
-            />
+            >
+              {}
+            </AudioPlayerMenuButton>
           </div>
 
           <div style={{ marginLeft: '12px', paddingLeft: '20px', borderLeft: '1px solid #3e3e47' }}>
