@@ -7,7 +7,7 @@ import AudioPlayerIcons from './AudioPlayerIcons';
 import useVolume from './useVolume';
 
 type ButtonProps = {
-  type: 'play' | 'pause' | 'next' | 'prev'| 'loop_list' | 'shuffle' | 'share' | 'eq' | 'lyrics' | 'like' | 'add',
+  type: 'play' | 'pause' | 'next' | 'prev'| 'loop_list' | 'loop_track' | 'shuffle' | 'share' | 'eq' | 'lyrics' | 'like' | 'add',
   isDisable: boolean,
   isActive: boolean,
   size: 'sm' | 'm' | 'lg',
@@ -48,6 +48,9 @@ const useStyles = createStyles((theme, params: { size: 'sm' | 'm' | 'lg' }) => (
       color: '#3e3e47',
       cursor: 'default'
     }
+  },
+  active: {
+    color: theme.colors.red[5]
   }
 }));
 
@@ -62,12 +65,12 @@ function AudioPlayerButton(props: FullButtonProps): JSX.Element {
     onClickHandler
   } = props;
 
-  const { classes } = useStyles({ size });
+  const { classes, cx } = useStyles({ size });
 
   return (
     <AudioPlayerTooltip tooltip={tooltip}>
       <Button
-        className={classes.button}
+        className={cx(classes.button, { [classes.active]: isActive })}
         onClick={onClickHandler}
         disabled={isDisable}
       >
@@ -111,7 +114,7 @@ function AudioPlayerMenuButton(props: ButtonProps): JSX.Element {
   const {
     type,
     isDisable,
-    isActive, // no yet implemented
+    isActive, // not yet implemented
     size,
     onClickHandler
   } = props;

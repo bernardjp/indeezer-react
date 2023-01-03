@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-nested-ternary */
 import { useRef } from 'react';
 import { Image } from '@mantine/core';
 import { IoMusicalNotes } from 'react-icons/io5';
@@ -96,29 +97,18 @@ function AudioPlayer() {
               isActive={false}
             />
             <AudioPlayerButton
-              /*
-                isLooping === false => {
-                  tooltip: "Repeat all tracks in list",
-                  type: "loop_list",
-                  isActive: false
-                }
-                isLooping === "list" => {
-                  tooltip: "Repeat the current track",
-                  type: "loop_list",
-                  isActive: true
-                }
-                isLooping === "track" => {
-                  tooltip: "Turn off repeat",
-                  type: "loop_list" + "point",
-                  isActive: true
-                }
-              */
-              tooltip="Repeat all tracks in list"
+              tooltip={
+                !isLooping
+                  ? 'Repeat all tracks in list'
+                  : isLooping === 'track'
+                    ? 'Repeat the current track'
+                    : 'Turn off repeat'
+              }
               size="m"
-              type="loop_list"
+              type={isLooping === 'list' ? 'loop_track' : 'loop_list'}
               onClickHandler={() => toggleLooping()}
               isDisable={false}
-              isActive={false}
+              isActive={Boolean(isLooping)}
             />
             <AudioPlayerButton
               tooltip={`Turn ${isShuffled ? 'off' : 'on'} Shuffle`}
@@ -128,13 +118,11 @@ function AudioPlayer() {
               isDisable={false}
               isActive={isShuffled}
             />
-
             <AudioPlayerVolumeButton
               audioPlayer={audioPlayer?.current}
               size="m"
               isDisable={false}
             />
-
             <AudioPlayerButton
               tooltip=""
               size="m"
