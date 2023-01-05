@@ -1,9 +1,10 @@
 import { HoverCard, Slider, createStyles } from '@mantine/core';
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme) => ({
   background: {
     alignItems: 'center',
-    backgroundColor: '#23232D',
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
+    border: 'none',
     borderRadius: '10px',
     boxShadow: '0px 5px 30px -2px rgba(0,0,0,0.3)',
     display: 'flex',
@@ -14,14 +15,14 @@ const useStyles = createStyles(() => ({
     width: '210px'
   },
   thumb: { // .mantine-Slider-thumb
-    border: '1px solid #32323d',
+    border: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.dark[1]}`,
     backgroundColor: '#fff',
     height: '20px',
     width: '20px',
     boxShadow: '0px 0px 19px -6px black'
   },
   bar: { // .mantine-Slider-bar  --->  Filled part of the track
-    backgroundColor: '#fff'
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.red[5]
   },
   track: { // track  -->  .mantine-Slider-track  -->  Track element, contains all other elements
     height: '5px',
