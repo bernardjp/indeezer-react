@@ -1,12 +1,10 @@
 /* eslint-disable no-nested-ternary */
-/* eslint-disable no-unused-vars */
 import { useState } from 'react';
-import {
-  Button, Menu, Radio, Switch, createStyles
-} from '@mantine/core';
+import { Button, createStyles } from '@mantine/core';
 import AudioPlayerTooltip from './AudioPlayerTootip';
 import AudioPlayerVolume from './AudioPlayerVolume';
 import AudioPlayerIcons from './AudioPlayerIcons';
+import AudioPlayerMenu from './AudioPlayerMenu';
 import useVolume from './useVolume';
 
 type ButtonProps = {
@@ -27,8 +25,10 @@ type VolumeButtonProps = {
   size: 'sm' | 'm' | 'lg'
 }
 
-type MenuButtonProps = ButtonProps & {
-  children: React.ReactNode[]
+type MenuButtonProps = {
+  type: 'eq' | 'add',
+  isDisable: boolean,
+  size: 'sm' | 'm' | 'lg'
 }
 
 const useStyles = createStyles((theme, params: { size: 'sm' | 'm' | 'lg' }) => ({
@@ -67,7 +67,7 @@ function AudioPlayerButton(props: FullButtonProps): JSX.Element {
     tooltip,
     type,
     isDisable,
-    isActive, // no yet implemented
+    isActive,
     size,
     onClickHandler
   } = props;
@@ -121,60 +121,22 @@ function AudioPlayerMenuButton(props: MenuButtonProps): JSX.Element {
   const {
     type,
     isDisable,
-    isActive, // not yet implemented
-    size,
-    onClickHandler,
-    children
+    size
   } = props;
 
   const { classes } = useStyles({ size });
   const [opened, setOpened] = useState(false);
 
   return (
-    <Menu opened={opened} position="top">
-      <Menu.Target>
-        <Button
-          className={classes.button}
-          onClick={() => setOpened((val) => !val)}
-          disabled={isDisable}
-        >
-          {AudioPlayerIcons[type]}
-        </Button>
-      </Menu.Target>
-      <Menu.Dropdown>
-        {/* {children} */}
-        <Menu.Label>Audio Quality</Menu.Label>
-        <Menu.Item>
-          {/* <Radio
-            label="Standard Quality"
-            labelPosition="left"
-            color="red"
-          /> */}
-          <label htmlFor="quality">
-            Standard Quality
-            <input
-              type="radio"
-              name="quality"
-              checked
-              readOnly
-            />
-          </label>
-        </Menu.Item>
-        <Menu.Item>
-          High Fidelity
-          <span>Try free &gt;</span>
-        </Menu.Item>
-
-        <Menu.Divider />
-
-        <Menu.Item>
-          <Switch
-            label="Normalize Audio"
-            color="red"
-          />
-        </Menu.Item>
-      </Menu.Dropdown>
-    </Menu>
+    <AudioPlayerMenu opened={opened} type={type}>
+      <Button
+        className={classes.button}
+        onClick={() => setOpened((val) => !val)}
+        disabled={isDisable}
+      >
+        {AudioPlayerIcons[type]}
+      </Button>
+    </AudioPlayerMenu>
   );
 }
 

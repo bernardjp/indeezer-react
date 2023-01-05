@@ -126,12 +126,8 @@ function AudioPlayer() {
             <AudioPlayerMenuButton
               size="m"
               type="eq"
-              onClickHandler={() => console.log('Toggle Equalizer')}
               isDisable={false}
-              isActive={false}
-            >
-              {}
-            </AudioPlayerMenuButton>
+            />
           </div>
 
           <div style={{ marginLeft: '12px', paddingLeft: '20px', borderLeft: '1px solid #3e3e47' }}>
