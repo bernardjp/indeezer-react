@@ -22,7 +22,7 @@ const useStyles = createStyles((theme) => ({
     boxShadow: '0px 0px 19px -6px black'
   },
   bar: { // .mantine-Slider-bar  --->  Filled part of the track
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.red[5]
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.red[5]
   },
   track: { // track  -->  .mantine-Slider-track  -->  Track element, contains all other elements
     height: '5px',
