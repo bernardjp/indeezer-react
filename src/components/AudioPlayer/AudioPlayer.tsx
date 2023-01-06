@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { Image } from '@mantine/core';
 import { IoMusicalNotes } from 'react-icons/io5';
 import useAudioPlayer from './useAudioPlayer';
-import { AudioPlayerButton, AudioPlayerVolumeButton, AudioPlayerMenuButton } from './AudioPlayerButton';
+import { AudioPlayerButton, AudioPlayerVolumeButton, AudioPlayerEQButton } from './AudioPlayerButton';
 import AudioPlayerTrack from './Track/AudioPlayerTrack';
 
 function AudioPlayer() {
@@ -123,9 +123,8 @@ function AudioPlayer() {
               size="m"
               isDisable={false}
             />
-            <AudioPlayerMenuButton
+            <AudioPlayerEQButton
               size="m"
-              type="eq"
               isDisable={false}
             />
           </div>
