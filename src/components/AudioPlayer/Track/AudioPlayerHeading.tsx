@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core';
 import { TrackType } from '../../../types/AudioPlayer.types';
-import { AudioPlayerButton } from '../AudioPlayerButton';
+import { AudioPlayerButton, AudioPlayerAddTrackButton } from '../AudioPlayerButton';
 
 type Props = {
   track: TrackType | null,
@@ -88,13 +88,9 @@ function AudioPlayerHeading(props: Props): JSX.Element {
             isDisable={false}
             isActive={false}
           />
-          <AudioPlayerButton
-            tooltip=""
+          <AudioPlayerAddTrackButton
             size="m"
-            type="add"
-            onClickHandler={() => console.log('show add to playlist menu')}
             isDisable={false}
-            isActive={false}
           />
           <AudioPlayerButton
             tooltip="Add to Favorite tracks"

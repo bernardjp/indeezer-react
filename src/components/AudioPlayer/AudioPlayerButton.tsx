@@ -1,10 +1,10 @@
 /* eslint-disable no-nested-ternary */
-import { useState } from 'react';
 import { Button, createStyles } from '@mantine/core';
 import AudioPlayerTooltip from './AudioPlayerTootip';
 import AudioPlayerVolume from './AudioPlayerVolume';
 import AudioPlayerIcons from './AudioPlayerIcons';
-import AudioPlayerMenu from './AudioPlayerMenu';
+import AudioPlayerEqualizer from './AudioPlayerEQMenu';
+import AudioPlayerAddTrack from './AudioPlayerAddMenu';
 import useVolume from './useVolume';
 
 type ButtonProps = {
@@ -26,7 +26,6 @@ type VolumeButtonProps = {
 }
 
 type MenuButtonProps = {
-  type: 'eq' | 'add',
   isDisable: boolean,
   size: 'sm' | 'm' | 'lg'
 }
@@ -52,7 +51,7 @@ const useStyles = createStyles((theme, params: { size: 'sm' | 'm' | 'lg' }) => (
 
     '&:disabled': {
       backgroundColor: 'transparent',
-      color: '#3e3e47',
+      color: `${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
       cursor: 'default'
     }
   },
@@ -77,7 +76,10 @@ function AudioPlayerButton(props: FullButtonProps): JSX.Element {
   return (
     <AudioPlayerTooltip tooltip={tooltip}>
       <Button
-        className={cx(classes.button, { [classes.active]: isActive })}
+        className={cx(
+          classes.button,
+          { [classes.active]: isActive }
+        )}
         onClick={onClickHandler}
         disabled={isDisable}
       >
@@ -116,28 +118,51 @@ function AudioPlayerVolumeButton(props: VolumeButtonProps): JSX.Element {
   );
 }
 
-// Button Component design to handle dropdown menus.
-function AudioPlayerMenuButton(props: MenuButtonProps): JSX.Element {
+// Button Component design to handle the dropdown EQ menu.
+function AudioPlayerEQButton(props: MenuButtonProps): JSX.Element {
   const {
-    type,
     isDisable,
     size
   } = props;
 
   const { classes } = useStyles({ size });
-  const [opened, setOpened] = useState(false);
 
   return (
-    <AudioPlayerMenu opened={opened} type={type}>
+    <AudioPlayerEqualizer>
       <Button
         className={classes.button}
-        onClick={() => setOpened((val) => !val)}
         disabled={isDisable}
       >
-        {AudioPlayerIcons[type]}
+        {AudioPlayerIcons.eq}
       </Button>
-    </AudioPlayerMenu>
+    </AudioPlayerEqualizer>
   );
 }
 
-export { AudioPlayerButton, AudioPlayerVolumeButton, AudioPlayerMenuButton };
+// Button Component design to handle the dropdown Add to Playlist menu.
+function AudioPlayerAddTrackButton(props: MenuButtonProps): JSX.Element {
+  const {
+    isDisable,
+    size
+  } = props;
+
+  const { classes } = useStyles({ size });
+
+  return (
+    <AudioPlayerAddTrack>
+      <Button
+        className={classes.button}
+        disabled={isDisable}
+      >
+        {AudioPlayerIcons.add}
+      </Button>
+    </AudioPlayerAddTrack>
+  );
+}
+
+export {
+  AudioPlayerButton,
+  AudioPlayerVolumeButton,
+  AudioPlayerEQButton,
+  AudioPlayerAddTrackButton
+};
