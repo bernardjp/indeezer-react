@@ -21,6 +21,7 @@ const useStyles = createStyles((theme, params: { disabled: boolean, hovered: boo
   },
   timer: {
     bottom: '-3px',
+    color: `${params.disabled ? theme.colors.gray[5] : ''}`,
     position: 'absolute'
   },
   slide_root: {
