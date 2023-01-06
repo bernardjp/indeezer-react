@@ -1,6 +1,9 @@
 import { Menu, Input, createStyles } from '@mantine/core';
 import { FiSearch, FiPlus } from 'react-icons/fi';
 import { IoIosArrowBack } from 'react-icons/io';
+import {
+  TrackMixIcon, NotRecommendIcon, ShareIcon, ReportIcon
+} from './AudioPlayerIcons';
 
 type Props = {
   children: React.ReactNode | null
@@ -12,15 +15,17 @@ const useStyles = createStyles((theme) => ({
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
     border: 'none',
     borderRadius: '10px',
-    boxShadow: '0px 5px 30px -2px rgba(0,0,0,0.3)',
+    boxShadow: '0px 5px 20px -6px rgba(0,0,0,0.3)',
     padding: '0'
   },
   item: {
+    alignItems: 'center',
     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.dark[5],
-    width: '20.5rem',
-    padding: '0 1rem',
+    display: 'flex',
     minHeight: '3rem',
+    padding: '0 1rem',
     transition: '0.2s',
+    width: '20.5rem',
 
     '&[data-hovered]': {
       backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[2]
@@ -30,7 +35,7 @@ const useStyles = createStyles((theme) => ({
     margin: '0'
   },
   itemLabel: {
-    fontSize: '0.9rem',
+    fontSize: '0.95rem',
     display: 'flex',
     alignItems: 'center'
   },
@@ -87,7 +92,7 @@ function AddTrackMenu(props: Props): JSX.Element {
   const { classes } = useStyles();
 
   return (
-    <Menu classNames={classes} position="top" closeOnItemClick={false}>
+    <Menu classNames={classes} position="top" closeOnItemClick={false} transition="pop">
       <Menu.Target>
         {children}
       </Menu.Target>
@@ -120,17 +125,34 @@ function AddTrackMenu(props: Props): JSX.Element {
 
 function SupportMenu(props: { children: React.ReactNode | null }): JSX.Element {
   const { children } = props;
+  const { classes } = useStyles();
 
   return (
-    <Menu>
+    <Menu classNames={classes} position="left-start" transition="pop-top-right">
       <Menu.Target>
         {children}
       </Menu.Target>
       <Menu.Dropdown>
-        <Menu.Item>launch Track mix</Menu.Item>
-        <Menu.Item>Don&apos;t recommend this track</Menu.Item>
-        <Menu.Item>Share</Menu.Item>
-        <Menu.Item>Report a problem</Menu.Item>
+        <Menu.Item
+          style={{ width: '18rem', borderStartStartRadius: '10px', borderStartEndRadius: '10px' }}
+        >
+          <TrackMixIcon />
+          Launch Track mix
+        </Menu.Item>
+        <Menu.Item style={{ width: '18rem' }}>
+          <NotRecommendIcon />
+          Don&apos;t recommend this track
+        </Menu.Item>
+        <Menu.Item style={{ width: '18rem' }}>
+          <ShareIcon />
+          Share
+        </Menu.Item>
+        <Menu.Item
+          style={{ width: '18rem', borderEndStartRadius: '10px', borderEndEndRadius: '10px' }}
+        >
+          <ReportIcon />
+          Report a problem
+        </Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );

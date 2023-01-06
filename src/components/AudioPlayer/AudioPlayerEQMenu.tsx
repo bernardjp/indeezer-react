@@ -18,7 +18,7 @@ const useStyles = createStyles((theme) => ({
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
     border: 'none',
     borderRadius: '10px',
-    boxShadow: '0px 5px 30px -2px rgba(0,0,0,0.3)',
+    boxShadow: '0px 5px 20px -6px rgba(0,0,0,0.3)',
     padding: '16px',
     paddingTop: '0'
   },
@@ -103,6 +103,7 @@ function AudioPlayerEqualizer(props: Props): JSX.Element {
       classNames={classes}
       position="top"
       closeOnItemClick={false}
+      transition="pop"
     >
       <Menu.Target>
         {children}
