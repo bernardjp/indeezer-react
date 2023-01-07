@@ -1,6 +1,7 @@
 import { createStyles } from '@mantine/core';
 import { TrackType } from '../../../types/AudioPlayer.types';
 import { AudioPlayerButton, AudioPlayerAddTrackButton } from '../AudioPlayerButton';
+import AudioPlayerLyricsOverlay from '../AudioPlayerLyrics';
 
 type Props = {
   track: TrackType | null,
@@ -80,14 +81,7 @@ function AudioPlayerHeading(props: Props): JSX.Element {
           </a>
         </div>
         <div className={classes.actions}>
-          <AudioPlayerButton
-            tooltip="View lyrics"
-            size="m"
-            type="lyrics"
-            onClickHandler={() => console.log('show lyrics')}
-            isDisable={false}
-            isActive={false}
-          />
+          <AudioPlayerLyricsOverlay image={track.albumCover} />
           <AudioPlayerAddTrackButton
             size="m"
             isDisable={false}
