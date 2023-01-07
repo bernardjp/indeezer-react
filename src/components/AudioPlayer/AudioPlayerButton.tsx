@@ -8,7 +8,7 @@ import AudioPlayerAddTrack from './AudioPlayerAddMenu';
 import useVolume from './useVolume';
 
 type ButtonProps = {
-  type: 'play' | 'pause' | 'next' | 'prev'| 'loop_list' | 'loop_track' | 'shuffle' | 'share' | 'eq' | 'lyrics' | 'like' | 'add',
+  type: 'play' | 'pause' | 'next' | 'prev'| 'loop_list' | 'loop_track' | 'shuffle' | 'share' | 'eq' | 'lyrics' | 'like_empty' | 'like_full' | 'add',
   isDisable: boolean,
   isActive: boolean,
   size: 'sm' | 'm' | 'lg',
@@ -56,7 +56,9 @@ const useStyles = createStyles((theme, params: { size: 'sm' | 'm' | 'lg' }) => (
     }
   },
   active: {
-    color: theme.colors.red[5]
+    '& svg': {
+      fill: theme.colors.red[5]
+    }
   }
 }));
 
