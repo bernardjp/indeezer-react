@@ -6,10 +6,13 @@ import { AudioPlayerButton } from './AudioPlayerButton';
 
 const useStyles = createStyles((theme) => ({
   root: {
+    width: '100vw'
   },
   drawer: {
+    background: `linear-gradient(233.13deg, rgb(246, 105, 60) 0%, ${theme.colors.red[6]} 89.29%)`,
+    maxWidth: '100vw',
     padding: '2.5rem !important',
-    background: `linear-gradient(233.13deg, rgb(246, 105, 60) 0%, ${theme.colors.red[6]} 89.29%)`
+    width: '100vw'
   },
   header: {
     justifyContent: 'flex-start',
