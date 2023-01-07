@@ -11,10 +11,10 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     height: '80px',
     justifyContent: 'center',
-    maxWidth: '100%',
-    padding: '0 24px',
+    maxWidth: '100vw',
+    padding: '0 40px 0 36px',
     position: 'fixed',
-    width: '100%',
+    width: '100vw',
     zIndex: 4
   }
 }));

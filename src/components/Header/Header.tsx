@@ -13,9 +13,10 @@ const useStyles = createStyles((theme) => ({
     height: '54px',
     justifyContent: 'end',
     left: 0,
-    minWidth: '100%',
-    padding: '0',
+    minWidth: '100vw',
+    padding: '0 18px 0 0', // 18px accounts for the scrokkbar width
     position: 'fixed',
+    width: '100vw',
     zIndex: 2
   }
 }));

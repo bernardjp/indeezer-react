@@ -37,7 +37,8 @@ const useStyles = createStyles({
     padding: '0',
     paddingBottom: '100px',
     position: 'absolute',
-    width: ['-moz-available', '-webkit-fill-available']
+    // width: ['-moz-available', '-webkit-fill-available']
+    width: 'calc(100vw - 238px)' // 238px = 220px (side-navbar) + 18px (scroll-bar)
   }
 });
 
