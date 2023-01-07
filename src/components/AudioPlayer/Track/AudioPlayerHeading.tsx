@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { createStyles } from '@mantine/core';
 import { TrackType } from '../../../types/AudioPlayer.types';
 import { AudioPlayerButton, AudioPlayerAddTrackButton } from '../AudioPlayerButton';
@@ -54,6 +55,8 @@ const DEEZER_URL = 'https://www.deezer.com/us'; // Move to .env file (?)
 
 function AudioPlayerHeading(props: Props): JSX.Element {
   const { track } = props;
+
+  const [liked, setLiked] = useState<boolean>(false);
   const { classes } = useStyles();
 
   return (
@@ -87,12 +90,12 @@ function AudioPlayerHeading(props: Props): JSX.Element {
             isDisable={false}
           />
           <AudioPlayerButton
-            tooltip="Add to Favorite tracks"
+            tooltip={liked ? 'Remove from Favorite tracks' : 'Add to Favorite tracks'}
             size="m"
-            type="like"
-            onClickHandler={() => console.log('track added to favorites')}
+            type={liked ? 'like_full' : 'like_empty'}
+            onClickHandler={() => setLiked((val) => !val)}
             isDisable={false}
-            isActive={false}
+            isActive={liked}
           />
         </div>
       </>
