@@ -16,9 +16,10 @@ const useStyles = createStyles((theme) => ({
     margin: '0'
   },
   closeButton: {
+    borderRadius: '50%',
+    color: 'white',
     height: '40px',
     width: '40px',
-    borderRadius: '50%',
 
     '&:hover': {
       backgroundColor: '#ffffff2e'
@@ -40,10 +41,11 @@ const useStyles = createStyles((theme) => ({
     filter: 'drop-shadow(rgba(0, 0, 0, 0.1) 0px 5.2392px 20.9569px) drop-shadow(rgba(0, 0, 0, 0.1) 0px 20.9569px 41.9137px)'
   },
   lyrics: {
-    width: '500px',
-    textAlign: 'center',
+    color: 'white',
     opacity: '0.65',
+    textAlign: 'center',
     transition: '0.1s',
+    width: '500px',
 
     '&:hover': {
       cursor: 'pointer',
