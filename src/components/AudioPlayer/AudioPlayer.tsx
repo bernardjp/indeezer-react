@@ -1,11 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
-import { useRef } from 'react';
-import { Image } from '@mantine/core';
-import { IoMusicalNotes } from 'react-icons/io5';
+import { useState, useRef } from 'react';
 import useAudioPlayer from './useAudioPlayer';
 import { AudioPlayerButton, AudioPlayerVolumeButton, AudioPlayerEQButton } from './AudioPlayerButton';
 import AudioPlayerTrack from './Track/AudioPlayerTrack';
+import AudioPlayerPlaylistOverlay from './Playlist/PlaylistOverlay';
 
 function AudioPlayer() {
   // CONSIDERATION: Move the useAudioPlayer inside each button to avoid re-rendering
@@ -22,6 +21,8 @@ function AudioPlayer() {
     nextTrack,
     prevTrack
   } = useAudioPlayer({ audioPlayer: audioPlayer.current });
+
+  const [playlistOpened, setOpened] = useState(false);
 
   return (
     <div style={{ width: '100%' }}>
@@ -77,6 +78,7 @@ function AudioPlayer() {
           audioPlayer={audioPlayer.current}
           track={tracks.current}
           isPlaying={isPlaying}
+          opened={playlistOpened}
         />
 
         {/* Playlist a misc. controls (volume, looping, shuffling, sharing, eq, etc.) */}
@@ -129,39 +131,11 @@ function AudioPlayer() {
             />
           </div>
 
-          <div style={{ marginLeft: '12px', paddingLeft: '20px', borderLeft: '1px solid #3e3e47' }}>
-            <button
-              style={{
-                backgroundColor: 'transparent', border: 'none', display: 'flex', alignItems: 'center', cursor: 'pointer', color: 'white', fontSize: '0.75rem', gap: '8px'
-              }}
-              type="button"
-              onClick={(e) => console.log(e)}
-            >
-              {
-                tracks.current
-                  ? (
-                    <Image
-                      width={28}
-                      height={28}
-                      radius={4}
-                      src={tracks.current.albumThumbnail}
-                    />
-                  )
-                  : (
-                    <IoMusicalNotes style={{
-                      width: '28px',
-                      height: '28px',
-                      padding: '6px',
-                      backgroundColor: 'rgb(223, 222, 228)',
-                      borderRadius: '4px',
-                      color: 'rgb(200, 200, 200)'
-                    }}
-                    />
-                  )
-              }
-              Queue
-            </button>
-          </div>
+          <AudioPlayerPlaylistOverlay
+            tracks={tracks}
+            opened={playlistOpened}
+            setOpened={setOpened}
+          />
         </div>
 
       </div>

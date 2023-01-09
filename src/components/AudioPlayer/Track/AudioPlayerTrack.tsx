@@ -6,7 +6,8 @@ import AudioPlayerHeading from './AudioPlayerHeading';
 type Props = {
   audioPlayer: HTMLAudioElement | null,
   isPlaying: boolean,
-  track: TrackType | null
+  track: TrackType | null,
+  opened: boolean
 }
 
 const useStyles = createStyles(() => ({
@@ -16,17 +17,15 @@ const useStyles = createStyles(() => ({
 }));
 
 function AudioPlayerTrack(props: Props) {
-  const { audioPlayer, isPlaying, track } = props;
+  const {
+    audioPlayer, isPlaying, track, opened
+  } = props;
   const disabled = !track; // if there is no track loaded then the component is disabled
   const { classes } = useStyles();
 
   return (
     <div className={classes.container}>
-      {/*
-        Check if the playlist dropdown is open. If it is, then the heading doesn't render,
-        and the Seekbar is vertically centered.
-      */}
-      <AudioPlayerHeading track={track} />
+      <AudioPlayerHeading track={track} opened={opened} />
       <AudioPlayerSeekbar
         isPlaying={isPlaying}
         audioPlayer={audioPlayer}

@@ -6,12 +6,12 @@ import AudioPlayerLyricsOverlay from '../AudioPlayerLyrics';
 
 type Props = {
   track: TrackType | null,
-
+  opened: boolean
 }
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles((theme, params: { opened: boolean }) => ({
   heading: {
-    display: 'flex',
+    display: params.opened ? 'none' : 'flex',
     justifyContent: 'space-between',
     minHeight: '30px', // check height after final design implementation
     width: '100%',
@@ -54,10 +54,10 @@ const useStyles = createStyles((theme) => ({
 const DEEZER_URL = 'https://www.deezer.com/us'; // Move to .env file (?)
 
 function AudioPlayerHeading(props: Props): JSX.Element {
-  const { track } = props;
+  const { track, opened } = props;
 
   const [liked, setLiked] = useState<boolean>(false);
-  const { classes } = useStyles();
+  const { classes } = useStyles({ opened });
 
   return (
     <div className={classes.heading}>
