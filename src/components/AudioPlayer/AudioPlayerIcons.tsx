@@ -1,13 +1,9 @@
-/* eslint-disable no-unused-vars */
 import { createStyles } from '@mantine/core';
 import {
-  IoPlaySkipBackSharp, IoPlaySkipForwardSharp, IoPlaySharp, IoPauseSharp, IoHeartOutline
+  IoPlaySkipBackSharp, IoPlaySkipForwardSharp, IoPlaySharp, IoPauseSharp, IoMusicalNotes
 } from 'react-icons/io5';
-import { TiArrowLoop, TiArrowShuffle } from 'react-icons/ti';
 import { FaChromecast } from 'react-icons/fa';
-import { FiVolume2, FiVolumeX, FiPlus } from 'react-icons/fi';
-import { ImEqualizer } from 'react-icons/im';
-import { BiMicrophone } from 'react-icons/bi';
+import { FiPlus } from 'react-icons/fi';
 
 const useStyles = createStyles((theme) => ({
   supportIcon: {
@@ -18,6 +14,14 @@ const useStyles = createStyles((theme) => ({
   playlistControlIcon: {
     fill: theme.colorScheme === 'dark' ? 'white' : theme.colors.dark[7],
     width: '16px'
+  },
+  playlistPlaceholderIcon: {
+    backgroundColor: 'rgb(223, 222, 228)',
+    borderRadius: '4px',
+    color: 'rgb(175, 175, 175)',
+    height: '28px',
+    padding: '6px',
+    width: '28px'
   }
 }));
 
@@ -73,6 +77,11 @@ export function ReportIcon() {
       <path d="M4 12v3l3-3h8V1H1v11h3zm-2-1V2h12v9H6.586L5 12.586V11H2zm10-5H4V5h8v1zM4 8h5V7H4v1z" />
     </SupportIconWrapper>
   );
+}
+
+export function PlaceholderPlaylistIcon() {
+  const { classes } = useStyles();
+  return <IoMusicalNotes className={classes.playlistPlaceholderIcon} />;
 }
 
 function ShuffleIcon() {
