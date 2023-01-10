@@ -9,6 +9,11 @@ type Props = {
   children: React.ReactNode | null
 }
 
+type SupportMenuProps = {
+  children: React.ReactNode | null,
+  position: 'default' | ''
+};
+
 const useStyles = createStyles((theme) => ({
   // Menu default style override
   dropdown: {
@@ -97,7 +102,7 @@ function AddTrackMenu(props: Props): JSX.Element {
         {children}
       </Menu.Target>
       <Menu.Dropdown>
-        <SupportMenu>
+        <SupportMenu position="default">
           <Menu.Label className={classes.title}>
             <IoIosArrowBack style={{ marginRight: '0.5rem' }} />
             Back
@@ -123,12 +128,16 @@ function AddTrackMenu(props: Props): JSX.Element {
   );
 }
 
-function SupportMenu(props: { children: React.ReactNode | null }): JSX.Element {
-  const { children } = props;
+function SupportMenu(props: SupportMenuProps): JSX.Element {
+  const { children, position } = props;
   const { classes } = useStyles();
 
   return (
-    <Menu classNames={classes} position="left-start" transition="pop-top-right">
+    <Menu
+      classNames={classes}
+      position={position === 'default' ? 'left-start' : 'right'}
+      transition={position === 'default' ? 'pop-top-right' : 'pop'}
+    >
       <Menu.Target>
         {children}
       </Menu.Target>
@@ -158,4 +167,4 @@ function SupportMenu(props: { children: React.ReactNode | null }): JSX.Element {
   );
 }
 
-export default AddTrackMenu;
+export { AddTrackMenu, SupportMenu };
