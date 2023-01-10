@@ -1,8 +1,9 @@
-import {
-  Drawer, Image, Text, createStyles
-} from '@mantine/core';
+import { Drawer, createStyles } from '@mantine/core';
 import { TrackType } from '../../../types/AudioPlayer.types';
+import { AudioPlayerButton } from '../AudioPlayerButton';
 import AudioPlayerPlaylistButton from '../AudioPlayerPlaylistButton';
+import TrackInformation from './TrackInformation';
+import PlaylistMainContainer from './MainContainer';
 
 type Props = {
   tracks: {
@@ -19,58 +20,37 @@ const useStyles = createStyles((theme) => ({
     width: '100vw'
   },
   drawer: {
-    background: `linear-gradient(233.13deg, rgb(246, 105, 60) 0%, ${theme.colors.red[6]} 89.29%)`,
+    background: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0],
     maxWidth: '100vw',
-    padding: '2.5rem !important',
+    padding: '0 2.5rem 80px 2.5rem !important',
     width: '100vw'
   },
-  header: {
-    justifyContent: 'flex-start',
-    margin: '0'
-  },
-  closeButton: {
-    borderRadius: '50%',
-    color: 'white',
-    height: '40px',
-    width: '40px',
-
-    '&:hover': {
-      backgroundColor: '#ffffff2e'
-    },
-
-    '& svg': {
-      height: '32px',
-      width: '32px'
-    }
-  },
   body: {
-    display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    height: 'calc(100% - 80px)',
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
     padding: '0 4rem 80px 4rem'
   },
-  cover: {
-    filter: 'drop-shadow(rgba(0, 0, 0, 0.1) 0px 5.2392px 20.9569px) drop-shadow(rgba(0, 0, 0, 0.1) 0px 20.9569px 41.9137px)'
+  headerOriginal: {
+    display: 'none'
   },
-  lyrics: {
-    color: 'white',
-    opacity: '0.65',
-    textAlign: 'center',
-    transition: '0.1s',
-    width: '500px',
-
-    '&:hover': {
-      cursor: 'pointer',
-      opacity: '1'
-    }
+  headerNew: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    width: '100%',
+    height: '54px',
+    alignItems: 'center'
+  },
+  playlistBody: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'space-between'
   }
 }));
 
 function AudioPlayerPlaylistOverlay(props: Props): JSX.Element {
   const { tracks, opened, setOpened } = props;
-
-  // const [opened, setOpened] = useState(false);
   const { classes } = useStyles();
 
   return (
@@ -79,8 +59,7 @@ function AudioPlayerPlaylistOverlay(props: Props): JSX.Element {
         classNames={{
           root: classes.root,
           drawer: classes.drawer,
-          header: classes.header,
-          closeButton: classes.closeButton,
+          header: classes.headerOriginal,
           body: classes.body
         }}
         position="bottom"
@@ -90,18 +69,20 @@ function AudioPlayerPlaylistOverlay(props: Props): JSX.Element {
         size="full"
         zIndex={3}
       >
-        <Image
-          className={classes.cover}
-          src={tracks.current?.albumCover}
-          width={320}
-          radius={16}
-        />
-        <Text
-          className={classes.lyrics}
-          size={42}
-          fw="bolder"
-        >Playlist
-        </Text>
+        <div className={classes.headerNew}>
+          <AudioPlayerButton
+            tooltip="Close"
+            isDisable={false}
+            type="close"
+            isActive={false}
+            size="m"
+            onClickHandler={() => setOpened(false)}
+          />
+        </div>
+        <div className={classes.playlistBody}>
+          <TrackInformation track={tracks.current} />
+          <PlaylistMainContainer />
+        </div>
       </Drawer>
 
       <AudioPlayerPlaylistButton
