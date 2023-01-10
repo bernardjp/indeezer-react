@@ -1,11 +1,12 @@
 import * as PropTypes from 'prop-types';
 import {
-  Card, Image, Badge, Text, Group, createStyles, Avatar
+  Card, Image, Text, Group, createStyles, Avatar
 } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import { FaPlay } from 'react-icons/fa';
 import { BsEye } from 'react-icons/bs';
 import RoundButton from '../Utils/RoundButton';
+import StyledBadge from '../Utils/StyledBadge';
 import { useModalImage, ModalImagePropType } from '../Modal/ModalImage';
 
 export type CardInfoType = {
@@ -71,10 +72,6 @@ const useStyles = createStyles((theme, align: 'center' | '') => ({
     alignItems: align,
     display: 'flex',
     flexDirection: 'column'
-  },
-  explicitBadge: {
-    marginTop: '0.5rem',
-    maxWidth: 'fit-content'
   }
 }));
 
@@ -115,10 +112,7 @@ function TemplateCard(props: TemplateCardPropType) {
       <Card.Section className={classes.textContainer}>
         <Text size="md" lineClamp={1} align={isRound ? 'center' : 'left'}>{card.title}</Text>
         <Text size="xs" lineClamp={2} color="dimmed" align={isRound ? 'center' : 'left'}>{card.info}</Text>
-        {
-          isExplicit
-            && <Badge className={classes.explicitBadge} color="gray" radius="sm" variant="outline">EXPLICIT</Badge>
-        }
+        {isExplicit && <StyledBadge text="EXPLICIT" variant="outline" />}
       </Card.Section>
     </Card>
   );
