@@ -157,6 +157,14 @@ function LyricsIcon() {
   );
 }
 
+function MoreOptionsIcon() {
+  return (
+    <PlaylistControlIcons>
+      <path d="M5 8.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm3.5 1.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+    </PlaylistControlIcons>
+  );
+}
+
 function CloseIcon() {
   return (
     <PlaylistControlIcons>
@@ -181,7 +189,8 @@ const icons = {
   like_empty: <LikeTrackIcon />,
   like_full: <LikeTrackFullIcon />,
   add: <FiPlus style={{ fontSize: '1.2rem' }} />,
-  close: <CloseIcon />
+  close: <CloseIcon />,
+  options: <MoreOptionsIcon />
 };
 
 export default icons;
