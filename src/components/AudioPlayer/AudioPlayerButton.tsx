@@ -4,7 +4,7 @@ import AudioPlayerTooltip from './AudioPlayerTootip';
 import AudioPlayerVolume from './AudioPlayerVolume';
 import AudioPlayerIcons from './AudioPlayerIcons';
 import AudioPlayerEqualizer from './AudioPlayerEQMenu';
-import AudioPlayerAddTrack from './AudioPlayerAddMenu';
+import { AddTrackMenu, SupportMenu } from './AudioPlayerAddMenu';
 import useVolume from './useVolume';
 
 type ButtonProps = {
@@ -151,14 +151,34 @@ function AudioPlayerAddTrackButton(props: MenuButtonProps): JSX.Element {
   const { classes } = useStyles({ size });
 
   return (
-    <AudioPlayerAddTrack>
+    <AddTrackMenu>
       <Button
         className={classes.button}
         disabled={isDisable}
       >
         {AudioPlayerIcons.add}
       </Button>
-    </AudioPlayerAddTrack>
+    </AddTrackMenu>
+  );
+}
+
+function AudioPlayerOptionsButton(props: MenuButtonProps): JSX.Element {
+  const {
+    isDisable,
+    size
+  } = props;
+
+  const { classes } = useStyles({ size });
+
+  return (
+    <SupportMenu position="">
+      <Button
+        className={classes.button}
+        disabled={isDisable}
+      >
+        {AudioPlayerIcons.options}
+      </Button>
+    </SupportMenu>
   );
 }
 
@@ -166,5 +186,6 @@ export {
   AudioPlayerButton,
   AudioPlayerVolumeButton,
   AudioPlayerEQButton,
-  AudioPlayerAddTrackButton
+  AudioPlayerAddTrackButton,
+  AudioPlayerOptionsButton
 };
