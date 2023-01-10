@@ -45,7 +45,9 @@ const useStyles = createStyles((theme) => ({
   playlistBody: {
     display: 'flex',
     width: '100%',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    height: '100%',
+    paddingTop: '2rem'
   }
 }));
 
