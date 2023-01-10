@@ -157,6 +157,14 @@ function LyricsIcon() {
   );
 }
 
+function CloseIcon() {
+  return (
+    <PlaylistControlIcons>
+      <path d="m8 11.5 6-6.277-.69-.723L8 10.054 2.691 4.5l-.69.723L8 11.5z" />
+    </PlaylistControlIcons>
+  );
+}
+
 const icons = {
   play: <IoPlaySharp style={{ paddingLeft: '3px' }} />,
   pause: <IoPauseSharp />,
@@ -172,7 +180,8 @@ const icons = {
   lyrics: <LyricsIcon />,
   like_empty: <LikeTrackIcon />,
   like_full: <LikeTrackFullIcon />,
-  add: <FiPlus style={{ fontSize: '1.2rem' }} />
+  add: <FiPlus style={{ fontSize: '1.2rem' }} />,
+  close: <CloseIcon />
 };
 
 export default icons;
