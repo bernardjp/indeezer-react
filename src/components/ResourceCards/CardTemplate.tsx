@@ -6,7 +6,7 @@ import { useHover } from '@mantine/hooks';
 import { FaPlay } from 'react-icons/fa';
 import { BsEye } from 'react-icons/bs';
 import RoundButton from '../Utils/RoundButton';
-import StyledBadge from '../Utils/StyledBadge';
+import { StyledBadge } from '../Utils/StyledBadge';
 import { useModalImage, ModalImagePropType } from '../Modal/ModalImage';
 
 export type CardInfoType = {

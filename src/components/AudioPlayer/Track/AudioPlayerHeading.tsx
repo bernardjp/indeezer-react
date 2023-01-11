@@ -3,6 +3,7 @@ import { createStyles } from '@mantine/core';
 import { TrackType } from '../../../types/AudioPlayer.types';
 import { AudioPlayerButton, AudioPlayerAddTrackButton } from '../AudioPlayerButton';
 import AudioPlayerLyricsOverlay from '../AudioPlayerLyrics';
+import { StyledShortBadge } from '../../Utils/StyledBadge';
 
 type Props = {
   track: TrackType | null,
@@ -64,7 +65,7 @@ function AudioPlayerHeading(props: Props): JSX.Element {
       {track && (
       <>
         <div className={classes.title}>
-          {track?.explicitLyrics && <span className={classes.label}>E</span> }
+          {track?.explicitLyrics && <StyledShortBadge text="E" /> }
           <a
             className={classes.link}
             href={`${DEEZER_URL}/album/${track?.albumID}`}
