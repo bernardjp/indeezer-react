@@ -30,7 +30,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    padding: '0 4rem 80px 4rem'
+    padding: '0 2.5rem 80px 2.5rem'
   },
   headerOriginal: {
     display: 'none'
@@ -83,14 +83,16 @@ function AudioPlayerPlaylistOverlay(props: Props): JSX.Element {
         </div>
         <div className={classes.playlistBody}>
           <TrackInformation track={tracks.current} />
-          <PlaylistMainContainer />
+          <PlaylistMainContainer currentTrack={tracks.current} />
         </div>
       </Drawer>
 
       <AudioPlayerPlaylistButton
         active={opened}
         currentTrack={tracks.current}
-        onClickHandler={() => setOpened((val) => !val)}
+        onClickHandler={() => {
+          if (tracks.current) setOpened((val) => !val);
+        }}
       />
     </>
   );
