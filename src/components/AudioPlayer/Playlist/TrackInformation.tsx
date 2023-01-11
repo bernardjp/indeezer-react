@@ -7,7 +7,7 @@ import AudioPlayerLyricsOverlay from '../AudioPlayerLyrics';
 import {
   AudioPlayerAddTrackButton, AudioPlayerButton, AudioPlayerOptionsButton
 } from '../AudioPlayerButton';
-import StyledBadge from '../../Utils/StyledBadge';
+import { StyledBadge } from '../../Utils/StyledBadge';
 
 type Props = {
   track: TrackType | null
@@ -34,7 +34,7 @@ const useStyles = createStyles(() => ({
     }
   },
   badgeContainer: {
-    marginTop: '0.5rem'
+    // marginTop: '0.5rem'
   }
 }));
 
@@ -48,7 +48,7 @@ function TrackInformation(props: Props): JSX.Element {
     <div className={classes.container}>
       <Image
         className={classes.cover}
-        src={track!.albumCover}
+        src={track?.albumCover}
         width={320}
         radius={4}
       />
