@@ -6,6 +6,7 @@ export type TrackType = {
   artistID: number,
   artistName: string,
   explicitLyrics: boolean,
+  duration: number,
   source: string,
   trackID: number,
   trackTitle: string

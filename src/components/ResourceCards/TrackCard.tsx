@@ -52,6 +52,7 @@ function TrackCard(props: { data: TrackCardPropType }) {
       albumTitle: data.album.title,
       artistID: data.artist.id,
       artistName: data.artist.name,
+      duration: data.duration,
       explicitLyrics: data.explicit_lyrics,
       trackID: data.id,
       trackTitle: data.title,
