@@ -173,6 +173,14 @@ function CloseIcon() {
   );
 }
 
+function CrossIcon() {
+  return (
+    <PlaylistControlIcons>
+      <path d="m8.002 8.71 6.295 6.294.707-.707L8.71 8.002l6.294-6.295L14.297 1 8.002 7.295 1.707 1 1 1.707l6.295 6.295L1 14.297l.707.707L8.002 8.71z" />
+    </PlaylistControlIcons>
+  );
+}
+
 const icons = {
   play: <IoPlaySharp style={{ paddingLeft: '3px' }} />,
   pause: <IoPauseSharp />,
@@ -190,7 +198,8 @@ const icons = {
   like_full: <LikeTrackFullIcon />,
   add: <FiPlus style={{ fontSize: '1.2rem' }} />,
   close: <CloseIcon />,
-  options: <MoreOptionsIcon />
+  options: <MoreOptionsIcon />,
+  cross: <CrossIcon />
 };
 
 export default icons;
