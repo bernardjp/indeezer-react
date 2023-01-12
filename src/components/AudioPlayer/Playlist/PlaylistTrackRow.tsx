@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import {
   Image, createStyles, Text, Group
 } from '@mantine/core';
@@ -6,6 +6,8 @@ import { TrackType } from '../../../types/AudioPlayer.types';
 import { StyledShortBadge } from '../../Utils/StyledBadge';
 import { AudioPlayerButton, AudioPlayerOptionsButton } from '../AudioPlayerButton';
 import AudioPlayerLyricsOverlay from '../AudioPlayerLyrics';
+import getFormatedTimer from '../../../utils/timeFormat';
+import { PlaylistContext } from '../../Context/PlaylistContext';
 
 type Props = {
   track: TrackType,
@@ -38,10 +40,11 @@ const useStyles = createStyles((theme) => ({
     width: '-moz-available' // Check attribute for other vendors
   },
   buttonContainer: {
-    gap: '7px'
-    // minWidth: '112px'
+    gap: '7px',
+    minWidth: '112px'
   },
   titleText: {
+    fontSize: '15px',
     paddingBottom: '1px',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -56,6 +59,9 @@ const useStyles = createStyles((theme) => ({
     // minWidth: '112px',
     width: '6.75rem',
     marginLeft: '2rem'
+  },
+  active: {
+    color: theme.colors.red[5]
   }
 }));
 
@@ -64,15 +70,18 @@ function PlaylistTrackRow(props: Props): JSX.Element {
 
   // TO-DO: Move the state. Consider using state management library
   const [liked, setLiked] = useState(false);
+  const { removeTrack } = useContext(PlaylistContext);
 
   const { classes, cx } = useStyles();
 
   return (
-    <li className={classes.container}>
+    <li className={classes.container} draggable>
       <div className={classes.trackTitle}>
         <Image src={track.albumThumbnail} height={40} width={40} radius={4} />
         <Group className={classes.textContainer}>
-          <Text className={classes.titleText} color={isCurrent ? 'red' : ''}>
+          <Text
+            className={cx(classes.titleText, { [classes.active]: isCurrent })}
+          >
             {track.trackTitle}
           </Text>
           {/* TO.DO: Set tooltip compatibility */}
@@ -95,22 +104,24 @@ function PlaylistTrackRow(props: Props): JSX.Element {
         component="a"
         href={`https://www.deezer.com/us/artist/${track?.artistID}`}
         target="_blank"
-        className={cx(classes.titleText, classes.artistName)}
-        color={isCurrent ? 'red' : ''}
+        className={cx(classes.titleText, classes.artistName, { [classes.active]: isCurrent })}
       >
         {track.artistName}
       </Text>
-      <Text style={{ width: '40px', marginLeft: '2rem' }}>
-        00:00
+      <Text style={{
+        width: '40px', marginLeft: '2rem', color: 'gray', fontSize: '14px'
+      }}
+      >
+        {getFormatedTimer(track.duration)}
       </Text>
-      <div style={{ marginLeft: '2rem' }}>
+      <div style={{ marginLeft: '2rem', opacity: '0.7' }}>
         <AudioPlayerButton
-          tooltip="Close"
+          tooltip=""
           isDisable={false}
-          type="close"
+          type="cross"
           isActive={false}
           size="m"
-          onClickHandler={() => console.log('Remove Track')}
+          onClickHandler={() => removeTrack(track.trackID)}
         />
       </div>
     </li>
