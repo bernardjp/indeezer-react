@@ -8,7 +8,7 @@ import { AddTrackMenu, SupportMenu } from './AudioPlayerAddMenu';
 import useVolume from './useVolume';
 
 type ButtonProps = {
-  type: 'play' | 'pause' | 'next' | 'prev'| 'loop_list' | 'loop_track' | 'shuffle' | 'share' | 'eq' | 'lyrics' | 'like_empty' | 'like_full' | 'add' | 'close',
+  type: 'play' | 'pause' | 'next' | 'prev'| 'loop_list' | 'loop_track' | 'shuffle' | 'share' | 'eq' | 'lyrics' | 'like_empty' | 'like_full' | 'add' | 'close' | 'cross',
   isDisable: boolean,
   isActive: boolean,
   size: 'sm' | 'm' | 'lg',
