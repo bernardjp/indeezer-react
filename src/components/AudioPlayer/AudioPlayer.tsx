@@ -1,15 +1,13 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
-import { useState, useRef } from 'react';
+import { useState, useContext } from 'react';
 import useAudioPlayer from './useAudioPlayer';
 import { AudioPlayerButton, AudioPlayerVolumeButton, AudioPlayerEQButton } from './AudioPlayerButton';
 import AudioPlayerTrack from './Track/AudioPlayerTrack';
 import AudioPlayerPlaylistOverlay from './Playlist/PlaylistOverlay';
+import { AudioPlayerContext } from '../Context/AudioPlayerContext';
 
 function AudioPlayer() {
-  // CONSIDERATION: Move the useAudioPlayer inside each button to avoid re-rendering
-  // the whole component. e.g: togglePlaying --> play_button, toggleShuffle --> shuffle_list
-  const audioPlayer = useRef<HTMLAudioElement>(null);
+  const audioPlayer = useContext(AudioPlayerContext);
   const {
     tracks,
     isPlaying,
@@ -20,7 +18,7 @@ function AudioPlayer() {
     toggleShuffle,
     nextTrack,
     prevTrack
-  } = useAudioPlayer({ audioPlayer: audioPlayer.current });
+  } = useAudioPlayer();
 
   const [playlistOpened, setOpened] = useState(false);
 
@@ -28,11 +26,8 @@ function AudioPlayer() {
     <div style={{ width: '100%' }}>
       {/* Core Audioplayer. Hide after development */}
       <div>
-        <audio ref={audioPlayer} autoPlay={isPlaying} loop={isLooping === 'track' || false}>
-          <source
-            src="#"
-            type="audio/mpeg"
-          />
+        <audio ref={audioPlayer}>
+          <source src="#" type="audio/mpeg" />
           <track kind="captions" />
         </audio>
       </div>
@@ -75,7 +70,6 @@ function AudioPlayer() {
 
         {/* Track slide, name, and timers */}
         <AudioPlayerTrack
-          audioPlayer={audioPlayer.current}
           track={tracks.current}
           isPlaying={isPlaying}
           opened={playlistOpened}
@@ -107,7 +101,7 @@ function AudioPlayer() {
                     : 'Turn off repeat'
               }
               size="m"
-              type={isLooping === 'list' ? 'loop_track' : 'loop_list'}
+              type={isLooping === 'track' ? 'loop_track' : 'loop_list'}
               onClickHandler={() => toggleLooping()}
               isDisable={false}
               isActive={Boolean(isLooping)}
@@ -121,7 +115,6 @@ function AudioPlayer() {
               isActive={isShuffled}
             />
             <AudioPlayerVolumeButton
-              audioPlayer={audioPlayer?.current}
               size="m"
               isDisable={false}
             />

@@ -1,12 +1,17 @@
-import { useState, useEffect, useRef } from 'react';
+import {
+  useState, useEffect, useRef, useContext
+} from 'react';
+import { AudioPlayerContext } from '../Context/AudioPlayerContext';
 
 type Props = {
-  audioPlayer: HTMLAudioElement | null,
   isPlaying: boolean
 }
 
 function useTrackSlider(props: Props) {
-  const { audioPlayer, isPlaying } = props;
+  const audioPlayerRef = useContext(AudioPlayerContext);
+  const audioPlayer = audioPlayerRef!.current;
+
+  const { isPlaying } = props;
   const [duration, setDuration] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const animationRef = useRef<number>(0);
