@@ -4,7 +4,6 @@ import AudioPlayerSeekbar from './AudioPlayerSeekbar';
 import AudioPlayerHeading from './AudioPlayerHeading';
 
 type Props = {
-  audioPlayer: HTMLAudioElement | null,
   isPlaying: boolean,
   track: TrackType | null,
   opened: boolean
@@ -17,9 +16,7 @@ const useStyles = createStyles(() => ({
 }));
 
 function AudioPlayerTrack(props: Props) {
-  const {
-    audioPlayer, isPlaying, track, opened
-  } = props;
+  const { isPlaying, track, opened } = props;
   const disabled = !track; // if there is no track loaded then the component is disabled
   const { classes } = useStyles();
 
@@ -28,7 +25,6 @@ function AudioPlayerTrack(props: Props) {
       <AudioPlayerHeading track={track} opened={opened} />
       <AudioPlayerSeekbar
         isPlaying={isPlaying}
-        audioPlayer={audioPlayer}
         disabled={disabled}
       />
     </div>

@@ -1,8 +1,7 @@
-import { useEffect, useState, useRef } from 'react';
-
-type Props = {
-  audioPlayer: HTMLAudioElement | null
-}
+import {
+  useEffect, useState, useRef, useContext
+} from 'react';
+import { AudioPlayerContext } from '../Context/AudioPlayerContext';
 
 type useVolumeHandler = {
   volume: number,
@@ -10,8 +9,9 @@ type useVolumeHandler = {
   toggleMute: () => void
 }
 
-const useVolume = (props: Props): useVolumeHandler => {
-  const { audioPlayer } = props;
+const useVolume = (): useVolumeHandler => {
+  const audioPlayerRef = useContext(AudioPlayerContext);
+  const audioPlayer = audioPlayerRef?.current;
   const DEFAULT_VALUE = 10;
 
   const lastValue = useRef(DEFAULT_VALUE);

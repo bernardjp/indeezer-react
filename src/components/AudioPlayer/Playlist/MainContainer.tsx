@@ -20,7 +20,6 @@ function PlaylistMainContainer(props: Props): JSX.Element {
   const { playlist } = useContext(PlaylistContext);
   const { classes } = useStyles();
 
-  console.log(playlist);
   return (
     <div className={classes.container}>
       <div>Playlist</div>

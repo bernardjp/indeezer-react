@@ -20,7 +20,6 @@ type FullButtonProps = ButtonProps & {
 }
 
 type VolumeButtonProps = {
-  audioPlayer: HTMLAudioElement | null,
   isDisable: boolean,
   size: 'sm' | 'm' | 'lg'
 }
@@ -94,7 +93,6 @@ function AudioPlayerButton(props: FullButtonProps): JSX.Element {
 // Unique Button Component design to handle the volume input.
 function AudioPlayerVolumeButton(props: VolumeButtonProps): JSX.Element {
   const {
-    audioPlayer,
     isDisable,
     size
   } = props;
@@ -103,7 +101,7 @@ function AudioPlayerVolumeButton(props: VolumeButtonProps): JSX.Element {
     volume,
     setVolume,
     toggleMute
-  } = useVolume({ audioPlayer });
+  } = useVolume();
 
   const { classes } = useStyles({ size });
 

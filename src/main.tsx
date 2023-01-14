@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import StyleProvider from './components/StyleProvider/StyleProvider';
 import QueryProvider from './components/QueryProvider/QueryProvider';
 import { PlaylistContextProvider } from './components/Context/PlaylistContext';
+import { AudioPlayerContextProvider } from './components/Context/AudioPlayerContext';
 import './styles/index.css';
 import App from './App';
 
@@ -16,7 +17,9 @@ root.render(
       <StyleProvider>
         <QueryProvider>
           <PlaylistContextProvider>
-            <App />
+            <AudioPlayerContextProvider>
+              <App />
+            </AudioPlayerContextProvider>
           </PlaylistContextProvider>
         </QueryProvider>
       </StyleProvider>

@@ -4,7 +4,6 @@ import useTrackSlider from '../useTrackSlider';
 import getFormatedTimer from '../../../utils/timeFormat';
 
 type Props = {
-  audioPlayer: HTMLAudioElement | null,
   disabled: boolean,
   isPlaying: boolean
 }
@@ -59,8 +58,8 @@ const useStyles = createStyles((theme, params: { disabled: boolean, hovered: boo
 }));
 
 function AudioPlayerSeekbar(props: Props): JSX.Element {
-  const { audioPlayer, disabled, isPlaying } = props;
-  const { currentTime, duration, onChangeHandler } = useTrackSlider({ audioPlayer, isPlaying });
+  const { disabled, isPlaying } = props;
+  const { currentTime, duration, onChangeHandler } = useTrackSlider({ isPlaying });
 
   const { hovered, ref } = useHover();
   const { classes } = useStyles({ disabled, hovered });

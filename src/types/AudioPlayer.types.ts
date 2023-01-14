@@ -11,3 +11,5 @@ export type TrackType = {
   trackID: number,
   trackTitle: string
 }
+
+export type AudioPlayerElementType = HTMLAudioElement | null | undefined;
