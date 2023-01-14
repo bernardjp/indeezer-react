@@ -1,9 +1,11 @@
+import { useEffect, useContext } from 'react';
 import { Drawer, createStyles } from '@mantine/core';
 import { TrackType } from '../../../types/AudioPlayer.types';
 import { AudioPlayerButton } from '../AudioPlayerButton';
 import AudioPlayerPlaylistButton from '../AudioPlayerPlaylistButton';
 import TrackInformation from './TrackInformation';
 import PlaylistMainContainer from './MainContainer';
+import { PlaylistContext } from '../../Context/PlaylistContext';
 
 type Props = {
   tracks: {
@@ -53,7 +55,12 @@ const useStyles = createStyles((theme) => ({
 
 function AudioPlayerPlaylistOverlay(props: Props): JSX.Element {
   const { tracks, opened, setOpened } = props;
+  const { playlist } = useContext(PlaylistContext);
   const { classes } = useStyles();
+
+  useEffect(() => {
+    if (playlist.length === 0) setOpened(false);
+  }, [playlist]);
 
   return (
     <>
