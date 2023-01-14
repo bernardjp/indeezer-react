@@ -1,16 +1,16 @@
+/* eslint-disable no-unused-vars */
 import {
   useState, useRef, useEffect, useContext
 } from 'react';
 import { TrackType } from '../../types/AudioPlayer.types';
 import { PlaylistContext } from '../Context/PlaylistContext';
 import { shuffleArray } from '../Context/usePlaylistContext';
+import { AudioPlayerContext } from '../Context/AudioPlayerContext';
 
-type Props = {
-  audioPlayer: HTMLAudioElement | null
-}
+const useAudioPlayer = () => {
+  const audioPlayerRef = useContext(AudioPlayerContext);
+  const audioPlayer = audioPlayerRef?.current;
 
-const useAudioPlayer = (props: Props) => {
-  const { audioPlayer } = props;
   const { playlist } = useContext(PlaylistContext);
 
   // States
@@ -40,17 +40,31 @@ const useAudioPlayer = (props: Props) => {
       setOrder();
       updateTracks();
       setTrackSource();
+
+      setVolume(10);
+
       setPlay(true);
-      setVolume(10); // Set to 50 in prod..
+      audioPlayer!.autoplay = true;
     }
   }, [playlist]);
 
   // This effect is checking on playlist changes.
   // Update the order of the tracks in the playlist when the latter is updated.
   useEffect(() => {
-    isShuffled ? shuffleOrder() : setOrder();
+    // 1- Updates the order to include the new track
+    setOrder();
+
+    // 2- If is shuffled the rearrange the rest of the order list.
+    if (isShuffled) shuffleOrder();
+
+    // 3- Update tracks accordingly
     updateTracks();
   }, [isShuffled, playlist]);
+
+  // This effect updates the track when the looping option is changed
+  useEffect(() => {
+    updateTracks();
+  }, [isLooping, playlist]);
 
   // This effect controls the behavior of the audioplayer when the track ends.
   useEffect(() => {
@@ -58,7 +72,8 @@ const useAudioPlayer = (props: Props) => {
 
     function trackEndHandler(): void {
       // Checks if it is the last track of the playlist.
-      const isLastTrack = order.current.indexOf(index.current) === (order.current.length - 1);
+      // const isLastTrack = order.current.indexOf(index.current) === (order.current.length - 1);
+      const isLastTrack = index.current === (order.current.length - 1);
 
       // Stop reproducing audio if its the last track of the playlist
       // and the loop option is set to disable
@@ -76,6 +91,7 @@ const useAudioPlayer = (props: Props) => {
         updateTracks();
         setTrackSource();
         setPlay(true);
+        audioPlayer!.autoplay = true;
 
         return;
       }
@@ -92,12 +108,27 @@ const useAudioPlayer = (props: Props) => {
     return () => audioPlayer?.removeEventListener('ended', trackEndHandler);
   }, [isLooping, isShuffled, playlist]);
 
+  // This effect handles the removal of tracks from the playlist
+  useEffect(() => {
+    // IF the track removed is the last track of the playlist then reduce the index counter
+    if (index.current === order.current.length && index.current !== 0) {
+      index.current -= 1;
+    }
+
+    updateTracks();
+
+    // If the track removed is the current track then set the new track source
+    if (!playlist.find((track) => track.trackID === tracks.current?.trackID)) {
+      setTrackSource();
+    }
+  }, [playlist, index.current]);
+
   function updateTracks(): void {
-    if (isLooping) {
+    if (isLooping === 'list') {
       // if the list is looped then the value of the track object changes.
       // the next/prev nav-buttons are only disabled if the list contains just one track.
       setTracks({
-        current: playlist[index.current],
+        current: playlist[order.current[index.current]],
         nextDisable: (order.current.length === 0),
         prevDisable: (order.current.length === 0)
       });
@@ -106,16 +137,28 @@ const useAudioPlayer = (props: Props) => {
       // value on the "order" array. This value is valid even if the "order" array is shuffled.
       // NOTE: During the first render the current index is -1 because the array is empty,
       // matching out current array's length (0 - 1).
+
+      // console.log(index.current, order.current.length - 1);
+      // console.log(index.current, order.current);
+
       setTracks({
-        current: playlist[order.current.indexOf(index.current)],
-        nextDisable: (order.current.indexOf(index.current) === order.current.length - 1),
+        current: playlist[order.current[index.current]],
+        nextDisable: order.current.length === 0 || (index.current === (order.current.length - 1)),
         prevDisable: (index.current === 0)
       });
     }
   }
 
   function setTrackSource(): void {
-    audioPlayer!.src = playlist[order.current.indexOf(index.current)].source;
+    if (!audioPlayer) return;
+
+    // IF the playlist is empty set the audioplayer src value to the default --> ('')
+    if (playlist.length === 0) {
+      audioPlayer!.src = '';
+      return;
+    }
+
+    audioPlayer!.src = playlist[order.current[index.current]].source;
   }
 
   function setVolume(val: number): void {
@@ -140,16 +183,20 @@ const useAudioPlayer = (props: Props) => {
     // this ensures the list navigation keeps working on list-loops.
     switch (isLooping) {
       case false:
-        setLoop('track');
-        break;
-      case 'track':
+        audioPlayer!.loop = false;
         setLoop('list');
         break;
       case 'list':
+        audioPlayer!.loop = true;
+        setLoop('track');
+        break;
+      case 'track':
+        audioPlayer!.loop = false;
         setLoop(false);
         break;
 
       default:
+        audioPlayer!.loop = false;
         setLoop(false);
         break;
     }
@@ -170,7 +217,7 @@ const useAudioPlayer = (props: Props) => {
     // the next index to 0 so the list starts again.
     if (isLooping && order.current.length - 1 === index.current) {
       index.current = 0;
-      shuffleOrder();
+      // shuffleOrder();
     } else {
       index.current += 1;
     }
@@ -200,8 +247,6 @@ const useAudioPlayer = (props: Props) => {
   }
 
   function resumePlaying(): void {
-    // console.log(tracks.current?.trackTitle);
-
     audioPlayer!.play();
     audioPlayer!.autoplay = true;
 
@@ -216,10 +261,6 @@ const useAudioPlayer = (props: Props) => {
     const shuffledOrder = slice.concat(shuffleArray(originalOrder));
 
     order.current = shuffledOrder;
-
-    console.log(order.current);
-    console.log(index.current);
-    console.log('shuffled rest', shuffledOrder);
   }
 
   return {
