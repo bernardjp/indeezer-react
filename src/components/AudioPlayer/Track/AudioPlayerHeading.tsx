@@ -4,15 +4,15 @@ import { TrackType } from '../../../types/AudioPlayer.types';
 import { AudioPlayerButton, AudioPlayerAddTrackButton } from '../AudioPlayerButton';
 import AudioPlayerLyricsOverlay from '../AudioPlayerLyrics';
 import { StyledShortBadge } from '../../Utils/StyledBadge';
+import usePlaylistStore from '../../../store/PlaylistStore';
 
 type Props = {
-  track: TrackType | null,
-  opened: boolean
+  track: TrackType | null
 }
 
-const useStyles = createStyles((theme, params: { opened: boolean }) => ({
+const useStyles = createStyles((theme, params: { isOpen: boolean }) => ({
   heading: {
-    display: params.opened ? 'none' : 'flex',
+    display: params.isOpen ? 'none' : 'flex',
     justifyContent: 'space-between',
     minHeight: '30px', // check height after final design implementation
     width: '100%',
@@ -55,10 +55,11 @@ const useStyles = createStyles((theme, params: { opened: boolean }) => ({
 const DEEZER_URL = 'https://www.deezer.com/us'; // Move to .env file (?)
 
 function AudioPlayerHeading(props: Props): JSX.Element {
-  const { track, opened } = props;
+  const { track } = props;
+  const isOpen = usePlaylistStore((state) => state.isOpen);
 
   const [liked, setLiked] = useState<boolean>(false);
-  const { classes } = useStyles({ opened });
+  const { classes } = useStyles({ isOpen });
 
   return (
     <div className={classes.heading}>
