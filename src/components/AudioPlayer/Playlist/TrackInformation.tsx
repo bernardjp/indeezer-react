@@ -27,6 +27,7 @@ const useStyles = createStyles(() => ({
   },
   text: {
     marginBottom: '0.5rem',
+    textAlign: 'center',
 
     '&:hover': {
       textDecoration: 'underline',

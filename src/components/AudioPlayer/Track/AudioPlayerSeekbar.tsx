@@ -1,12 +1,7 @@
 import { Slider, createStyles } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import useTrackSlider from '../useTrackSlider';
-import getFormatedTimer from '../../../utils/timeFormat';
-
-type Props = {
-  disabled: boolean,
-  isPlaying: boolean
-}
+import { getFormatedTimer } from '../../../utils/timeFormat';
 
 const useStyles = createStyles((theme, params: { disabled: boolean, hovered: boolean }) => ({
   seekbar: {
@@ -57,9 +52,9 @@ const useStyles = createStyles((theme, params: { disabled: boolean, hovered: boo
   }
 }));
 
-function AudioPlayerSeekbar(props: Props): JSX.Element {
-  const { disabled, isPlaying } = props;
-  const { currentTime, duration, onChangeHandler } = useTrackSlider({ isPlaying });
+function AudioPlayerSeekbar(props: { disabled: boolean }): JSX.Element {
+  const { disabled } = props;
+  const { currentTime, duration, onChangeHandler } = useTrackSlider();
 
   const { hovered, ref } = useHover();
   const { classes } = useStyles({ disabled, hovered });

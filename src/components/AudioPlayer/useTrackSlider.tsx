@@ -2,16 +2,14 @@ import {
   useState, useEffect, useRef, useContext
 } from 'react';
 import { AudioPlayerContext } from '../Context/AudioPlayerContext';
+import useAudioPlayerStore from '../../store/AudioPlayerStore';
 
-type Props = {
-  isPlaying: boolean
-}
-
-function useTrackSlider(props: Props) {
+function useTrackSlider() {
   const audioPlayerRef = useContext(AudioPlayerContext);
   const audioPlayer = audioPlayerRef!.current;
 
-  const { isPlaying } = props;
+  const isPlaying = useAudioPlayerStore((state) => state.isPlaying);
+
   const [duration, setDuration] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const animationRef = useRef<number>(0);

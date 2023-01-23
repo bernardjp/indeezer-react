@@ -1,26 +1,31 @@
-import { useState, useContext } from 'react';
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-unused-vars */
+import { useState } from 'react';
 import {
   Image, createStyles, Text, Group
 } from '@mantine/core';
+import { useHover } from '@mantine/hooks';
 import { TrackType } from '../../../types/AudioPlayer.types';
 import { StyledShortBadge } from '../../Utils/StyledBadge';
-import { AudioPlayerButton, AudioPlayerOptionsButton } from '../AudioPlayerButton';
+import { AudioPlayerButton, AudioPlayerOptionsButton, PlaylistTrackControlButton } from '../AudioPlayerButton';
 import AudioPlayerLyricsOverlay from '../AudioPlayerLyrics';
-import getFormatedTimer from '../../../utils/timeFormat';
-import { PlaylistContext } from '../../Context/PlaylistContext';
+import { getFormatedTimer } from '../../../utils/timeFormat';
+import usePlaylistStore from '../../../store/PlaylistStore';
+import useAudioPlayerStore from '../../../store/AudioPlayerStore';
 
 type Props = {
   track: TrackType,
-  isCurrent: boolean
+  trackIndex: number,
+  isCurrent: boolean,
+  onClickHandler: Function
 }
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles((theme, params: { hovered: boolean }) => ({
   container: {
     display: 'flex',
     alignItems: 'center',
     listStyle: 'none',
     height: '56px',
-    // gap: '2rem',
     padding: '0 0.5rem',
 
     '&:hover': {
@@ -31,10 +36,10 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
+    position: 'relative',
     width: '-moz-available' // Check attribute for other vendors
   },
   textContainer: {
-    // minWidth: '240px',
     alignItems: 'baseline',
     flexWrap: 'nowrap',
     width: '-moz-available' // Check attribute for other vendors
@@ -56,9 +61,22 @@ const useStyles = createStyles((theme) => ({
     }
   },
   artistName: {
-    // minWidth: '112px',
     width: '6.75rem',
     marginLeft: '2rem'
+  },
+  trackDuration: {
+    color: 'gray',
+    fontSize: '14px',
+    marginLeft: '2rem',
+    width: '40px'
+  },
+  trackControl: {
+    display: params.hovered ? 'flex' : 'none',
+    background: 'white',
+    color: 'black',
+    left: '3px',
+    position: 'absolute',
+    zIndex: 1
   },
   active: {
     color: theme.colors.red[5]
@@ -66,21 +84,47 @@ const useStyles = createStyles((theme) => ({
 }));
 
 function PlaylistTrackRow(props: Props): JSX.Element {
-  const { track, isCurrent } = props;
+  const {
+    track, trackIndex, isCurrent, onClickHandler
+  } = props;
 
   // TO-DO: Move the state. Consider using state management library
   const [liked, setLiked] = useState(false);
-  const { removeTrack } = useContext(PlaylistContext);
 
-  const { classes, cx } = useStyles();
+  const removeTrack = usePlaylistStore((state) => state.removeTrack);
+  const { isPlaying, togglePlaying } = useAudioPlayerStore((state) => ({
+    isPlaying: state.isPlaying,
+    togglePlaying: state.togglePlaying
+  }));
+
+  const { hovered, ref } = useHover();
+  const { classes, cx } = useStyles({ hovered });
 
   return (
-    <li className={classes.container} draggable>
+    <div className={classes.container} ref={ref} draggable>
       <div className={classes.trackTitle}>
+        {(hovered || isCurrent) && (
+        <PlaylistTrackControlButton
+          size="m"
+          type={!isCurrent ? 'play' : isPlaying ? 'pause' : 'play'}
+          onClickHandler={
+            isCurrent
+              ? () => togglePlaying()
+              : () => onClickHandler(trackIndex)
+            }
+          isDisable={false}
+          isActive={isCurrent && isPlaying}
+        />
+        )}
         <Image src={track.albumThumbnail} height={40} width={40} radius={4} />
         <Group className={classes.textContainer}>
           <Text
             className={cx(classes.titleText, { [classes.active]: isCurrent })}
+            onClick={
+              isCurrent
+                ? () => togglePlaying()
+                : () => onClickHandler(trackIndex)
+              }
           >
             {track.trackTitle}
           </Text>
@@ -108,10 +152,7 @@ function PlaylistTrackRow(props: Props): JSX.Element {
       >
         {track.artistName}
       </Text>
-      <Text style={{
-        width: '40px', marginLeft: '2rem', color: 'gray', fontSize: '14px'
-      }}
-      >
+      <Text className={cx(classes.trackDuration, { [classes.active]: isCurrent })}>
         {getFormatedTimer(track.duration)}
       </Text>
       <div style={{ marginLeft: '2rem', opacity: '0.7' }}>
@@ -124,7 +165,7 @@ function PlaylistTrackRow(props: Props): JSX.Element {
           onClickHandler={() => removeTrack(track.trackID)}
         />
       </div>
-    </li>
+    </div>
   );
 }
 

@@ -1,13 +1,7 @@
 import { createStyles } from '@mantine/core';
-import { TrackType } from '../../../types/AudioPlayer.types';
 import AudioPlayerSeekbar from './AudioPlayerSeekbar';
 import AudioPlayerHeading from './AudioPlayerHeading';
-
-type Props = {
-  isPlaying: boolean,
-  track: TrackType | null,
-  opened: boolean
-}
+import useTracksStore from '../../../store/TracksStore';
 
 const useStyles = createStyles(() => ({
   container: {
@@ -15,18 +9,15 @@ const useStyles = createStyles(() => ({
   }
 }));
 
-function AudioPlayerTrack(props: Props) {
-  const { isPlaying, track, opened } = props;
+function AudioPlayerTrack() {
+  const track = useTracksStore((state) => state.current);
   const disabled = !track; // if there is no track loaded then the component is disabled
   const { classes } = useStyles();
 
   return (
     <div className={classes.container}>
-      <AudioPlayerHeading track={track} opened={opened} />
-      <AudioPlayerSeekbar
-        isPlaying={isPlaying}
-        disabled={disabled}
-      />
+      <AudioPlayerHeading track={track} />
+      <AudioPlayerSeekbar disabled={disabled} />
     </div>
   );
 }
