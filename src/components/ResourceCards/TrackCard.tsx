@@ -1,10 +1,10 @@
+/* eslint-disable no-unused-vars */
 import * as PropTypes from 'prop-types';
-import { useContext } from 'react';
 import { TrackType } from '../../types/AudioPlayer.types';
 import { TrackCardPropType } from '../../types/CardDisplay.types';
 import TemplateCard, { CardInfoType } from './CardTemplate';
 import { ModalImagePropType } from '../Modal/ModalImage';
-import { PlaylistContext } from '../Context/PlaylistContext';
+import usePlaylistStore from '../../store/PlaylistStore';
 
 TrackCard.propTypes = {
   data: PropTypes.shape({
@@ -43,7 +43,8 @@ function TrackCard(props: { data: TrackCardPropType }) {
     alt: `${curatedCardData.title} Playlist Picture`
   };
 
-  const { addTrack } = useContext(PlaylistContext);
+  const addTrack = usePlaylistStore((state) => state.addTrack);
+
   const playButtonHandler = () => {
     const trackData: TrackType = {
       albumID: data.album.id,
