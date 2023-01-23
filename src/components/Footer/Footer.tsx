@@ -1,5 +1,6 @@
 import { Container, createStyles } from '@mantine/core';
 import AudioPlayer from '../AudioPlayer/AudioPlayer';
+import { AudioPlayerContextProvider } from '../Context/AudioPlayerContext';
 
 const useStyles = createStyles((theme) => ({
   footerContainer: {
@@ -23,9 +24,11 @@ function Footer() {
   const { classes } = useStyles();
 
   return (
-    <Container className={classes.footerContainer}>
-      <AudioPlayer />
-    </Container>
+    <AudioPlayerContextProvider>
+      <Container className={classes.footerContainer}>
+        <AudioPlayer />
+      </Container>
+    </AudioPlayerContextProvider>
   );
 }
 
