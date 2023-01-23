@@ -1,21 +1,12 @@
-import { useEffect, useContext } from 'react';
+/* eslint-disable no-unused-vars */
+import { useEffect } from 'react';
 import { Drawer, createStyles } from '@mantine/core';
-import { TrackType } from '../../../types/AudioPlayer.types';
 import { AudioPlayerButton } from '../AudioPlayerButton';
-import AudioPlayerPlaylistButton from '../AudioPlayerPlaylistButton';
+import AudioPlayerPlaylistButton from './AudioPlayerPlaylistButton';
 import TrackInformation from './TrackInformation';
 import PlaylistMainContainer from './MainContainer';
-import { PlaylistContext } from '../../Context/PlaylistContext';
-
-type Props = {
-  tracks: {
-    current: TrackType | null;
-    nextDisable: boolean;
-    prevDisable: boolean;
-  },
-  opened: boolean,
-  setOpened: React.Dispatch<React.SetStateAction<boolean>>
-}
+import usePlaylistStore from '../../../store/PlaylistStore';
+import useTracksStore from '../../../store/TracksStore';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -53,13 +44,17 @@ const useStyles = createStyles((theme) => ({
   }
 }));
 
-function AudioPlayerPlaylistOverlay(props: Props): JSX.Element {
-  const { tracks, opened, setOpened } = props;
-  const { playlist } = useContext(PlaylistContext);
+function AudioPlayerPlaylistOverlay(): JSX.Element {
+  const track = useTracksStore((state) => state.current);
+  const { playlist, isOpen, setOpen } = usePlaylistStore((state) => ({
+    playlist: state.playlist,
+    isOpen: state.isOpen,
+    setOpen: state.setOpen
+  }));
   const { classes } = useStyles();
 
   useEffect(() => {
-    if (playlist.length === 0) setOpened(false);
+    if (playlist.length === 0) setOpen(false);
   }, [playlist]);
 
   return (
@@ -72,8 +67,8 @@ function AudioPlayerPlaylistOverlay(props: Props): JSX.Element {
           body: classes.body
         }}
         position="bottom"
-        opened={opened}
-        onClose={() => setOpened(false)}
+        opened={isOpen}
+        onClose={() => setOpen(false)}
         transitionDuration={500}
         size="full"
         zIndex={3}
@@ -85,20 +80,20 @@ function AudioPlayerPlaylistOverlay(props: Props): JSX.Element {
             type="close"
             isActive={false}
             size="m"
-            onClickHandler={() => setOpened(false)}
+            onClickHandler={() => setOpen(false)}
           />
         </div>
         <div className={classes.playlistBody}>
-          <TrackInformation track={tracks.current} />
-          <PlaylistMainContainer currentTrack={tracks.current} />
+          <TrackInformation track={track} />
+          <PlaylistMainContainer currentTrack={track} />
         </div>
       </Drawer>
 
       <AudioPlayerPlaylistButton
-        active={opened}
-        currentTrack={tracks.current}
+        active={isOpen}
+        currentTrack={track}
         onClickHandler={() => {
-          if (tracks.current) setOpened((val) => !val);
+          if (track) setOpen(!isOpen);
         }}
       />
     </>
