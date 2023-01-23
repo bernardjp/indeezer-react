@@ -1,9 +1,9 @@
 /* eslint-disable no-nested-ternary */
 import { Button, createStyles } from '@mantine/core';
 import AudioPlayerTooltip from './AudioPlayerTootip';
-import AudioPlayerVolume from './AudioPlayerVolume';
+import AudioPlayerVolume from './Controls/AudioPlayerVolume';
 import AudioPlayerIcons from './AudioPlayerIcons';
-import AudioPlayerEqualizer from './AudioPlayerEQMenu';
+import AudioPlayerEqualizer from './Controls/AudioPlayerEQMenu';
 import { AddTrackMenu, SupportMenu } from './AudioPlayerAddMenu';
 import useVolume from './useVolume';
 
@@ -58,6 +58,32 @@ const useStyles = createStyles((theme, params: { size: 'sm' | 'm' | 'lg' }) => (
     '& svg': {
       fill: theme.colors.red[5]
     }
+  },
+  playlistButton: {
+    background: 'white',
+    color: 'black',
+    left: '4px',
+    position: 'absolute',
+    zIndex: 1,
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: '50%',
+    display: 'flex',
+    fontSize: params.size === 'lg' ? '1.8rem' : params.size === 'm' ? '1.2rem' : '1rem',
+    height: params.size === 'lg' ? '48px' : params.size === 'm' ? '32px' : '24px',
+    justifyContent: 'center',
+    padding: '0',
+    textAlign: 'center',
+    width: params.size === 'lg' ? '48px' : params.size === 'm' ? '32px' : '24px',
+    transition: '0.1s',
+
+    '&:hover': {
+      backgroundColor: 'lightgray'
+    }
+  },
+  playlistActive: {
+    outlineOffset: '2px',
+    outline: '2px solid white !important'
   }
 }));
 
@@ -180,10 +206,28 @@ function AudioPlayerOptionsButton(props: MenuButtonProps): JSX.Element {
   );
 }
 
+function PlaylistTrackControlButton(props: ButtonProps): JSX.Element {
+  const {
+    size, type, isDisable, isActive, onClickHandler
+  } = props;
+  const { classes, cx } = useStyles({ size });
+
+  return (
+    <Button
+      className={cx(classes.playlistButton, { [classes.playlistActive]: isActive })}
+      onClick={onClickHandler}
+      disabled={isDisable}
+    >
+      {AudioPlayerIcons[type]}
+    </Button>
+  );
+}
+
 export {
   AudioPlayerButton,
   AudioPlayerVolumeButton,
   AudioPlayerEQButton,
   AudioPlayerAddTrackButton,
-  AudioPlayerOptionsButton
+  AudioPlayerOptionsButton,
+  PlaylistTrackControlButton
 };
