@@ -16,7 +16,14 @@ const useStyles = createStyles((theme) => ({
     padding: '0 40px 0 36px',
     position: 'fixed',
     width: '100vw',
-    zIndex: 4
+    zIndex: 4,
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      height: 'fit-content',
+      minHeight: '146px',
+      backdropFilter: 'blur(16px)',
+      backgroundColor: '#23232dde'
+    }
   }
 }));
 
