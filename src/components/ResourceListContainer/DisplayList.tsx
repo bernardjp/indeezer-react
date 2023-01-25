@@ -6,10 +6,14 @@ type DisplayListPropType = {
   CardComponent: React.ElementType
 }
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme) => ({
   container: {
     paddingBottom: '80px',
-    width: '93%'
+    width: '93%',
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      paddingBottom: '146px'
+    }
   },
   cardContainer: {
     padding: '0',
