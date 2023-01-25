@@ -17,7 +17,12 @@ const useStyles = createStyles((theme) => ({
     padding: '0 18px 0 0', // 18px accounts for the scrokkbar width
     position: 'fixed',
     width: '100vw',
-    zIndex: 2
+    zIndex: 2,
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      backdropFilter: 'blur(16px)',
+      backgroundColor: '#121216d1'
+    }
   }
 }));
 
