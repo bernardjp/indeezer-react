@@ -29,7 +29,7 @@ ChartListContainer.propTypes = {
   }).isRequired
 };
 
-const useStyles = createStyles({
+const useStyles = createStyles((theme) => ({
   container: {
     marginTop: '54px',
     maxWidth: '100%',
@@ -37,10 +37,17 @@ const useStyles = createStyles({
     padding: '0',
     paddingBottom: '100px',
     position: 'absolute',
-    // width: ['-moz-available', '-webkit-fill-available']
-    width: 'calc(100vw - 238px)' // 238px = 220px (side-navbar) + 18px (scroll-bar)
+    width: 'calc(100vw - 238px)', // 238px = 220px (side-navbar) + 18px (scroll-bar)
+
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      width: '100%'
+    },
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      paddingBottom: '160px'
+    }
   }
-});
+}));
 
 export default function ChartListContainer(props: { data: APIJsonResponseType }) {
   const { data: { resourceList, resourceType } } = props;
