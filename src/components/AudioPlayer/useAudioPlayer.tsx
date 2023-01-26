@@ -24,7 +24,10 @@ const useAudioPlayer = () => {
 
   // Initialize the audio player when the first track is pushed into the playlist.
   useEffect(() => {
-    if (playlist.length === 1 && audioPlayer!.src === BASE_URL) {
+    if (
+      playlist.length === 1
+      && (audioPlayer!.src === BASE_URL || audioPlayer!.src === '')
+    ) {
       setOrder();
       updateTracks();
       setTrackSource();
