@@ -16,14 +16,22 @@ const useStyles = createStyles((theme) => ({
     background: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0],
     maxWidth: '100vw',
     padding: '0 2.5rem 80px 2.5rem !important',
-    width: '100vw'
+    width: '100vw',
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      padding: '2rem 2rem 150px 2rem !important'
+    }
   },
   body: {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    padding: '0 2.5rem 80px 2.5rem'
+    padding: '0 2.5rem 80px 2.5rem',
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      padding: '0'
+    }
   },
   headerOriginal: {
     display: 'none'
@@ -33,14 +41,36 @@ const useStyles = createStyles((theme) => ({
     justifyContent: 'flex-end',
     width: '100%',
     height: '54px',
-    alignItems: 'center'
+    alignItems: 'center',
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      position: 'absolute',
+      top: '6px',
+      zIndex: 3,
+
+      '& button': {
+        backgroundColor: theme.colors.red[6],
+        right: '40px'
+      }
+    }
+
   },
   playlistBody: {
     display: 'flex',
     width: '100%',
     justifyContent: 'space-between',
     height: '100%',
-    paddingTop: '2rem'
+    paddingTop: '2rem',
+
+    [`@media (max-width: ${theme.breakpoints.md}px)`]: {
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+      overflow: 'scroll'
+    },
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      paddingTop: '0'
+    }
   }
 }));
 

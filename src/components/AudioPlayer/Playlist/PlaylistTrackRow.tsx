@@ -20,7 +20,7 @@ type Props = {
   onClickHandler: Function
 }
 
-const useStyles = createStyles((theme, params: { hovered: boolean }) => ({
+const useStyles = createStyles((theme, params: { hovered: boolean, active: boolean }) => ({
   container: {
     display: 'flex',
     alignItems: 'center',
@@ -29,7 +29,12 @@ const useStyles = createStyles((theme, params: { hovered: boolean }) => ({
     padding: '0 0.5rem',
 
     '&:hover': {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[4]
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[2]
+    },
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      justifyContent: 'center',
+      backgroundColor: params.active ? (theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[4]) : ''
     }
   },
   trackTitle: {
@@ -37,16 +42,41 @@ const useStyles = createStyles((theme, params: { hovered: boolean }) => ({
     alignItems: 'center',
     gap: '1rem',
     position: 'relative',
-    width: '-moz-available' // Check attribute for other vendors
+    width: 'calc(100% - 75px - 35px - 32px - 96px)',
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      width: 'calc(100% - 40px - 100px)'
+    }
+  },
+  trackThumbnail: {
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      display: 'none'
+    }
   },
   textContainer: {
     alignItems: 'baseline',
     flexWrap: 'nowrap',
-    width: '-moz-available' // Check attribute for other vendors
+    width: 'calc(100% - 40px - 112px)', // 40px => track thumbnail / 112px => track options btns
+
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      width: 'calc(100% - 112px)'
+    },
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      width: '100%'
+    }
   },
   buttonContainer: {
     gap: '7px',
-    minWidth: '112px'
+    minWidth: 'fit-content',
+
+    [`@media (max-width: ${theme.breakpoints.lg}px)`]: {
+      gap: '2px'
+    },
+
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      display: 'none'
+    }
   },
   titleText: {
     fontSize: '15px',
@@ -62,7 +92,11 @@ const useStyles = createStyles((theme, params: { hovered: boolean }) => ({
   },
   artistName: {
     width: '6.75rem',
-    marginLeft: '2rem'
+    marginLeft: '2rem',
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      display: 'none'
+    }
   },
   trackDuration: {
     color: 'gray',
@@ -98,25 +132,32 @@ function PlaylistTrackRow(props: Props): JSX.Element {
   }));
 
   const { hovered, ref } = useHover();
-  const { classes, cx } = useStyles({ hovered });
+  const { classes, cx } = useStyles({ hovered, active: isCurrent });
 
   return (
     <div className={classes.container} ref={ref} draggable>
       <div className={classes.trackTitle}>
-        {(hovered || isCurrent) && (
-        <PlaylistTrackControlButton
-          size="m"
-          type={!isCurrent ? 'play' : isPlaying ? 'pause' : 'play'}
-          onClickHandler={
-            isCurrent
-              ? () => togglePlaying()
-              : () => onClickHandler(trackIndex)
-            }
-          isDisable={false}
-          isActive={isCurrent && isPlaying}
-        />
-        )}
-        <Image src={track.albumThumbnail} height={40} width={40} radius={4} />
+        <div className={classes.trackThumbnail}>
+          {(hovered || isCurrent) && (
+          <PlaylistTrackControlButton
+            size="m"
+            type={!isCurrent ? 'play' : isPlaying ? 'pause' : 'play'}
+            onClickHandler={
+              isCurrent
+                ? () => togglePlaying()
+                : () => onClickHandler(trackIndex)
+              }
+            isDisable={false}
+            isActive={isCurrent && isPlaying}
+          />
+          )}
+          <Image
+            src={track.albumThumbnail}
+            height={40}
+            width={40}
+            radius={4}
+          />
+        </div>
         <Group className={classes.textContainer}>
           <Text
             className={cx(classes.titleText, { [classes.active]: isCurrent })}
