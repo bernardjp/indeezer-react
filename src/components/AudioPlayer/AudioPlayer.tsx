@@ -7,12 +7,16 @@ import AudioPlayerTrack from './Track/AudioPlayerTrack';
 import AudioPlayerPlaylistControls from './Controls/AudioPlayerPlaylistControls';
 import { AudioPlayerContext } from '../Context/AudioPlayerContext';
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme) => ({
   audioPlayerContainer: {
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'space-between',
-    width: '100%'
+    width: '100%',
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      flexDirection: 'column'
+    }
   },
   mainWrapper: {
     width: '100%'
