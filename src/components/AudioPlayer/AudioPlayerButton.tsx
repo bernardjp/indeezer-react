@@ -60,25 +60,30 @@ const useStyles = createStyles((theme, params: { size: 'sm' | 'm' | 'lg' }) => (
     }
   },
   playlistButton: {
-    background: 'white',
-    color: 'black',
-    left: '4px',
-    position: 'absolute',
-    zIndex: 1,
     alignItems: 'center',
+    background: 'white',
     backgroundColor: 'white',
     borderRadius: '50%',
+    color: 'black',
     display: 'flex',
     fontSize: params.size === 'lg' ? '1.8rem' : params.size === 'm' ? '1.2rem' : '1rem',
     height: params.size === 'lg' ? '48px' : params.size === 'm' ? '32px' : '24px',
     justifyContent: 'center',
+    left: '4px',
     padding: '0',
+    position: 'absolute',
     textAlign: 'center',
-    width: params.size === 'lg' ? '48px' : params.size === 'm' ? '32px' : '24px',
+    top: '4px',
     transition: '0.1s',
+    width: params.size === 'lg' ? '48px' : params.size === 'm' ? '32px' : '24px',
+    zIndex: 1,
 
     '&:hover': {
       backgroundColor: 'lightgray'
+    },
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      display: 'none'
     }
   },
   playlistActive: {
