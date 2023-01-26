@@ -3,11 +3,16 @@ import useAudioPlayerStore from '../../../store/AudioPlayerStore';
 import useTracksStore from '../../../store/TracksStore';
 import { AudioPlayerButton } from '../AudioPlayerButton';
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme) => ({
   container: {
     display: 'flex',
     gap: '8px',
-    alignItems: 'center'
+    alignItems: 'center',
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      order: 2,
+      padding: '1rem 0 8px 0'
+    }
   }
 }));
 

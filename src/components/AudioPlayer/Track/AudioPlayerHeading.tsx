@@ -19,19 +19,37 @@ const useStyles = createStyles((theme, params: { isOpen: boolean }) => ({
     marginBottom: '5px'
   },
   title: {
-    display: 'flex',
     alignItems: 'center',
+    display: 'flex',
+    fontSize: '0.9rem',
+    maxWidth: '100%',
     paddingBottom: '1px',
-    fontSize: '0.9rem'
+    width: 'calc(100% - 120px)',
+
+    [`@media (max-width: ${theme.breakpoints.md}px)`]: {
+      width: '100%'
+    }
   },
   actions: {
     alignItems: 'center',
     display: 'flex',
-    gap: '8px'
+    gap: '8px',
+
+    [`@media (max-width: ${theme.breakpoints.lg}px)`]: {
+      gap: '4px'
+    },
+
+    [`@media (max-width: ${theme.breakpoints.md}px)`]: {
+      display: 'none'
+    }
   },
   link: {
     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.dark[7],
+    height: '1.5rem',
+    overflow: 'hidden',
     textDecoration: 'none',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
 
     '&:hover': {
       textDecoration: 'underline',
