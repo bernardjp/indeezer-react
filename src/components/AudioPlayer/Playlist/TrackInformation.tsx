@@ -13,14 +13,24 @@ type Props = {
   track: TrackType | null
 }
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme) => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+
+    [`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+      width: '320px'
+    }
   },
   cover: {
-    filter: 'drop-shadow(rgba(0, 0, 0, 0.1) 0px 5.2392px 20.9569px) drop-shadow(rgba(0, 0, 0, 0.1) 0px 20.9569px 41.9137px)'
+    filter: 'drop-shadow(rgba(0, 0, 0, 0.1) 0px 5.2392px 20.9569px) drop-shadow(rgba(0, 0, 0, 0.1) 0px 20.9569px 41.9137px)',
+    maxWidth: '320px',
+    minWidth: '220px',
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      width: '100%'
+    }
   },
   buttons: {
     margin: '20px 0 14px 0'
@@ -33,9 +43,6 @@ const useStyles = createStyles(() => ({
       textDecoration: 'underline',
       textUnderlineOffset: '3px'
     }
-  },
-  badgeContainer: {
-    // marginTop: '0.5rem'
   }
 }));
 
@@ -50,7 +57,7 @@ function TrackInformation(props: Props): JSX.Element {
       <Image
         className={classes.cover}
         src={track?.albumCover}
-        width={320}
+        // width={320}
         radius={4}
       />
       <Group spacing={4} className={classes.buttons}>
@@ -86,7 +93,7 @@ function TrackInformation(props: Props): JSX.Element {
       >
         {track?.artistName}
       </Text>
-      <div className={classes.badgeContainer}>
+      <div>
         {track?.explicitLyrics && <StyledBadge text="EXPLICIT" variant="outline" />}
       </div>
     </div>

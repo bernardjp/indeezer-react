@@ -19,7 +19,16 @@ const useStyles = createStyles((theme) => ({
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[5],
     marginRight: '20px',
     width: '1px',
-    height: '28px'
+    height: '28px',
+
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      display: 'none'
+    }
+  },
+  text: {
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      display: 'none'
+    }
   },
   button: {
     alignItems: 'center',
@@ -62,7 +71,7 @@ function AudioPlayerPlaylistButton(props: Props) {
             )
             : <PlaceholderPlaylistIcon />
           }
-        Queue
+        <span className={classes.text}>Queue</span>
       </button>
     </div>
   );

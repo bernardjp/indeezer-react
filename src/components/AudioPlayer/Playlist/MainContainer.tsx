@@ -15,8 +15,18 @@ type Props = {
 
 const useStyles = createStyles((theme) => ({
   container: {
-    width: '100%',
-    marginLeft: '3rem'
+    marginLeft: '3rem',
+    maxWidth: '1280px',
+    width: 'calc(100% - 320px)',
+
+    [`@media (max-width: ${theme.breakpoints.md}px)`]: {
+      marginLeft: '0',
+      width: '100%'
+    }
+
+    // [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+
+    // }
   },
   titleContainer: {
     alignItems: 'center',
@@ -42,7 +52,11 @@ const useStyles = createStyles((theme) => ({
     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.dark[5],
     display: 'flex',
     justifyContent: 'space-between',
-    textDecoration: 'none'
+    textDecoration: 'none',
+
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      display: 'none'
+    }
   }
 }));
 
