@@ -8,25 +8,25 @@ ChartListContainer.propTypes = {
   data: PropTypes.shape({
     albums: PropTypes.shape({
       data: PropTypes.arrayOf(PropTypes.object),
-      total: PropTypes.number
+      total: PropTypes.number,
     }),
     artists: PropTypes.shape({
       data: PropTypes.arrayOf(PropTypes.object),
-      total: PropTypes.number
+      total: PropTypes.number,
     }),
     playlists: PropTypes.shape({
       data: PropTypes.arrayOf(PropTypes.object),
-      total: PropTypes.number
+      total: PropTypes.number,
     }),
     podcasts: PropTypes.shape({
       data: PropTypes.arrayOf(PropTypes.object),
-      total: PropTypes.number
+      total: PropTypes.number,
     }),
     tracks: PropTypes.shape({
       data: PropTypes.arrayOf(PropTypes.object),
-      total: PropTypes.number
-    })
-  }).isRequired
+      total: PropTypes.number,
+    }),
+  }).isRequired,
 };
 
 const useStyles = createStyles((theme) => ({
@@ -37,32 +37,38 @@ const useStyles = createStyles((theme) => ({
     padding: '0',
     paddingBottom: '100px',
     position: 'absolute',
-    width: 'calc(100vw - 238px)', // 238px = 220px (side-navbar) + 18px (scroll-bar)
+    width: 'calc(100vw - 239px)', // 238px = 220px (side-navbar) + 18px (scroll-bar)
 
     [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
-      width: '100%'
+      width: '100%',
     },
 
     [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
-      paddingBottom: '160px'
-    }
-  }
+      paddingBottom: '160px',
+    },
+  },
 }));
 
-export default function ChartListContainer(props: { data: APIJsonResponseType }) {
-  const { data: { resourceList, resourceType } } = props;
+export default function ChartListContainer(props: {
+  data: APIJsonResponseType;
+}) {
+  const {
+    data: { resourceList, resourceType },
+  } = props;
   const { classes } = useStyles();
 
   return (
     <Container className={classes.container}>
-      {resourceType.map((resource): React.ReactNode => (
-        <DisplayChart
-          data={resourceList[resource]}
-          resourceType={resource}
-          CardComponent={getCardComponent(resource)}
-          key={resource}
-        />
-      ))}
+      {resourceType.map(
+        (resource): React.ReactNode => (
+          <DisplayChart
+            data={resourceList[resource]}
+            resourceType={resource}
+            CardComponent={getCardComponent(resource)}
+            key={resource}
+          />
+        )
+      )}
     </Container>
   );
 }
