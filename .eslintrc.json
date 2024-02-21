@@ -1,47 +1,51 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:react/jsx-runtime",
+    "plugin:import/typescript"
+  ],
+  "globals": {
+    "JSX": true,
+    "React": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb",
-        "plugin:react/jsx-runtime",
-        "plugin:import/typescript"
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
     ],
-    "globals": {
-      "JSX": true,
-      "React": true
-    },
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "@typescript-eslint"
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "never",
+        "objects": "only-multiline",
+        "imports": "only-multiline",
+        "exports": "only-multiline",
+        "functions": "never"
+      }
     ],
-    "rules": {
-      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-      "comma-dangle": ["error", "never"],
-      "import/extensions": ["error", "never"],
-      "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
-      "no-use-before-define": ["error", { "functions": false, "classes": false }],
-      "react/jsx-one-expression-per-line": [0, { "allow": "single-child" }],
-      "linebreak-style": "off",
-      "no-console": "off", // turn warning on and check this rule before production build.
-      "no-unused-expressions": ["error", { "allowTernary": true }] 
-    },
-    "settings": {
-      "import/extensions": [
-        ".js",
-        ".jsx",
-        ".ts",
-        ".tsx"
-      ]
-    }
+    "import/extensions": ["error", "never"],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "no-use-before-define": ["error", { "functions": false, "classes": false }],
+    "react/jsx-one-expression-per-line": [0, { "allow": "single-child" }],
+    "linebreak-style": "off",
+    "no-console": "off", // turn warning on and check this rule before production build.
+    "no-unused-expressions": ["error", { "allowTernary": true }]
+  },
+  "settings": {
+    "import/extensions": [".js", ".jsx", ".ts", ".tsx"]
+  }
 }
