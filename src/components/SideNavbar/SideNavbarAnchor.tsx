@@ -1,12 +1,12 @@
 import { Image, createStyles } from '@mantine/core';
 import * as PropTypes from 'prop-types';
 import NavbarAnchor from '../Utils/NavbarAnchor';
-import IconAlbum from '../../assets/icon_album.png';
-import IconArtist from '../../assets/icon_artist.png';
-import IconChart from '../../assets/icon_top_10.png';
-import IconPlaylist from '../../assets/icon_playlist.png';
-import IconPodcast from '../../assets/icon_podcast.png';
-import IconTrack from '../../assets/icon_track.png';
+import IconAlbum from '../../../public/assets/icon_album.png';
+import IconArtist from '../../../public/assets/icon_artist.png';
+import IconChart from '../../../public/assets/icon_top_10.png';
+import IconPlaylist from '../../../public/assets/icon_playlist.png';
+import IconPodcast from '../../../public/assets/icon_podcast.png';
+import IconTrack from '../../../public/assets/icon_track.png';
 
 type SideNavbarAnchorPropType = {
   route: string;

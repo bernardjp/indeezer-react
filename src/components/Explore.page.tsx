@@ -49,9 +49,6 @@ function ExplorePage() {
     'podcasts',
   ];
 
-  console.log(pathname.split('/'));
-  console.log(resourceType);
-
   return (
     <Container className={classes.pageContainer}>
       <SideNavbar />
