@@ -7,11 +7,11 @@ import {
   ScrollArea,
   Image,
 } from '@mantine/core';
-import ProfilePicture from '../assets/profile_pic.webp';
+import ProfilePicture from '../../public/assets/profile_pic.webp';
 import GeneralLayoutContainer from './GeneralLayoutContainer';
 import TemplateCard from './ResourceCards/CardTemplate';
-import GithubIcon from '../assets/github_logo.png';
-import LinkedInIcon from '../assets/linkedin_logo.png';
+import GithubIcon from '../../public/assets/github_logo.png';
+import LinkedInIcon from '../../public/assets/linkedin_logo.png';
 
 const useStyles = createStyles((theme) => ({
   contentContainer: {

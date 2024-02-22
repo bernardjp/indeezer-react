@@ -10,8 +10,8 @@ import {
 import { LinkData } from '../Header/HeaderNavbar';
 import SideNavbarAnchor from './SideNavbarAnchor';
 import ConversionBanner from './ConversionBanner';
-import AppLogoDM from '../../assets/IN_Colored_Full_White.png';
-import AppLogoLM from '../../assets/IN_Colored_Full_Black.png';
+import AppLogoDM from '../../../public/assets/IN_Colored_Full_White.png';
+import AppLogoLM from '../../../public/assets/IN_Colored_Full_Black.png';
 
 const navbarLinksData: LinkData[] = [
   {

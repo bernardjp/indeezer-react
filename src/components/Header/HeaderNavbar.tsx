@@ -46,7 +46,7 @@ export const navbarLinksData: LinkData[] = [
   // },
   {
     route: '/',
-    text: 'INDEEZER',
+    text: 'IN/DEEZER',
   },
   {
     route: '/about',
