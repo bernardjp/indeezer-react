@@ -4,8 +4,8 @@ import { FiSearch } from 'react-icons/fi';
 import { VscClose } from 'react-icons/vsc';
 
 type searchFormValues = {
-  search: string
-}
+  search: string;
+};
 
 const useStyles = createStyles((theme, _params: searchFormValues, getRef) => ({
   searchBarContainer: {
@@ -18,13 +18,13 @@ const useStyles = createStyles((theme, _params: searchFormValues, getRef) => ({
     '&:hover': {
       [`.${getRef('resetBtn')}`]: {
         visibility: _params.search === '' ? 'hidden' : 'visible',
-        opacity: '100%'
-      }
+        opacity: '100%',
+      },
     },
 
     [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
-      paddingLeft: '0'
-    }
+      paddingLeft: '0',
+    },
   },
   searchIcon: {
     backgroundColor: 'transparent',
@@ -35,11 +35,11 @@ const useStyles = createStyles((theme, _params: searchFormValues, getRef) => ({
 
     '&:hover': {
       backgroundColor: 'transparent',
-      cursor: 'inherit'
-    }
+      cursor: 'inherit',
+    },
   },
   searchInputContainer: {
-    width: ['-moz-available', '-webkit-fill-available']
+    width: ['-moz-available', '-webkit-fill-available'],
   },
   searchInput: {
     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : 'black',
@@ -47,8 +47,8 @@ const useStyles = createStyles((theme, _params: searchFormValues, getRef) => ({
     padding: '0 14px',
 
     '::placeholder': {
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : 'black'
-    }
+      color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : 'black',
+    },
   },
   resetIcon: {
     ref: getRef('resetBtn'),
@@ -63,26 +63,32 @@ const useStyles = createStyles((theme, _params: searchFormValues, getRef) => ({
     marginTop: '2px',
 
     '&:hover': {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.dark[5]
+      backgroundColor:
+        theme.colorScheme === 'dark'
+          ? theme.colors.dark[2]
+          : theme.colors.dark[5],
     },
 
     svg: {
       height: '20px',
       width: '20px',
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.dark[3],
+      color:
+        theme.colorScheme === 'dark'
+          ? theme.colors.dark[1]
+          : theme.colors.dark[3],
 
       '&:hover': {
-        color: theme.colors.dark[1]
-      }
-    }
-  }
+        color: theme.colors.dark[1],
+      },
+    },
+  },
 }));
 
 function SearchBar() {
   const form = useForm({
     initialValues: {
-      search: ''
-    }
+      search: '',
+    },
   });
   const { classes } = useStyles(form.values);
 
@@ -100,7 +106,10 @@ function SearchBar() {
       <TextInput
         aria-label="Search"
         placeholder="Search"
-        styles={{ input: classes.searchInput, root: classes.searchInputContainer }}
+        classNames={{
+          input: classes.searchInput,
+          root: classes.searchInputContainer,
+        }}
         variant="unstyled"
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...form.getInputProps('search')}
