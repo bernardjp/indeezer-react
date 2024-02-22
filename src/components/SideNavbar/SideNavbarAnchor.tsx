@@ -9,17 +9,15 @@ import IconPodcast from '../../assets/icon_podcast.png';
 import IconTrack from '../../assets/icon_track.png';
 
 type SideNavbarAnchorPropType = {
-  route: string,
-  text: string,
-  theme: 'dark' | 'light',
-  currentActiveType: string
-}
+  route: string;
+  text: string;
+  currentActiveType: string;
+};
 
 SideNavbarAnchor.propTypes = {
   route: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  theme: PropTypes.oneOf(['dark', 'light']).isRequired,
-  currentActiveType: PropTypes.string.isRequired
+  currentActiveType: PropTypes.string.isRequired,
 };
 
 const useStyles = createStyles((theme) => ({
@@ -27,7 +25,9 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     gap: '0.9rem',
-    borderLeft: `3px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.dark[0]}`,
+    borderLeft: `3px solid ${
+      theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.dark[0]
+    }`,
     color: theme.colorScheme === 'dark' ? 'white' : 'black',
     fontSize: '1rem',
     fontWeight: 'bold',
@@ -39,7 +39,7 @@ const useStyles = createStyles((theme) => ({
 
     img: {
       maxWidth: '25px',
-      filter: theme.colorScheme === 'dark' ? 'invert(100%)' : ''
+      filter: theme.colorScheme === 'dark' ? 'invert(100%)' : '',
     },
 
     '&:hover': {
@@ -47,9 +47,10 @@ const useStyles = createStyles((theme) => ({
       textDecoration: 'none',
 
       img: {
-        filter: 'invert(64%) sepia(85%) saturate(3667%) hue-rotate(324deg) brightness(100%) contrast(101%)'
-      }
-    }
+        filter:
+          'invert(64%) sepia(85%) saturate(3667%) hue-rotate(324deg) brightness(100%) contrast(101%)',
+      },
+    },
   },
   active: {
     borderLeft: `3px solid ${theme.colors.red[5]}`,
@@ -57,16 +58,19 @@ const useStyles = createStyles((theme) => ({
     textDecoration: 'none',
 
     img: {
-      filter: 'invert(64%) sepia(85%) saturate(3667%) hue-rotate(324deg) brightness(100%) contrast(101%)'
-    }
-  }
+      filter:
+        'invert(64%) sepia(85%) saturate(3667%) hue-rotate(324deg) brightness(100%) contrast(101%)',
+    },
+  },
 }));
 
 function SideNavbarAnchor(props: SideNavbarAnchorPropType) {
   const {
     // TO-DO: use the 'theme' argument to set Dark Mode / Light Mode
     // eslint-disable-next-line no-unused-vars
-    route, text, theme, currentActiveType
+    route,
+    text,
+    currentActiveType,
   } = props;
   const { classes, cx } = useStyles();
   const icon = getIcon(route);
@@ -74,7 +78,9 @@ function SideNavbarAnchor(props: SideNavbarAnchorPropType) {
   return (
     <NavbarAnchor
       route={route}
-      styleClasses={cx(classes.anchor, { [classes.active]: currentActiveType === route })}
+      styleClasses={cx(classes.anchor, {
+        [classes.active]: currentActiveType === route,
+      })}
       key={route}
     >
       {/*
