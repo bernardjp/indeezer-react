@@ -43,7 +43,17 @@
     "react/jsx-one-expression-per-line": [0, { "allow": "single-child" }],
     "linebreak-style": "off",
     "no-console": "off", // turn warning on and check this rule before production build.
-    "no-unused-expressions": ["error", { "allowTernary": true }]
+    "no-unused-expressions": ["error", { "allowTernary": true }],
+    "object-curly-newline": [
+      "error",
+      {
+        "ObjectExpression": { "multiline": true, "minProperties": 4 },
+        "ObjectPattern": { "multiline": true, "minProperties": 4 },
+        "ImportDeclaration": { "multiline": true, "minProperties": 4 },
+        "ExportDeclaration": { "multiline": true, "minProperties": 4 }
+      }
+    ],
+    "operator-linebreak": "off"
   },
   "settings": {
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"]
