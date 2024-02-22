@@ -1,6 +1,11 @@
 import { useLocation } from 'react-router-dom';
 import {
-  Container, Image, Anchor, ScrollArea, createStyles, useMantineTheme
+  Container,
+  Image,
+  Anchor,
+  ScrollArea,
+  createStyles,
+  useMantineTheme,
 } from '@mantine/core';
 import { LinkData } from '../Header/HeaderNavbar';
 import SideNavbarAnchor from './SideNavbarAnchor';
@@ -8,37 +13,42 @@ import ConversionBanner from './ConversionBanner';
 import AppLogoDM from '../../assets/IN_Colored_Full_White.png';
 import AppLogoLM from '../../assets/IN_Colored_Full_Black.png';
 
-const navbarLinksData:LinkData[] = [
+const navbarLinksData: LinkData[] = [
   {
     route: '',
-    text: 'Top 10'
+    text: 'Top 10',
   },
   {
     route: 'artists',
-    text: 'Artists'
+    text: 'Artists',
   },
   {
     route: 'albums',
-    text: 'Albums'
+    text: 'Albums',
   },
   {
     route: 'tracks',
-    text: 'Tracks'
+    text: 'Tracks',
   },
   {
     route: 'playlists',
-    text: 'Playlists'
+    text: 'Playlists',
   },
   {
     route: 'podcasts',
-    text: 'Podcasts'
-  }
+    text: 'Podcasts',
+  },
 ];
 
 const useStyles = createStyles((theme) => ({
   mainContainer: {
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-    borderRight: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]}`,
+    backgroundColor:
+      theme.colorScheme === 'dark'
+        ? theme.colors.dark[6]
+        : theme.colors.gray[0],
+    borderRight: `1px solid ${
+      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]
+    }`,
     display: 'flex',
     flexDirection: 'column',
     height: '100vh',
@@ -50,28 +60,28 @@ const useStyles = createStyles((theme) => ({
     zIndex: 3,
 
     [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
-      display: 'none'
-    }
+      display: 'none',
+    },
   },
   navbarContainer: {
     display: 'flex',
     flexDirection: 'column',
     margin: 0,
     overflow: 'auto',
-    padding: '0'
+    padding: '0',
   },
   anchorContainer: {
     height: '55px',
     margin: '0',
     padding: '12px 0 0 24px',
-    width: 'fit-content'
+    width: 'fit-content',
   },
   iconContainer: {
     display: 'flex',
     height: '100%',
     justifyContent: 'center',
-    maxWidth: '135px'
-  }
+    maxWidth: '135px',
+  },
 }));
 
 function SideNavbar() {
@@ -97,7 +107,6 @@ function SideNavbar() {
           {navbarLinksData.map(({ route, text }) => (
             <SideNavbarAnchor
               route={route}
-              theme={theme.colorScheme}
               text={text}
               currentActiveType={resourceTypeActive}
               key={route}
