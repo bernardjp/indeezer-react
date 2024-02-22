@@ -19,7 +19,7 @@ const useStyles = createStyles((theme) => ({
     margin: '0',
     maxWidth: '100%',
     minHeight: '100vh',
-    padding: '0'
+    padding: '0',
   },
   displayContainer: {
     alignItems: 'center',
@@ -32,42 +32,50 @@ const useStyles = createStyles((theme) => ({
     padding: '0',
 
     [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
-      marginLeft: '0px'
-    }
-  }
+      marginLeft: '0px',
+    },
+  },
 }));
 
 function ExplorePage() {
   const { classes } = useStyles();
   const { pathname } = useLocation();
-  const resourceType: string | undefined = pathname.split('/')[2];
-  const RESOURCE_LIST = ['albums', 'artists', 'tracks', 'playlists', 'podcasts'];
+  const resourceType: string | undefined = pathname.split('/')[1];
+  const RESOURCE_LIST = [
+    'albums',
+    'artists',
+    'tracks',
+    'playlists',
+    'podcasts',
+  ];
+
+  console.log(pathname.split('/'));
+  console.log(resourceType);
 
   return (
     <Container className={classes.pageContainer}>
       <SideNavbar />
       <Container className={classes.displayContainer}>
         <Header withSearchBar />
-        {resourceType === undefined
-            && (
-            <RequestHandler
-              queryOptions={resourceType}
-              queryCallback={fetchJSONData}
-              RenderComponent={ChartListContainer}
-            />
-            )}
+        {resourceType === '' && (
+          <RequestHandler
+            queryOptions={resourceType}
+            queryCallback={fetchJSONData}
+            RenderComponent={ChartListContainer}
+          />
+        )}
         <Routes>
           {RESOURCE_LIST.map((resource) => (
             <Route
               key={resource}
               path={resource}
-              element={(
+              element={
                 <RequestHandler
                   queryOptions={resourceType}
                   queryCallback={fetchJSONData}
                   RenderComponent={ResourceListContainer}
                 />
-                )}
+              }
             />
           ))}
         </Routes>
