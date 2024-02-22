@@ -86,7 +86,7 @@ const useStyles = createStyles((theme) => ({
 
 function SideNavbar() {
   const { pathname } = useLocation();
-  const resourceTypeActive = pathname.split('/')[2] || '';
+  const resourceTypeActive = pathname.split('/')[1] || '';
   const { classes } = useStyles();
   const theme = useMantineTheme();
 

@@ -6,17 +6,19 @@ import BurgerThemeButton from './BurgerThemeButton';
 import usePathnameRoot from '../usePathnameRoot';
 
 type BurgerNavbarPropType = {
-  isOpened: boolean
-}
+  isOpened: boolean;
+};
 
 const iconSlide = keyframes({
   'from, to': { transform: 'translate3d(0, 0, 0)' },
-  '50%': { transform: 'translate3d(6px, 0, 0)' }
+  '50%': { transform: 'translate3d(6px, 0, 0)' },
 });
 
 const useStyles = createStyles((theme, isOpened: boolean) => ({
   navbarContainer: {
-    backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1]}`,
+    backgroundColor: `${
+      theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1]
+    }`,
     borderEndStartRadius: '10px',
     borderTopLeftRadius: '10px',
     display: 'flex',
@@ -33,29 +35,33 @@ const useStyles = createStyles((theme, isOpened: boolean) => ({
 
     [`@media (min-width: ${theme.breakpoints.md}px)`]: {
       display: 'none',
-      visibility: 'hidden'
+      visibility: 'hidden',
     },
 
     [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
-      width: 'auto'
+      width: 'auto',
     },
 
     '@media (max-width: 360px)': {
       minWidth: '0',
-      width: '100%'
-    }
+      width: '100%',
+    },
   },
   middleSection: {
-    borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[3]}`,
-    borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[3]}`,
+    borderBottom: `1px solid ${
+      theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[3]
+    }`,
+    borderTop: `1px solid ${
+      theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[3]
+    }`,
     display: 'flex',
     flexDirection: 'column',
     margin: '0',
     padding: '0.5rem',
-    paddingRight: '0'
+    paddingRight: '0',
   },
   menuFooter: {
-    margin: '0'
+    margin: '0',
   },
   navbarButton: {
     alignItems: 'center',
@@ -70,23 +76,31 @@ const useStyles = createStyles((theme, isOpened: boolean) => ({
     transition: '0.15s',
 
     '&:hover': {
-      backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[3]}`,
+      backgroundColor: `${
+        theme.colorScheme === 'dark'
+          ? theme.colors.dark[3]
+          : theme.colors.gray[3]
+      }`,
       textDecoration: 'none',
 
       svg: {
-        animation: `${iconSlide} 0.27s`
-      }
+        animation: `${iconSlide} 0.27s`,
+      },
     },
 
     '&:active': {
-      backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[4]}`,
-      textDecoration: 'none'
-    }
+      backgroundColor: `${
+        theme.colorScheme === 'dark'
+          ? theme.colors.dark[2]
+          : theme.colors.gray[4]
+      }`,
+      textDecoration: 'none',
+    },
   },
   icon: {
     height: '18px',
     transition: '0.05s ease-in-out',
-    width: 'auto'
+    width: 'auto',
   },
   secondaryButton: {
     color: 'gray',
@@ -96,7 +110,7 @@ const useStyles = createStyles((theme, isOpened: boolean) => ({
     paddingRight: '0.25rem',
 
     svg: {
-      transform: 'scale(90%)'
+      transform: 'scale(90%)',
     },
 
     '&:hover': {
@@ -104,48 +118,46 @@ const useStyles = createStyles((theme, isOpened: boolean) => ({
       color: theme.colors.red[5],
 
       svg: {
-        color: theme.colors.red[5]
-      }
-    }
+        color: theme.colors.red[5],
+      },
+    },
   },
   active: {
-    backgroundColor: `${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[3]}`
-  }
+    backgroundColor: `${
+      theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[3]
+    }`,
+  },
 }));
 
-const navbarLinksData:LinkData[] = [
+const navbarLinksData: LinkData[] = [
   {
     route: '/',
-    text: 'Go Home'
+    text: 'Explore IN/Deezer',
   },
   {
-    route: '/explore',
-    text: 'Explore IN/Deezer'
+    route: '/artists',
+    text: 'Artists',
   },
   {
-    route: '/explore/artists',
-    text: 'Artists'
+    route: '/albums',
+    text: 'Albums',
   },
   {
-    route: '/explore/albums',
-    text: 'Albums'
+    route: '/tracks',
+    text: 'Tracks',
   },
   {
-    route: '/explore/tracks',
-    text: 'Tracks'
+    route: '/playlists',
+    text: 'Playlists',
   },
   {
-    route: '/explore/playlists',
-    text: 'Playlists'
-  },
-  {
-    route: '/explore/podcasts',
-    text: 'Podcasts'
+    route: '/podcasts',
+    text: 'Podcasts',
   },
   {
     route: '/about',
-    text: 'About us'
-  }
+    text: 'About this project',
+  },
 ];
 
 function BurgerMenuNavbar(props: BurgerNavbarPropType) {
@@ -155,19 +167,15 @@ function BurgerMenuNavbar(props: BurgerNavbarPropType) {
 
   return (
     <Container className={classes.navbarContainer}>
-      <Container>
-        Menu header with Links
-      </Container>
+      <Container>Menu header with Links</Container>
       <Container className={classes.middleSection}>
         {navbarLinksData.map(({ text, route }) => (
           <NavbarAnchor
-            styleClasses={
-              cx(
-                classes.navbarButton,
-                { [classes.active]: pathnameRoot === route },
-                { [classes.secondaryButton]: route.split('/').length > 2 }
-              )
-            }
+            styleClasses={cx(
+              classes.navbarButton,
+              { [classes.active]: pathnameRoot === route },
+              { [classes.secondaryButton]: route.split('/').length > 2 }
+            )}
             route={route}
             key={text}
           >

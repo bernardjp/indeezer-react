@@ -1,5 +1,9 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { ResourceType, ResourceDataList, APIJsonResponseType } from '../types/CardDisplay.types';
+import {
+  ResourceType,
+  ResourceDataList,
+  APIJsonResponseType,
+} from '../types/CardDisplay.types';
 
 // REQUEST HANDLER THROUGH A HEROKU PUBLIC CORS PROXY
 // const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -29,8 +33,8 @@ const fetchAPIData = async (pathname: string) => {
     url: `https://deezerdevs-deezer.p.rapidapi.com/${pathname}`,
     headers: {
       'x-rapidapi-host': 'deezerdevs-deezer.p.rapidapi.com',
-      'x-rapidapi-key': '18e16c68ecmsh98c743985d72524p149522jsn240142df5788'
-    }
+      'x-rapidapi-key': '18e16c68ecmsh98c743985d72524p149522jsn240142df5788',
+    },
   };
 
   try {
@@ -49,12 +53,12 @@ const fetchJSONData = async (
   try {
     const jsonData = await axios.get('../../data/json-chart.json');
 
-    if (resourceType === undefined) {
+    if (!resourceType) {
       const mappedData = dataMapper(jsonData.data);
       const data: APIJsonResponseType = {
         resourceList: mappedData,
         // NO-NO: hardcoded implementation
-        resourceType: ['albums', 'artists', 'tracks', 'playlists', 'podcasts']
+        resourceType: ['albums', 'artists', 'tracks', 'playlists', 'podcasts'],
       };
 
       return data;
@@ -62,7 +66,7 @@ const fetchJSONData = async (
 
     const data: APIJsonResponseType = {
       resourceList: { [resourceType]: jsonData.data[resourceType].data },
-      resourceType: [resourceType]
+      resourceType: [resourceType],
     };
 
     return data;
@@ -74,7 +78,10 @@ const fetchJSONData = async (
 
 function dataMapper(data: any): { [key: string]: ResourceDataList } {
   const keys = Object.keys(data);
-  const mappedData = keys.reduce((acc, key) => ({ ...acc, [key]: data[key].data }), {});
+  const mappedData = keys.reduce(
+    (acc, key) => ({ ...acc, [key]: data[key].data }),
+    {}
+  );
 
   return mappedData;
 }

@@ -9,8 +9,8 @@ const useStyles = createStyles((theme) => ({
     margin: 'auto 0',
 
     [`@media (max-width: ${theme.breakpoints.md}px)`]: {
-      display: 'none'
-    }
+      display: 'none',
+    },
   },
   anchor: {
     color: theme.colorScheme === 'dark' ? 'white' : 'black', // check theming with dark/light mode
@@ -22,32 +22,36 @@ const useStyles = createStyles((theme) => ({
 
     '&:hover': {
       color: theme.colors.red[5],
-      textDecoration: 'none'
-    }
+      textDecoration: 'none',
+    },
   },
   active: {
-    color: theme.colors.red[5]
-  }
+    color: theme.colors.red[5],
+  },
 }));
 
 export interface LinkData {
-  route: string,
-  text: string
+  route: string;
+  text: string;
 }
 
-export const navbarLinksData:LinkData[] = [
+export const navbarLinksData: LinkData[] = [
+  // {
+  //   route: '/',
+  //   text: 'HOME'
+  // },
+  // {
+  //   route: '/explore',
+  //   text: 'INDEEZER'
+  // },
   {
     route: '/',
-    text: 'HOME'
-  },
-  {
-    route: '/explore',
-    text: 'INDEEZER'
+    text: 'INDEEZER',
   },
   {
     route: '/about',
-    text: 'ABOUT'
-  }
+    text: 'ABOUT',
+  },
 ];
 
 function StyledNavbar() {
@@ -59,7 +63,9 @@ function StyledNavbar() {
       {navbarLinksData.map(({ route, text }) => (
         <NavbarAnchor
           route={route}
-          styleClasses={cx(classes.anchor, { [classes.active]: pathnameRoot === route })}
+          styleClasses={cx(classes.anchor, {
+            [classes.active]: pathnameRoot === route,
+          })}
           key={route}
         >
           {text}

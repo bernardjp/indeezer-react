@@ -26,7 +26,6 @@ const useStyles = createStyles((theme) => ({
 
     [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
       backdropFilter: 'blur(16px)',
-      // backgroundColor: '#121216d1',
     },
   },
 }));
