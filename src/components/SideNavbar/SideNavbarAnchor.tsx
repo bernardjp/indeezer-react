@@ -65,13 +65,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 function SideNavbarAnchor(props: SideNavbarAnchorPropType) {
-  const {
-    // TO-DO: use the 'theme' argument to set Dark Mode / Light Mode
-    // eslint-disable-next-line no-unused-vars
-    route,
-    text,
-    currentActiveType,
-  } = props;
+  const { route, text, currentActiveType } = props;
   const { classes, cx } = useStyles();
   const icon = getIcon(route);
 
@@ -83,10 +77,6 @@ function SideNavbarAnchor(props: SideNavbarAnchorPropType) {
       })}
       key={route}
     >
-      {/*
-        The image below is wrapped around a div because the width of the image cannot be
-        adjusted through the style API of Mantine (probably due to a bug)
-      */}
       <div style={{ width: 'auto' }}>
         <Image src={icon} alt={`${text}-icon`} />
       </div>

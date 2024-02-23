@@ -7,8 +7,8 @@ import getCardComponent from '../ResourceCards/getCardComponent';
 ResourceListContainer.propTypes = {
   data: PropTypes.shape({
     resourceList: PropTypes.objectOf(PropTypes.array).isRequired,
-    resourceType: PropTypes.arrayOf(PropTypes.string).isRequired
-  })
+    resourceType: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }),
 };
 
 const useStyles = createStyles(() => ({
@@ -18,17 +18,22 @@ const useStyles = createStyles(() => ({
     flexDirection: 'column',
     marginTop: '54px',
     maxWidth: '100%',
-    width: ['-moz-available', '-webkit-fill-available']
-  }
+    width: ['-moz-available', '-webkit-fill-available'],
+  },
 }));
 
 function ResourceListContainer(props: { data: APIJsonResponseType }) {
   const { classes } = useStyles();
-  const { data: { resourceList, resourceType: [resourceType] } } = props;
+  const {
+    data: {
+      resourceList,
+      resourceType: [resourceType],
+    },
+  } = props;
 
   return (
     <Container className={classes.mainContainer}>
-      <h1>{`PAGINA DE ${resourceType.toUpperCase()}`}</h1>
+      <h1>{`IN/DEEZER Top 10 ${resourceType.toUpperCase()}`}</h1>
       <DisplayList
         dataList={resourceList[resourceType]}
         CardComponent={getCardComponent(resourceType)}
