@@ -36,26 +36,18 @@ export interface LinkData {
 }
 
 export const navbarLinksData: LinkData[] = [
-  // {
-  //   route: '/',
-  //   text: 'HOME'
-  // },
-  // {
-  //   route: '/explore',
-  //   text: 'INDEEZER'
-  // },
   {
-    route: '/',
+    route: '/indeezer-react/',
     text: 'IN/DEEZER',
   },
   {
-    route: '/about',
+    route: 'about',
     text: 'ABOUT',
   },
 ];
 
 function StyledNavbar() {
-  const pathnameRoot = usePathnameRoot();
+  const activePath = usePathnameRoot() !== 'about' && '/indeezer-react/';
   const { classes, cx } = useStyles();
 
   return (
@@ -64,7 +56,7 @@ function StyledNavbar() {
         <NavbarAnchor
           route={route}
           styleClasses={cx(classes.anchor, {
-            [classes.active]: pathnameRoot === route,
+            [classes.active]: activePath === route,
           })}
           key={route}
         >

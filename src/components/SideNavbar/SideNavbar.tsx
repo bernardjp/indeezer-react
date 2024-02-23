@@ -1,4 +1,3 @@
-import { useLocation } from 'react-router-dom';
 import {
   Container,
   Image,
@@ -12,10 +11,11 @@ import SideNavbarAnchor from './SideNavbarAnchor';
 import ConversionBanner from './ConversionBanner';
 import AppLogoDM from '../../../public/assets/IN_Colored_Full_White.png';
 import AppLogoLM from '../../../public/assets/IN_Colored_Full_Black.png';
+import usePathnameRoot from '../Header/usePathnameRoot';
 
 const navbarLinksData: LinkData[] = [
   {
-    route: '',
+    route: '/indeezer-react/',
     text: 'Top 10',
   },
   {
@@ -85,8 +85,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 function SideNavbar() {
-  const { pathname } = useLocation();
-  const resourceTypeActive = pathname.split('/')[1] || '';
+  const activePath = usePathnameRoot();
   const { classes } = useStyles();
   const theme = useMantineTheme();
 
@@ -108,7 +107,7 @@ function SideNavbar() {
             <SideNavbarAnchor
               route={route}
               text={text}
-              currentActiveType={resourceTypeActive}
+              currentActiveType={activePath}
               key={route}
             />
           ))}

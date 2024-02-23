@@ -8,8 +8,8 @@ function App() {
   return (
     <AppContainer>
       <Routes>
-        <Route path="about" element={<AboutPage />} />
-        <Route path="/*" element={<ExplorePage />} />
+        <Route path="indeezer-react/about" element={<AboutPage />} />
+        <Route path="indeezer-react/*" element={<ExplorePage />} />
       </Routes>
       <Footer />
     </AppContainer>
