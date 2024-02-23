@@ -11,8 +11,8 @@ PlaylistCard.propTypes = {
     picture_medium: PropTypes.string,
     picture_xl: PropTypes.string,
     title: PropTypes.string,
-    tracklist: PropTypes.string
-  }).isRequired
+    tracklist: PropTypes.string,
+  }).isRequired,
 };
 
 function PlaylistCard(props: { data: PlaylistCardPropTypes }) {
@@ -21,17 +21,17 @@ function PlaylistCard(props: { data: PlaylistCardPropTypes }) {
     image: data.picture_medium,
     info: `${data.nb_tracks - 5}+ tracks`,
     link: data.link,
-    title: data.title
+    title: data.title,
   };
 
   const modalImageSettings: ModalImagePropType = {
     imageURL: data.picture_xl,
-    alt: `${curatedCardData.title} Playlist Picture`
+    alt: `${curatedCardData.title} Playlist Picture`,
   };
 
   return (
     <TemplateCard
-      playButtonCallback={() => console.log('play music')}
+      playButtonCallback={() => {}}
       viewButtonSettings={modalImageSettings}
       isRound={false}
       isExplicit={false}

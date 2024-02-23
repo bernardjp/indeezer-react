@@ -13,8 +13,8 @@ ArtistCard.propTypes = {
     position: PropTypes.number,
     radio: PropTypes.bool,
     tracklist: PropTypes.string,
-    type: PropTypes.string
-  })
+    type: PropTypes.string,
+  }),
 };
 
 function ArtistCard(props: { data: ArtistCardPropType }) {
@@ -23,17 +23,17 @@ function ArtistCard(props: { data: ArtistCardPropType }) {
     image: data.picture_medium,
     info: `#${data.position} rank`,
     link: data.link,
-    title: data.name
+    title: data.name,
   };
 
   const modalImageSettings: ModalImagePropType = {
     imageURL: data.picture_xl,
-    alt: `${curatedCardData.title} Picture`
+    alt: `${curatedCardData.title} Picture`,
   };
 
   return (
     <TemplateCard
-      playButtonCallback={() => console.log('play music')}
+      playButtonCallback={() => {}}
       viewButtonSettings={modalImageSettings}
       isExplicit={false}
       isRound

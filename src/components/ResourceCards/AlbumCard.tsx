@@ -7,7 +7,7 @@ AlbumCard.propTypes = {
   data: PropTypes.shape({
     artist: PropTypes.shape({
       id: PropTypes.number,
-      name: PropTypes.string
+      name: PropTypes.string,
     }),
     cover: PropTypes.string,
     cover_medium: PropTypes.string,
@@ -17,8 +17,8 @@ AlbumCard.propTypes = {
     link: PropTypes.string,
     position: PropTypes.number,
     title: PropTypes.string,
-    tracklist: PropTypes.string
-  })
+    tracklist: PropTypes.string,
+  }),
 };
 
 function AlbumCard(props: { data: AlbumCardPropType }) {
@@ -27,17 +27,17 @@ function AlbumCard(props: { data: AlbumCardPropType }) {
     image: data.cover_medium,
     info: `by ${data.artist.name}`,
     link: data.link,
-    title: data.title
+    title: data.title,
   };
 
   const modalImageSettings: ModalImagePropType = {
     imageURL: data.cover_xl,
-    alt: `${curatedCardData.title} Cover Art`
+    alt: `${curatedCardData.title} Cover Art`,
   };
 
   return (
     <TemplateCard
-      playButtonCallback={() => console.log('Play music')}
+      playButtonCallback={() => {}}
       viewButtonSettings={modalImageSettings}
       isExplicit={data.explicit_lyrics}
       isRound={false}

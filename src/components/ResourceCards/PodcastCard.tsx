@@ -10,8 +10,8 @@ PodcastCard.propTypes = {
     link: PropTypes.string,
     picture_medium: PropTypes.string,
     picture_xl: PropTypes.string,
-    title: PropTypes.string
-  }).isRequired
+    title: PropTypes.string,
+  }).isRequired,
 };
 
 function PodcastCard(props: { data: PodcastCardPropTypes }) {
@@ -20,17 +20,17 @@ function PodcastCard(props: { data: PodcastCardPropTypes }) {
     title: data.title,
     info: data.description,
     image: data.picture_medium,
-    link: data.link
+    link: data.link,
   };
 
   const modalImageSettings: ModalImagePropType = {
     imageURL: data.picture_xl,
-    alt: `${curatedCardData.title} Podcast Picture`
+    alt: `${curatedCardData.title} Podcast Picture`,
   };
 
   return (
     <TemplateCard
-      playButtonCallback={() => console.log('Play music')}
+      playButtonCallback={() => {}}
       viewButtonSettings={modalImageSettings}
       isExplicit={false}
       isRound={false}
